@@ -1,7 +1,9 @@
 package cs3500.animation.model;
 
 /**
- * represent an Animation that contains shapes and their motion. Work as model for the project.
+ * Represent an animation that allows multiple shapes coduct multiple movement. Work as Model of
+ * this project.
+ * @param <K> the sequence of motions.
  */
 public interface Animation<K> {
 
