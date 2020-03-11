@@ -27,9 +27,11 @@ public class SimpleAnimation implements Animation<List<Motion>> {
   @Override
   public void addMotion(String name, Motion motion) {
     validate(name);
-    List<Motion> sequence =  animation.get(name);
+    List<Motion> sequence = animation.get(name);
     Motion last = sequence.get(sequence.size() - 1);
-    if(last.get)
+    if (last.isConnect(motion)) {
+      sequence.add(motion.clone());
+    }
   }
 
   /**
@@ -91,5 +93,10 @@ public class SimpleAnimation implements Animation<List<Motion>> {
   @Override
   public List<Motion> getSequence(String name) {
     return null;
+  }
+
+  @Override
+  public int getLength() {
+    return 0;
   }
 }

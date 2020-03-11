@@ -130,8 +130,18 @@ public class Motion {
    *
    * @return int as the length of timeline
    */
-  int getPeriod() {
+  public int getPeriod() {
     return endTick - startTick;
   }
+
+  /**
+   * make a copy of this Motion.
+   *
+   * @return Motion as the copy
+   */
+  public Motion clone() {
+    return new Motion(startTick, endTick, startShape.copyShape(), endShape.copyShape());
+  }
+
 
 }
