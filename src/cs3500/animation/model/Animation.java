@@ -3,6 +3,7 @@ package cs3500.animation.model;
 /**
  * Represent an animation that allows multiple shapes coduct multiple movement. Work as Model of
  * this project.
+ *
  * @param <K> the sequence of motions.
  */
 public interface Animation<K> {
@@ -107,5 +108,12 @@ public interface Animation<K> {
    * @return K as sequence of motions
    */
   K getSequence(String name);
+
+  /**
+   * compute the length of this animation.
+   *
+   * @return int as the length
+   */
+  int getLength();
 
 }

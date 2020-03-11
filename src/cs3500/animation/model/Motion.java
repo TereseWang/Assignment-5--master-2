@@ -5,7 +5,6 @@ package cs3500.animation.model;
  * exclusive at the endpoint.
  */
 public class Motion {
-
   private int startTick;
   private int endTick;
   private Shape startShape;
@@ -43,85 +42,48 @@ public class Motion {
    *
    * @return int as the length of timeline
    */
-  public int getPeriod() {
+  int getPeriod() {
     return endTick - startTick;
-  }
-
-  /**
-   * Get the start tick of the motion.
-   *
-   * @return the start tick
-   */
-  public int getStartTick() {
-    return this.startTick;
-  }
-
-  /**
-   * Get the end tick of the motion.
-   *
-   * @return the end tick
-   */
-  public int getEndTick() {
-    return this.endTick;
   }
 
   //modify
 
   /**
    * push the timeline forward with the length of given period.
-   *
    * @param period the given length
    * @throws IllegalArgumentException if it can't be push forward at that long.
    */
-  public void pushForward(int period) {
-    if (startTick - period < 0 || period < 0) {
+  public void pushForward(int period){
+    if(startTick-period<0){
       throw new IllegalArgumentException("can't push thie motion forward");
     }
     startTick = startTick - period;
-    endTick = endTick - period;
+    endTick = endTick -period;
 
   }
 
   /**
    * push the timeline backward with the length of given period.
-   *
    * @param period the given length
    */
-  public void pushBackward(int period) {
-    if (period < 0) {
-      throw new IllegalArgumentException("Cannot push this motion backward");
-    }
+  public void pushBackward(int period){
     startTick = startTick + period;
     endTick = endTick + period;
   }
 
   /**
    * extend the timeline to the given point.
-   *
    * @param endpoint the given point
    */
-  public void changeEndTick(int endpoint) {
-    if (endpoint < 0 || endpoint < startTick) {
-      throw new IllegalArgumentException(
-          "You cannot move end time before start time or it cannot be negative");
-    }
+  public void changeTimeline(int endpoint){
     endTick = endpoint;
-  }
-
-  public void changeStartTick(int startpoint) {
-    if (startpoint < 0 || startpoint > endTick) {
-      throw new IllegalArgumentException(
-          "You cannot move start time after end point or it cannot be negative");
-    }
-    startTick = startpoint;
   }
 
   /**
    * change the color of the shape within this timeLine
-   *
    * @param color the desired color
    */
-  public void changeColor(Color color) {
+  public void changeColor(Color color){
     startShape.changeColor(color);
     endShape.changeColor(color);
 
@@ -129,22 +91,20 @@ public class Motion {
 
   /**
    * change the position of the final shape.
-   *
    * @param position the desired position
    */
-  public void changePosition(Posn position) {
+  public void changePosition(Posn position){
     endShape.changePosn(position);
   }
 
   /**
    * change the size of the final shape.
-   *
-   * @param width  the width of the shape
+   * @param width the width of the shape
    * @param height the height of the shape
    * @throws IllegalArgumentException if the given width and height are invalid.
    */
-  public void changeSize(int width, int height) {
-    endShape.changeSize(width, height);
+  public void changeSize(int width, int height){
+    endShape.changeSize(width,height);
   }
 
 }

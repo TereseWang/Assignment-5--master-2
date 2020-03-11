@@ -31,9 +31,7 @@ public class SimpleAnimation implements Animation<List<Motion>>{
    * check whether there is a shape is
    * @param name
    */
-  private void validate(String name){
-
-  }
+  private void validate(String name)
 
   @Override
   public void deleteShape(String name) {
