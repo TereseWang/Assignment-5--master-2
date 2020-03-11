@@ -85,6 +85,12 @@ public interface Animation<K> {
   void changeSpeed(String name, int startTick, int endTick);
 
   // getInfo
+
+  /**
+   *
+   * @param tick
+   * @return
+   */
   String getFrame(int tick);
   Map<String, K> getAnimation();
   K getSequence(String name);
