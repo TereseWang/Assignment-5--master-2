@@ -23,8 +23,8 @@ public class Posn {
    * @param p the desired posn to be copied
    */
   public Posn(Posn p) {
-    this.x = getX();
-    this.y = getY();
+    this.x = p.getX();
+    this.y = p.getY();
   }
 
   /**

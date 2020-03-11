@@ -24,6 +24,9 @@ public abstract class AbstractShape implements Shape {
     }
     this.position = position;
     this.color = color;
+    if( width <= 0 || height <= 0) {
+      throw new IllegalArgumentException("Width and height should not be zero or negative");
+    }
     this.width = width;
     this.height = height;
   }
