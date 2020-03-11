@@ -112,6 +112,7 @@ public class RectangleTest {
   public void testCopyShape() {
     assertEquals(r, r.copyShape());
     assertEquals(r1, r1.copyShape());
+    assertFalse(r==r.copyShape());
   }
 
   @Test
