@@ -19,6 +19,15 @@ public class Posn {
   }
 
   /**
+   * Copy constructor.
+   * @param p the desired posn to be copied
+   */
+  public Posn(Posn p) {
+    this.x = getX();
+    this.y = getY();
+  }
+
+  /**
    * get the x value of this position.
    *
    * @return int as value in x

@@ -89,7 +89,7 @@ public class Color {
 
   @Override
   public String toString() {
-    return String.format("(%d, %d, &d)", r, g, b);
+    return String.format("(%d, %d, %d)", r, g, b);
   }
 
   @Override

@@ -57,6 +57,4 @@ public interface Shape {
    * * @return Shape as the copy
    */
   Shape copyShape();
-
-
 }
