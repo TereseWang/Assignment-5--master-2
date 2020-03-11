@@ -30,12 +30,12 @@ public abstract class AbstractShape implements Shape {
 
   @Override
   public void changeColor(Color color) {
-    this.color = color;
+    this.color = new Color(color);
   }
 
   @Override
   public void changePosn(Posn position) {
-    this.position = position;
+    this.position = new Posn(position);
   }
 
   @Override
@@ -49,12 +49,12 @@ public abstract class AbstractShape implements Shape {
 
   @Override
   public Posn getPosition() {
-    return new Posn(position.getX(), position.getY());
+    return new Posn(position);
   }
 
   @Override
   public Color getColor() {
-    return new Color(color.getR(), color.getG(), color.getB());
+    return new Color(color);
   }
 
   @Override

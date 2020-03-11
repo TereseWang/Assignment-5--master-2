@@ -70,4 +70,9 @@ public class ColorTest {
     assertEquals(true, c.equals(c1));
     assertEquals(false, c.equals(c2));
   }
+
+  @Test
+  public void testHashCode() {
+    assertEquals(540, c.hashCode());
+  }
 }

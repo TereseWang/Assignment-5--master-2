@@ -4,6 +4,7 @@ package cs3500.animation.model;
  * represent the shape Oval.
  */
 public class Oval extends AbstractShape {
+
   /**
    * construct a shape with given attributes.
    *
@@ -23,7 +24,7 @@ public class Oval extends AbstractShape {
       return true;
     } else if (o instanceof Oval) {
       return ((Oval) o).position.equals(position) && ((Oval) o).color.equals(color)
-              && ((Oval) o).width == width && ((Oval) o).height == height;
+          && ((Oval) o).width == width && ((Oval) o).height == height;
     } else {
       return false;
     }
@@ -31,7 +32,6 @@ public class Oval extends AbstractShape {
 
   @Override
   public Shape copyShape() {
-    return new Oval(position, color, width, height);
+    return new Oval(this.getPosition(), this.getColor(), width, height);
   }
-
 }
