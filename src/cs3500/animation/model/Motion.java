@@ -42,8 +42,16 @@ public class Motion {
    *
    * @return int as the length of timeline
    */
-  int getPeriod() {
+  public int getPeriod() {
     return endTick - startTick;
+  }
+
+  public int getStartTick() {
+    return this.startTick;
+  }
+
+  public int getEndTick() {
+    return this.endTick;
   }
 
   //modify
@@ -54,8 +62,8 @@ public class Motion {
    * @throws IllegalArgumentException if it can't be push forward at that long.
    */
   public void pushForward(int period){
-    if(startTick-period<0){
-      throw new IllegalArgumentException("can't push thie motion forward");
+    if(startTick-period<0 || period < 0){
+      throw new IllegalArgumentException("can't push this motion forward");
     }
     startTick = startTick - period;
     endTick = endTick -period;
@@ -67,6 +75,9 @@ public class Motion {
    * @param period the given length
    */
   public void pushBackward(int period){
+    if(period < 0) {
+      throw new IllegalArgumentException("Cannot push this motion forward");
+    }
     startTick = startTick + period;
     endTick = endTick + period;
   }
@@ -75,8 +86,18 @@ public class Motion {
    * extend the timeline to the given point.
    * @param endpoint the given point
    */
-  public void changeTimeline(int endpoint){
+  public void changeEndTick(int endpoint){
+    if(endpoint < 0 || endpoint <= startTick) {
+      throw new IllegalArgumentException("Invalid endpoint");
+    }
     endTick = endpoint;
+  }
+
+  public void changeStartTick(int startpoint) {
+    if(startpoint < 0 || startpoint >= endTick) {
+      throw new IllegalArgumentException("Invalid startpoint");
+    }
+    startTick = startpoint;
   }
 
   /**
