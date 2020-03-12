@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cs3500.animation.model.Color;
 import cs3500.animation.model.Motion;
@@ -100,17 +101,128 @@ public class AnimationTest {
     model.addMotion("Rectangle", m);
     model.deleteShape("Rectangle");
     model.declareShape("Rectangle");
-    assertEquals(0,model.getSequence("Rectangle").size());
+    assertEquals(0, model.getSequence("Rectangle").size());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testDeleteMotionInvalidS() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m2);
+    model.addMotion("Rectangle", m3);
+    model.addMotion("Rectangle", m);
+    model.deleteMotion("Rectangle", 6);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testDeleteMotionNoName() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m2);
+    model.addMotion("Rectangle", m3);
+    model.addMotion("Rectangle", m);
+    model.deleteMotion("Rectangle2", 5);
   }
 
   @Test
   public void testDeleteMotion() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m2);
+    model.addMotion("Rectangle", m3);
+    model.addMotion("Rectangle", m);
+    model.deleteMotion("Rectangle", 5);
+    List l = new ArrayList();
+    l.add(m);
+    assertEquals(l, model.getSequence("Rectangle"));
+    model.deleteMotion("Rectangle", 4);
+    l.remove(m);
+    assertEquals(l, model.getSequence("Rectangle"));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testDeleteMotionEmp() {
+    init();
+    model.declareShape("Rectangle");
+    List l = new ArrayList();
+    model.deleteMotion("Rectangle", 0);
+    model.deleteMotion("Rectangle2", 5);
+  }
+
+  @Test
+  public void testDeleteMotionAll() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m2);
+    model.addMotion("Rectangle", m3);
+    model.addMotion("Rectangle", m);
+    model.deleteMotion("Rectangle", 5);
+    List l = new ArrayList();
+    l.add(m);
+    assertEquals(l, model.getSequence("Rectangle"));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeColorNullC() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.changeColor("Rectangle", null, 4, 5);
+
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeColorWrongS() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.changeColor("Rectangle", new Color(), 3, 5);
+
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeColorWrongE() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.changeColor("Rectangle", new Color(), 4, 6);
 
   }
 
   @Test
   public void testChangeColor() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.changeColor("Rectangle", new Color(), 4, 5);
+    Shape sClone = new Rectangle(new Posn(10, 10), new Color(), 3, 3);
+    Shape s1Clone = new Rectangle(new Posn(100, 100), new Color(100, 100, 100), 3, 3);
+    assertEquals(sClone, model.getSequence("Rectangle").get(0).getStartShape());
+    assertEquals(s1Clone, model.getSequence("Rectangle").get(0).getFinalImages());
+  }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeSizeNoName() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.changeSize("Rectangle!", 1,1, 4, 5);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeSizeWrongS() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.changeSize("Rectangle", 1,1, 4, 5);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeSizeWrongE() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.changeSize("Rectangle!", 1,1, 4, 5);
   }
 
   @Test
