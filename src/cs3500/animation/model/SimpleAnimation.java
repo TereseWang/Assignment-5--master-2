@@ -7,13 +7,13 @@ import java.util.List;
 /**
  * a simple animation class, use list of motion as representation of sequence of motions.
  */
-public class SimpleAnimation implements Animation<List<Motion>>{
+public class SimpleAnimation implements Animation<List<Motion>> {
   LinkedHashMap<String, List<Motion>> animation;
 
   /**
    * construct an empty animation.
    */
-  public SimpleAnimation(){
+  public SimpleAnimation() {
     animation = new LinkedHashMap<>();
   }
 
@@ -24,14 +24,20 @@ public class SimpleAnimation implements Animation<List<Motion>>{
 
   @Override
   public void addMotion(String name, Motion motion) {
-
+    validate(name);
+    List<Motion> sequence = animation.get(name);
+    Motion last = sequence.get(sequence.size() - 1);
+    if (last.isConnect(motion)) {
+      sequence.add(motion.clone());
+    }
   }
 
   /**
    * check whether there is a shape is
+   *
    * @param name
    */
-  private void validate(String name){
+  private void validate(String name) {
 
   }
 
