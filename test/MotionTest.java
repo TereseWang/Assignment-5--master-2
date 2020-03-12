@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import cs3500.animation.model.Color;
 import cs3500.animation.model.Motion;
@@ -143,7 +144,10 @@ public class MotionTest {
 
   @Test
   public void testChangeColor() {
-
+    init();
+    m.changeColor(new Color(255, 0, 0));
+    assertEquals(new Rectangle(new Posn(100, 100), new Color(255, 0, 0), 5, 5),m.getFinalImages());
+    assertFalse()
   }
 
   @Test
