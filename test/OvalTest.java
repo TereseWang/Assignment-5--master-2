@@ -123,4 +123,9 @@ public class OvalTest {
     assertEquals(830, c.hashCode());
     assertEquals(748, c1.hashCode());
   }
+  @Test
+  public void testGetShapeName() {
+    assertEquals("Oval", c.getShapeName());
+    assertEquals("Oval", c1.getShapeName());
+  }
 }

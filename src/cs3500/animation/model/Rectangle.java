@@ -25,4 +25,9 @@ public class Rectangle extends AbstractShape {
   public Shape copyShape() {
     return new Rectangle(this.getPosition(), this.getColor(), width, height);
   }
+
+  @Override
+  public String getShapeName() {
+    return "Rectangle";
+  }
 }

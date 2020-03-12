@@ -57,4 +57,17 @@ public interface Shape {
    * * @return Shape as the copy
    */
   Shape copyShape();
+
+  /**
+   * determine whether the given shape is as the same type as this Shape.
+   * @param other the given shape
+   * @return boolean as the result
+   */
+  boolean isSameType(Shape other);
+
+  /**
+   * get the name of the type of this shape.
+   * @return String as the result
+   */
+  String getShapeName();
 }

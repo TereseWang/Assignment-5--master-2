@@ -34,4 +34,9 @@ public class Oval extends AbstractShape {
   public Shape copyShape() {
     return new Oval(this.getPosition(), this.getColor(), width, height);
   }
+
+  @Override
+  public String getShapeName() {
+    return "Oval";
+  }
 }

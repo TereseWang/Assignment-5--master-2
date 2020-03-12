@@ -24,7 +24,7 @@ public abstract class AbstractShape implements Shape {
     }
     this.position = position;
     this.color = color;
-    if( width <= 0 || height <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new IllegalArgumentException("Width and height should not be zero or negative");
     }
     this.width = width;
@@ -87,4 +87,15 @@ public abstract class AbstractShape implements Shape {
     return position.hashCode() + color.hashCode()
             + Integer.hashCode(width) + Integer.hashCode(height);
   }
+
+  @Override
+  public boolean isSameType(Shape other) {
+    if(other == null){
+      return false;
+    }
+    return other.getShapeName() == getShapeName();
+  }
+
+  @Override
+  public abstract String getShapeName();
 }

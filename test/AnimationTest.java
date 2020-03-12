@@ -237,7 +237,10 @@ public class AnimationTest {
 
   @Test
   public void testChangeSize() {
-
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.changeSize("Rectangle", 1, 1, 4, 6);
   }
 
   @Test

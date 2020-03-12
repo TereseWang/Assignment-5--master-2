@@ -1,11 +1,12 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import org.junit.Test;
 
 import cs3500.animation.model.Color;
 import cs3500.animation.model.Oval;
 import cs3500.animation.model.Posn;
 import cs3500.animation.model.Rectangle;
-import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class RectangleTest {
 
@@ -112,12 +113,18 @@ public class RectangleTest {
   public void testCopyShape() {
     assertEquals(r, r.copyShape());
     assertEquals(r1, r1.copyShape());
-    assertFalse(r==r.copyShape());
+    assertFalse(r == r.copyShape());
   }
 
   @Test
   public void testHashCode() {
     assertEquals(830, r.hashCode());
     assertEquals(748, r1.hashCode());
+  }
+
+  @Test
+  public void testGetShapeName() {
+    assertEquals("Rectangle", r.getShapeName());
+    assertEquals("Rectangle", r1.getShapeName());
   }
 }

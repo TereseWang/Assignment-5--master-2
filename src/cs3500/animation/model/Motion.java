@@ -22,7 +22,8 @@ public class Motion {
    * @param enshape
    */
   public Motion(int start, int end, Shape startS, Shape enshape) {
-    if (start < 0 || end <= start || startS == null || enshape == null) {
+    if (start < 0 || end <= start || startS == null || enshape == null||
+            startS.isSameType(enshape)) {
       throw new IllegalArgumentException("can not construct a motion");
     }
     this.startTick = start;
