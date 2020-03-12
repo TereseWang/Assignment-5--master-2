@@ -83,8 +83,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       throw new IllegalArgumentException("Invalid name");
     }
     List<Motion> l = animation.get(name);
-    List<Motion> result = new ArrayList<Motion>() {
-    };
+    List<Motion> result = new ArrayList<Motion>() {};
     for (int i = 0; i < l.size(); i++) {
       Motion a = l.get(i);
       Motion b = new Motion(a);
