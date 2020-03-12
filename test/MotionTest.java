@@ -202,7 +202,11 @@ public class MotionTest {
 
   @Test
   public void testIsConnect() {
-
+    init();
+    Motion m2 = new Motion(10, 13, s, s1);
+    assertEquals(true, m.isConnect(m2));
+    m2.changeStartTick(11);
+    assertEquals(false, m.isConnect(m2));
   }
 
   @Test

@@ -115,5 +115,4 @@ public interface Animation<K> {
    * @return int as the length
    */
   int getLength();
-
 }

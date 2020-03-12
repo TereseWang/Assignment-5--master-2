@@ -3,6 +3,8 @@ package cs3500.animation.model;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * a simple animation class, use list of motion as representation of sequence of motions.
@@ -92,7 +94,18 @@ public class SimpleAnimation implements Animation<List<Motion>> {
 
   @Override
   public String animateDescription() {
-    return null;
+    if(animation.isEmpty()) {
+      return "";
+    }
+    String result = new String();
+    for(Entry<String, List<Motion>> entry : animation.entrySet()) {
+      String key = entry.getKey().toString();
+      List<Motion> l = entry.getValue();
+      for(int i = 0; i  < l.size(); i++) {
+        result += "motion " + key + " " + l.get(i).toString() + "\n";
+      }
+    }
+    return result;
   }
 
   @Override

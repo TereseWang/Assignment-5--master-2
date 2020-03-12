@@ -1,10 +1,13 @@
 package cs3500.animation.model;
 
+import static java.lang.String.format;
+
 /**
  * represent a shape's transition with a timeline, which is inclusive at the start point but
  * exclusive at the endpoint.
  */
 public class Motion {
+
   private int startTick;
   private int endTick;
   private Shape startShape;
@@ -26,13 +29,6 @@ public class Motion {
     this.endTick = end;
     this.startShape = startS;
     this.endShape = enshape;
-  }
-
-  public Motion(Motion m) {
-    this.startTick = m.startTick;
-    this.endTick = m.endTick;
-    this.startShape = m.startShape.copyShape();
-    this.endShape = m.endShape.copyShape();
   }
 
   /**
@@ -170,5 +166,11 @@ public class Motion {
 
   public Shape getStartShape() {
     return startShape.copyShape();
+  }
+
+  @Override
+  public String toString() {
+    return format("%d " + startShape.toString() + "  %d " + endShape.toString(), startTick,
+        endTick);
   }
 }

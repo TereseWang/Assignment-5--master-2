@@ -26,10 +26,10 @@ public class AnimationTest {
     m = new Motion(4, 5, s, s1);
     Shape s2 = new Oval(new Posn(100, 200), new Color(100, 100, 100), 5, 5);
     Shape s3 = new Oval(new Posn(100, 200), new Color(0, 0, 255), 5, 5);
-    m2 = new Motion(1, 3, s2, s3);
+    m2 = new Motion(5, 10, s2, s3);
     Shape s4 = new Oval(new Posn(100, 200), new Color(100, 100, 100), 5, 5);
     Shape s5 = new Oval(new Posn(100, 200), new Color(100, 100, 100), 4, 10);
-    m3 = new Motion(12, 23, s4, s5);
+    m3 = new Motion(10, 23, s4, s5);
   }
 
   @Test
@@ -48,14 +48,7 @@ public class AnimationTest {
     model.addMotion("Rectangle", m);
     model.addMotion("Rectangle", m2);
     model.addMotion("Rectangle", m3);
-    List<Motion> l = new ArrayList<Motion>();
-    l.add(m.clone());
-    l.add(m2.clone());
-    l.add(m3.clone());
-    model.addMotion("Rectangle", m2);
-    System.out.print(model.getSequence("Rectangle"));
-    model.addMotion("Rectangle", m3);
-    assertEquals(l, model.getSequence("Rectangle"));
+    assertEquals("", model.animateDescription());
   }
 
   @Test
