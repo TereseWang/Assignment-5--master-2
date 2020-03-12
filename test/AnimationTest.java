@@ -1,8 +1,4 @@
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
 import cs3500.animation.model.Color;
 import cs3500.animation.model.Motion;
@@ -10,8 +6,10 @@ import cs3500.animation.model.Posn;
 import cs3500.animation.model.Rectangle;
 import cs3500.animation.model.Shape;
 import cs3500.animation.model.SimpleAnimation;
-
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
 
 public class AnimationTest {
 
@@ -239,12 +237,12 @@ public class AnimationTest {
     model.declareShape("Rectangle");
     model.addMotion("Rectangle", m2);
     assertEquals("shape Rectangle Rectangle\n"
-                    + "motion Rectangle 5 100 100 3 3 100 100 100  10 100 200 5 5 0 0 255",
-            model.animateDescription());
+            + "motion Rectangle 5 100 100 3 3 100 100 100  10 100 200 5 5 0 0 255",
+        model.animateDescription());
     model.changeSize("Rectangle", 1, 1, 5, 10);
     assertEquals("shape Rectangle Rectangle\n"
-                    + "motion Rectangle 5 100 100 3 3 100 100 100  10 100 200 1 1 0 0 255",
-            model.animateDescription());
+            + "motion Rectangle 5 100 100 3 3 100 100 100  10 100 200 1 1 0 0 255",
+        model.animateDescription());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -277,16 +275,16 @@ public class AnimationTest {
     model.declareShape("Rectangle");
     model.addMotion("Rectangle", m);
     assertEquals("shape Rectangle Rectangle\n"
-                    + "motion Rectangle 4 10 10 3 3 100 100 100  5 100 100 3 3 100 100 100",
-            model.animateDescription());
+            + "motion Rectangle 4 10 10 3 3 100 100 100  5 100 100 3 3 100 100 100",
+        model.animateDescription());
     model.changePosition("Rectangle", new Posn(500, 500), 4, 5);
     assertEquals("shape Rectangle Rectangle\n"
-                    + "motion Rectangle 4 10 10 3 3 100 100 100  5 500 500 3 3 100 100 100",
-            model.animateDescription());
+            + "motion Rectangle 4 10 10 3 3 100 100 100  5 500 500 3 3 100 100 100",
+        model.animateDescription());
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testchangeSpeedAnchorEndPointWrongName() {
+  public void testChangeEndSpeedWrongName() {
     init();
     model.declareShape("Rectangle");
     model.addMotion("Rectangle", m2);
@@ -325,29 +323,51 @@ public class AnimationTest {
   }
 
   @Test
-  public void testChangeEndSpeed() {
-  }
-
-  @Test
-  public void testChangeStartSpeed() {
-
-
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testChangeStartSpeedWrongName() {
-
-  }
-
-
-  @Test
   public void testAnimateDescription() {
-
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.addMotion("Rectangle", m2);
+    assertEquals("shape Rectangle Rectangle\n"
+            + "motion Rectangle 4 10 10 3 3 100 100 100  5 100 100 3 3 100 100 100\n"
+            + "motion Rectangle 5 100 100 3 3 100 100 100  10 100 200 5 5 0 0 255",
+        model.animateDescription());
   }
+
+  @Test
+  public void testAnimatedDescriptionEmpty() {
+    model.declareShape("Rectangle");
+    assertEquals("", model.animateDescription());
+  }
+
 
   @Test
   public void testGetSequence() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.addMotion("Rectangle", m2);
+    model.addMotion("Rectangle", m3);
+    model.addMotion("Rectangle", m4);
+    assertEquals(4, model.getSequence("Rectangle").size());
+    assertEquals("1 100 200 4 10 100 100 100  4 10 10 3 3 100 100 100",
+        model.getSequence("Rectangle").get(0).toString());
+    assertEquals("4 10 10 3 3 100 100 100  5 100 100 3 3 100 100 100",
+        model.getSequence("Rectangle").get(1).toString());
+    assertEquals("5 100 100 3 3 100 100 100  10 100 200 5 5 0 0 255",
+        model.getSequence("Rectangle").get(2).toString());
+    assertEquals("10 100 200 5 5 0 0 255  23 100 200 4 10 100 100 100",
+        model.getSequence("Rectangle").get(3).toString());
+  }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetSequenceWrongName() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.addMotion("Rectangle", m2);
+    model.addMotion("Rectangle", m3);
+    model.addMotion("Rectangle", m4);
+    List<Motion> l = model.getSequence("Circle");
   }
 
   @Test
@@ -372,6 +392,11 @@ public class AnimationTest {
   }
 
   @Test
+  public void testGetLengthEmpty() {
+    assertEquals(0, model.getLength());
+  }
+
+  @Test
   public void testGetAnimate() {
     model.declareShape("a");
     model.declareShape("b");
@@ -380,13 +405,19 @@ public class AnimationTest {
     model.addMotion("b", m4);
     model.addMotion("c", m3);
     assertEquals("shape b Rectangle\n"
-                    + "motion b 1 100 200 4 10 100 100 100  4 10 10 3 3 100 100 100\n"
-                    + "\n"
-                    + "shape a Rectangle\n"
-                    + "motion a 4 10 10 3 3 100 100 100  5 100 100 3 3 100 100 100\n"
-                    + "\n"
-                    + "shape c Rectangle\n"
-                    + "motion c 10 100 200 5 5 0 0 255  23 100 200 4 10 100 100 100",
-            new SimpleAnimation(model.getAnimate()).animateDescription());
+            + "motion b 1 100 200 4 10 100 100 100  4 10 10 3 3 100 100 100\n"
+            + "\n"
+            + "shape a Rectangle\n"
+            + "motion a 4 10 10 3 3 100 100 100  5 100 100 3 3 100 100 100\n"
+            + "\n"
+            + "shape c Rectangle\n"
+            + "motion c 10 100 200 5 5 0 0 255  23 100 200 4 10 100 100 100",
+        new SimpleAnimation(model.getAnimate()).animateDescription());
+  }
+
+  @Test
+  public void testGetEmptyAnimate() {
+    model.declareShape("a");
+    assertEquals("", new SimpleAnimation(model.getAnimate()).animateDescription());
   }
 }
