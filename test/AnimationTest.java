@@ -362,6 +362,16 @@ public class AnimationTest {
   }
 
   @Test
+  public void testGetLengthNotfromZero() {
+    model.declareShape("a");
+    model.declareShape("b");
+    model.declareShape("c");
+    model.addMotion("a", m);
+    model.addMotion("c", m3);
+    assertEquals(23, model.getLength());
+  }
+
+  @Test
   public void testGetAnimate() {
     model.declareShape("a");
     model.declareShape("b");
