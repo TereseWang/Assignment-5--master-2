@@ -233,10 +233,12 @@ public class SimpleAnimation implements Animation<List<Motion>> {
     ArrayList<Integer> l = new ArrayList<>();
     LinkedHashMap<Integer, String> temp = new LinkedHashMap<>();
     for (Entry<String, List<Motion>> entry : animation.entrySet()) {
-      int i = entry.getValue().get(0).getStartTick();
-      String s = entry.getKey();
-      l.add(i);
-      temp.put(i, s);
+      if (!entry.getValue().isEmpty()) {
+        int i = entry.getValue().get(0).getStartTick();
+        String s = entry.getKey();
+        l.add(i);
+        temp.put(i, s);
+      }
     }
     Collections.sort(l);
     for (int i = 0; i < l.size(); i++) {
@@ -255,12 +257,16 @@ public class SimpleAnimation implements Animation<List<Motion>> {
     for (Entry<String, List<Motion>> entry : animation.entrySet()) {
       String key = entry.getKey();
       List<Motion> l = entry.getValue();
-      String s = l.get(0).getStartShape().getShapeName();
-      result += "shape " + key + " " + s + "\n";
-      for (int i = 0; i < l.size(); i++) {
-        result += "motion " + key + " " + l.get(i).toString() + "\n";
+      if (l.isEmpty()) {
+        return "";
+      } else {
+        String s = l.get(0).getStartShape().getShapeName();
+        result += "shape " + key + " " + s + "\n";
+        for (int i = 0; i < l.size(); i++) {
+          result += "motion " + key + " " + l.get(i).toString() + "\n";
+        }
+        result += "\n";
       }
-      result += "\n";
     }
     int i = result.lastIndexOf("\n");
     result = result.substring(0, i - 1);
