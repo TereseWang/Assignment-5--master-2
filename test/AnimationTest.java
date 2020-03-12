@@ -216,7 +216,7 @@ public class AnimationTest {
     init();
     model.declareShape("Rectangle");
     model.addMotion("Rectangle", m);
-    model.changeSize("Rectangle!", 1,1, 4, 5);
+    model.changeSize("Rectangle!", 1, 1, 4, 5);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -224,7 +224,7 @@ public class AnimationTest {
     init();
     model.declareShape("Rectangle");
     model.addMotion("Rectangle", m);
-    model.changeSize("Rectangle", 1,1, 4, 5);
+    model.changeSize("Rectangle", 1, 1, 43, 5);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -232,7 +232,7 @@ public class AnimationTest {
     init();
     model.declareShape("Rectangle");
     model.addMotion("Rectangle", m);
-    model.changeSize("Rectangle!", 1,1, 4, 5);
+    model.changeSize("Rectangle", 1, 1, 4, 6);
   }
 
   @Test
