@@ -8,7 +8,8 @@ import java.util.List;
  * a simple animation class, use list of motion as representation of sequence of motions.
  */
 public class SimpleAnimation implements Animation<List<Motion>> {
-  LinkedHashMap<String, List<Motion>> animation;
+
+  private LinkedHashMap<String, List<Motion>> animation;
 
   /**
    * construct an empty animation.
@@ -89,7 +90,18 @@ public class SimpleAnimation implements Animation<List<Motion>> {
 
   @Override
   public List<Motion> getSequence(String name) {
-    return null;
+    if(!animation.containsKey(name)){
+      throw new IllegalArgumentException("Invalid name");
+    }
+    List<Motion> l = animation.get(name);
+    List<Motion> result = new ArrayList<Motion>() {
+    };
+    for (int i = 0; i < l.size(); i++) {
+      Motion a = l.get(i);
+      Motion b = new Motion(a);
+      result.add(b);
+    }
+    return result;
   }
 
   @Override

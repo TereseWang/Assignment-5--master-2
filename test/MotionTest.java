@@ -146,9 +146,7 @@ public class MotionTest {
   public void testChangeColor() {
     init();
     m.changeColor(new Color(255, 0, 0));
-    assertEquals(new Rectangle(new Posn(100, 100), new Color(255, 0, 0), 5, 5), m.getFinalImages());
-    assertFalse(
-        new Rectangle(new Posn(100, 100), new Color(255, 0, 0), 5, 5) == m.getFinalImages());
+    assertEquals(new Oval(new Posn(200, 200), new Color(255, 0, 0), 5, 5), m.getStartShape());
   }
 
   @Test
@@ -164,6 +162,7 @@ public class MotionTest {
     init();
     m.changeSize(-10, 20);
   }
+
   @Test
   public void testChangePostion() {
     init();
@@ -182,5 +181,14 @@ public class MotionTest {
   public void testGetEndTick() {
     init();
     assertEquals(10, m.getEndTick());
+  }
+
+  @Test
+  public void testGetStartState() {
+    init();
+    assertEquals(s, m.getStartShape());
+    m.changeColor(new Color(200, 100, 0));
+    s.changeColor(new Color(200, 100, 0));
+    assertEquals(s, m.getStartShape());
   }
 }
