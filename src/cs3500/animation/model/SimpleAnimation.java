@@ -21,6 +21,9 @@ public class SimpleAnimation implements Animation<List<Motion>> {
 
   @Override
   public void declareShape(String name) {
+    if(animation.containsKey(name)){
+      throw new IllegalArgumentException("Shape "+ name + "has benn declared.");
+    }
     animation.put(name, new ArrayList<>());
   }
 
@@ -33,8 +36,10 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       Motion last = sequence.get(sequence.size() - 1);
       if (last.adjNext(motion)) {
         sequence.add(motion.clone());
-      } else if (last.adjPrior(motion)) {
+      } else if (sequence.get(0).adjPrior(motion)) {
         sequence.add(0, motion);
+      } else {
+        throw new IllegalArgumentException("can't add that motion!");
       }
     } else {
       sequence.add(motion.clone());
@@ -43,12 +48,14 @@ public class SimpleAnimation implements Animation<List<Motion>> {
   }
 
   /**
-   * check whether there is a shape is
+   * check this animation contains a shape has name as given.
    *
-   * @param name
+   * @param name the given name
    */
   private void validate(String name) {
-
+    if (!animation.containsKey(name)) {
+      throw new IllegalArgumentException("couldn't find the shape: " + name);
+    }
   }
 
   @Override

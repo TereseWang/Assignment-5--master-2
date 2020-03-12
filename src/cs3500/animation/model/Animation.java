@@ -15,6 +15,7 @@ public interface Animation<K> {
    * Add a shape to this animation with given name.
    *
    * @param name as the name of the shape
+   * @throws IllegalArgumentException if the name has been declared
    */
   void declareShape(String name);
 

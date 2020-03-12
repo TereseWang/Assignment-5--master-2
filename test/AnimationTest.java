@@ -1,23 +1,23 @@
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
 
 import cs3500.animation.model.Color;
 import cs3500.animation.model.Motion;
-import cs3500.animation.model.Oval;
 import cs3500.animation.model.Posn;
 import cs3500.animation.model.Rectangle;
 import cs3500.animation.model.Shape;
 import cs3500.animation.model.SimpleAnimation;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class AnimationTest {
   SimpleAnimation model;
   Motion m;
   Motion m2;
   Motion m3;
+
   @Before
   public void init() {
     model = new SimpleAnimation();
@@ -41,15 +41,50 @@ public class AnimationTest {
     assertEquals(0, model.getSequence("Circle").size());
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testdeclareShapeExisted() {
+    init();
+    model.declareShape("Rectangle");
+    model.declareShape("Rectangle");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddMotionInvalidName() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangleha", m2);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddMotionInvalidOrder() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.addMotion("Rectangle", m3);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddMotionInvalidOrderTele() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m3);
+    model.addMotion("Rectangle", m);
+  }
+
   @Test
   public void testAddMotion() {
     init();
     model.declareShape("Rectangle");
-    model.addMotion("Rectangle", m);
     model.addMotion("Rectangle", m2);
     model.addMotion("Rectangle", m3);
-    assertEquals("", model.animateDescription());
+    model.addMotion("Rectangle", m);
+    ArrayList list = new ArrayList();
+    list.add(m);
+    list.add(m2);
+    list.add(m3);
+    assertEquals(list, model.getSequence("Rectangle"));
   }
+
 
   @Test
   public void testDeleteShape() {
