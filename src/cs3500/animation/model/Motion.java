@@ -28,6 +28,13 @@ public class Motion {
     this.endShape = enshape;
   }
 
+  public Motion(Motion m) {
+    this.startTick = m.startTick;
+    this.endTick = m.endTick;
+    this.startShape = m.startShape.copyShape();
+    this.endShape = m.endShape.copyShape();
+  }
+
   /**
    * get the shape after motion.
    *
