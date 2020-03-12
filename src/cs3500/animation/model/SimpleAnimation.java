@@ -51,10 +51,21 @@ public class SimpleAnimation implements Animation<List<Motion>> {
 
   }
 
+  /**
+   * Find the motion with the exact same starting point
+   * @param startTick
+   * @param endTick
+   * @return
+   */
+  private Motion findMotion(int startTick, int endTick){
+
+  }
   @Override
   public void changeColor(String name, Color color, int startTick, int endTick) {
 
   }
+
+
 
   @Override
   public void changePosition(String name, Posn position, int startTick, int endTick) {

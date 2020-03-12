@@ -46,7 +46,7 @@ public interface Animation<K> {
    */
   void deleteMotion(String name, int startTick);
 
-//modify
+
 
   /**
    * change the color of shape in the motion of given timeline.
