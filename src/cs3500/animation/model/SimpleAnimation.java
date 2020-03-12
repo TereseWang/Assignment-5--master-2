@@ -195,7 +195,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
 
   @Override
   public void changeSpeedAnchorEndPoint(String name, int startTick, int endTick) {
-    Motion m = findMotionBaseOnS(name, endTick);
+    Motion m = findMotionBaseOnE(name, endTick);
     List<Motion> sequence = animation.get(name);
     int desIndex = sequence.indexOf(m);
     int before = m.getPeriod();
