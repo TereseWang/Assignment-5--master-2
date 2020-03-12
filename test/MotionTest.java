@@ -191,4 +191,23 @@ public class MotionTest {
     s.changeColor(new Color(200, 100, 0));
     assertEquals(s, m.getStartShape());
   }
+
+  @Test
+  public void testToString() {
+    init();
+    assertEquals("4 200 200 5 5 200 200 200  10 100 100 5 5 200 200 200", m.toString());
+    m.changeColor(new Color(200, 100, 40));
+    assertEquals("4 200 200 5 5 200 100 40  10 100 100 5 5 200 200 200", m.toString());
+  }
+
+  @Test
+  public void testIsConnect() {
+
+  }
+
+  @Test
+  public void testClone() {
+    Motion m2 = m.clone();
+    assertFalse(m2 == m);
+  }
 }

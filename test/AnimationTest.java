@@ -46,6 +46,8 @@ public class AnimationTest {
     init();
     model.declareShape("Rectangle");
     model.addMotion("Rectangle", m);
+    model.addMotion("Rectangle", m2);
+    model.addMotion("Rectangle", m3);
     List<Motion> l = new ArrayList<Motion>();
     l.add(m.clone());
     l.add(m2.clone());
