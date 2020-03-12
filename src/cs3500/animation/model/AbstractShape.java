@@ -84,12 +84,6 @@ public abstract class AbstractShape implements Shape {
   public abstract Shape copyShape();
 
   @Override
-  public int hashCode() {
-    return position.hashCode() + color.hashCode()
-        + Integer.hashCode(width) + Integer.hashCode(height);
-  }
-
-  @Override
   public boolean isSameType(Shape other) {
     if (other == null) {
       return false;
@@ -99,4 +93,7 @@ public abstract class AbstractShape implements Shape {
 
   @Override
   public abstract String getShapeName();
+
+  @Override
+  public abstract int hashCode();
 }

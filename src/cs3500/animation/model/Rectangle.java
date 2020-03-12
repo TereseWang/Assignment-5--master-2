@@ -38,4 +38,10 @@ public class Rectangle extends AbstractShape {
   public String getShapeName() {
     return "Rectangle";
   }
+
+  @Override
+  public int hashCode() {
+    return position.hashCode() + color.hashCode()
+        + Integer.hashCode(width) + Integer.hashCode(height);
+  }
 }

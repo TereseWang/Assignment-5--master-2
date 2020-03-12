@@ -1,4 +1,5 @@
 package cs3500.animation.model;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -22,6 +23,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
 
   /**
    * Constructor for testing.
+   *
    * @param animation the map of string combined with a list of motions
    */
   public SimpleAnimation(LinkedHashMap<String, List<Motion>> animation) {

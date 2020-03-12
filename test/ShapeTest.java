@@ -5,6 +5,7 @@ import cs3500.animation.model.Color;
 import cs3500.animation.model.Oval;
 import cs3500.animation.model.Posn;
 import cs3500.animation.model.Rectangle;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -17,6 +18,7 @@ public class ShapeTest {
   Oval o;
   Oval o1;
 
+  @Before
   public void reset() {
     r = new Rectangle(new Posn(0, 0), new Color(), 2, 2);
     r1 = new Rectangle(new Posn(0, 0), new Color(), 3, 2);

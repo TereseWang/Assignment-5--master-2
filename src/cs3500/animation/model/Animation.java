@@ -39,8 +39,8 @@ public interface Animation<K> {
   /**
    * Delete all motion from the given startTick.
    *
-   * @param name
-   * @param startTick
+   * @param name the given name of the shape
+   * @param startTick the start time of the desired shape that we want to change
    * @throws IllegalArgumentException if the move can't be made, for example if the start tick
    *                                  cannot be found or the delete will causes the motion to be
    *                                  illogical

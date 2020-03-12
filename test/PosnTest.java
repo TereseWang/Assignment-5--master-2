@@ -20,7 +20,9 @@ public class PosnTest {
   @Test
   public void testNegativePosn() {
     Posn p = new Posn(-100, 200);
+    assertEquals(-100, p.getX());
   }
+
   @Test
   public void testGetY() {
     assertEquals(1, p.getY());

@@ -39,4 +39,10 @@ public class Oval extends AbstractShape {
   public String getShapeName() {
     return "Oval";
   }
+
+  @Override
+  public int hashCode() {
+    return position.hashCode() + color.hashCode()
+        + Integer.hashCode(width) + Integer.hashCode(height);
+  }
 }
