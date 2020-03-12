@@ -146,27 +146,41 @@ public class MotionTest {
   public void testChangeColor() {
     init();
     m.changeColor(new Color(255, 0, 0));
-    assertEquals(new Rectangle(new Posn(100, 100), new Color(255, 0, 0), 5, 5),m.getFinalImages());
-    assertFalse()
+    assertEquals(new Rectangle(new Posn(100, 100), new Color(255, 0, 0), 5, 5), m.getFinalImages());
+    assertFalse(
+        new Rectangle(new Posn(100, 100), new Color(255, 0, 0), 5, 5) == m.getFinalImages());
   }
 
   @Test
   public void testChangeSize() {
-
+    init();
+    m.changeSize(10, 10);
+    assertEquals(10, m.getFinalImages().getHeight());
+    assertEquals(10, m.getFinalImages().getWidth());
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeSizeInvalidWH() {
+    init();
+    m.changeSize(-10, 20);
+  }
   @Test
   public void testChangePostion() {
-
+    init();
+    m.changePosition(new Posn(20, 20));
+    assertEquals(new Posn(20, 20), m.getFinalImages().getPosition());
+    assertFalse(new Posn(20, 20) == m.getFinalImages().getPosition());
   }
 
   @Test
   public void testGetStartTick() {
-
+    init();
+    assertEquals(4, m.getStartTick());
   }
 
   @Test
   public void testGetEndTick() {
-
+    init();
+    assertEquals(10, m.getEndTick());
   }
 }

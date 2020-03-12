@@ -18,6 +18,10 @@ public class PosnTest {
   }
 
   @Test
+  public void testNegativePosn() {
+    Posn p = new Posn(-100, 200);
+  }
+  @Test
   public void testGetY() {
     assertEquals(1, p.getY());
     assertEquals(200, p1.getY());

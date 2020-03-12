@@ -62,7 +62,7 @@ public class Motion {
    * @throws IllegalArgumentException if it can't be push forward at that long.
    */
   public void pushForward(int period){
-    if(startTick-period<0 || period < 0){
+    if(startTick-period< 0 || period < 0){
       throw new IllegalArgumentException("can't push this motion forward");
     }
     startTick = startTick - period;
@@ -126,5 +126,4 @@ public class Motion {
   public void changeSize(int width, int height){
     endShape.changeSize(width,height);
   }
-
 }
