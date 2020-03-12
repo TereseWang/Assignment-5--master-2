@@ -161,4 +161,7 @@ public class Motion {
     endShape.changeSize(width, height);
   }
 
+  public Shape getStartShape() {
+    return startShape.copyShape();
+  }
 }
