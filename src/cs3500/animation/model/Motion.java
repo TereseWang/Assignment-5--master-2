@@ -38,6 +38,25 @@ public class Motion {
   }
 
   /**
+   * determine whether the given motion is adjacent next to this motion.
+   *
+   * @param other given motion
+   * @return boolean as the result
+   */
+  public boolean isConnect(Motion other) {
+    return endTick == other.getStartTick() && endShape.equals(other.getFinalImages());
+  }
+
+  /**
+   * make a copy of this Motion.
+   *
+   * @return Motion as the copy
+   */
+  public Motion clone() {
+    return new Motion(startTick, endTick, startShape.copyShape(), endShape.copyShape());
+  }
+
+  /**
    * compute the length of the timeline of this motion.
    *
    * @return int as the length of timeline
@@ -46,10 +65,20 @@ public class Motion {
     return endTick - startTick;
   }
 
+  /**
+   * get the starting point of the timeline.
+   *
+   * @return int as the starting point
+   */
   public int getStartTick() {
     return this.startTick;
   }
 
+  /**
+   * Get the ending point of the timeline.
+   *
+   * @return int as ending point
+   */
   public int getEndTick() {
     return this.endTick;
   }
@@ -58,24 +87,26 @@ public class Motion {
 
   /**
    * push the timeline forward with the length of given period.
+   *
    * @param period the given length
    * @throws IllegalArgumentException if it can't be push forward at that long.
    */
-  public void pushForward(int period){
-    if(startTick-period< 0 || period < 0){
+  public void pushForward(int period) {
+    if (startTick - period < 0 || period < 0) {
       throw new IllegalArgumentException("can't push this motion forward");
     }
     startTick = startTick - period;
-    endTick = endTick -period;
+    endTick = endTick - period;
 
   }
 
   /**
    * push the timeline backward with the length of given period.
+   *
    * @param period the given length
    */
-  public void pushBackward(int period){
-    if(period < 0) {
+  public void pushBackward(int period) {
+    if (period < 0) {
       throw new IllegalArgumentException("Cannot push this motion forward");
     }
     startTick = startTick + period;
@@ -84,17 +115,18 @@ public class Motion {
 
   /**
    * extend the timeline to the given point.
+   *
    * @param endpoint the given point
    */
-  public void changeEndTick(int endpoint){
-    if(endpoint < 0 || endpoint <= startTick) {
+  public void changeEndTick(int endpoint) {
+    if (endpoint < 0 || endpoint <= startTick) {
       throw new IllegalArgumentException("Invalid endpoint");
     }
     endTick = endpoint;
   }
 
   public void changeStartTick(int startpoint) {
-    if(startpoint < 0 || startpoint >= endTick) {
+    if (startpoint < 0 || startpoint >= endTick) {
       throw new IllegalArgumentException("Invalid startpoint");
     }
     startTick = startpoint;
@@ -102,28 +134,31 @@ public class Motion {
 
   /**
    * change the color of the shape within this timeLine
+   *
    * @param color the desired color
    */
-  public void changeColor(Color color){
+  public void changeColor(Color color) {
     startShape.changeColor(color);
-    endShape.changeColor(color);
   }
 
   /**
    * change the position of the final shape.
+   *
    * @param position the desired position
    */
-  public void changePosition(Posn position){
+  public void changePosition(Posn position) {
     endShape.changePosn(position);
   }
 
   /**
    * change the size of the final shape.
-   * @param width the width of the shape
+   *
+   * @param width  the width of the shape
    * @param height the height of the shape
    * @throws IllegalArgumentException if the given width and height are invalid.
    */
-  public void changeSize(int width, int height){
-    endShape.changeSize(width,height);
+  public void changeSize(int width, int height) {
+    endShape.changeSize(width, height);
   }
+
 }
