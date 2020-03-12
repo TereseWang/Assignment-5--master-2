@@ -47,7 +47,7 @@ public class Motion {
    * @return boolean as the result
    */
   public boolean isConnect(Motion other) {
-    return endTick == other.getStartTick() && endShape.equals(other.getFinalImages());
+    return endTick == other.getStartTick() && endShape.equals(other.startShape);
   }
 
   /**

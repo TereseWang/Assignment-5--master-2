@@ -24,11 +24,11 @@ public class AnimationTest {
     Shape s = new Rectangle(new Posn(10, 10), new Color(100, 100, 100), 3, 3);
     Shape s1 = new Rectangle(new Posn(100, 100), new Color(100, 100, 100), 3, 3);
     m = new Motion(4, 5, s, s1);
-    Shape s2 = new Oval(new Posn(100, 200), new Color(100, 100, 100), 5, 5);
-    Shape s3 = new Oval(new Posn(100, 200), new Color(0, 0, 255), 5, 5);
+    Shape s2 = new Rectangle(new Posn(100, 100), new Color(100, 100, 100), 3, 3);
+    Shape s3 = new Rectangle(new Posn(100, 200), new Color(0, 0, 255), 5, 5);
     m2 = new Motion(5, 10, s2, s3);
-    Shape s4 = new Oval(new Posn(100, 200), new Color(100, 100, 100), 5, 5);
-    Shape s5 = new Oval(new Posn(100, 200), new Color(100, 100, 100), 4, 10);
+    Shape s4 = new Rectangle(new Posn(100, 200), new Color(0, 0, 255), 5, 5);
+    Shape s5 = new Rectangle(new Posn(100, 200), new Color(100, 100, 100), 4, 10);
     m3 = new Motion(10, 23, s4, s5);
   }
 
