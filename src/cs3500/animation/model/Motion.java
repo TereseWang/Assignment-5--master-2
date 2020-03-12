@@ -49,15 +49,17 @@ public class Motion {
   public boolean adjNext(Motion other) {
     return endTick == other.getStartTick() && endShape.equals(other.getStartShape());
   }
+
   /**
    * determine whether the given motion is come right before to this motion.
    *
    * @param other given motion
    * @return boolean as the result
    */
-  public boolean adjPrivious(Motion other) {
-    return other.getEndTick() == startTick && other.getFinalImages().equals(t);
+  public boolean adjPrior(Motion other) {
+    return other.getEndTick() == startTick && other.getFinalImages().equals(startShape);
   }
+
   /**
    * make a copy of this Motion.
    *
@@ -179,6 +181,25 @@ public class Motion {
   @Override
   public String toString() {
     return format("%d " + startShape.toString() + "  %d " + endShape.toString(), startTick,
-        endTick);
+            endTick);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    } else if (o instanceof Motion) {
+      return ((Motion) o).startTick == startTick &&
+              ((Motion) o).endTick == endTick &&
+              ((Motion) o).startShape.equals(startShape) &&
+              ((Motion) o).endShape.equals(endShape);
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return Integer.hashCode(startTick + endTick) +
+            startShape.hashCode() + endShape.hashCode();
   }
 }

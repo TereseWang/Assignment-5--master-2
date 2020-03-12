@@ -1,10 +1,8 @@
 package cs3500.animation.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -33,8 +31,10 @@ public class SimpleAnimation implements Animation<List<Motion>> {
     int size = sequence.size();
     if (size != 0) {
       Motion last = sequence.get(sequence.size() - 1);
-      if (last.isConnect(motion)) {
+      if (last.adjNext(motion)) {
         sequence.add(motion.clone());
+      } else if (last.adjPrior(motion)) {
+        sequence.add(0, motion);
       }
     } else {
       sequence.add(motion.clone());
@@ -64,9 +64,9 @@ public class SimpleAnimation implements Animation<List<Motion>> {
   /**
    * Find the motion with the exact same starting point and the ending point of a shpe.
    *
-   * @param name the name of the shape
+   * @param name      the name of the shape
    * @param startTick the starting point
-   * @param endTick the ending point
+   * @param endTick   the ending point
    * @return Motion as the result
    */
   private Motion findMotion(String name, int startTick, int endTick) {
@@ -96,14 +96,14 @@ public class SimpleAnimation implements Animation<List<Motion>> {
 
   @Override
   public String animateDescription() {
-    if(animation.isEmpty()) {
+    if (animation.isEmpty()) {
       return "";
     }
     String result = new String();
-    for(Entry<String, List<Motion>> entry : animation.entrySet()) {
+    for (Entry<String, List<Motion>> entry : animation.entrySet()) {
       String key = entry.getKey().toString();
       List<Motion> l = entry.getValue();
-      for(int i = 0; i  < l.size(); i++) {
+      for (int i = 0; i < l.size(); i++) {
         result += "motion " + key + " " + l.get(i).toString() + "\n";
       }
     }
@@ -116,7 +116,8 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       throw new IllegalArgumentException("Invalid name");
     }
     List<Motion> l = animation.get(name);
-    List<Motion> result = new ArrayList<Motion>() {};
+    List<Motion> result = new ArrayList<Motion>() {
+    };
     for (int i = 0; i < l.size(); i++) {
       Motion a = l.get(i);
       Motion b = a.clone();

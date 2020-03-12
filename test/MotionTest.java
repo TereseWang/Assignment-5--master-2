@@ -36,6 +36,12 @@ public class MotionTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
+  public void testInvalidMotionInvalidEndNeg() {
+    init();
+    Motion m = new Motion(10, -1, s, s1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
   public void testInvalidMotionInvalidStartShape() {
     init();
     Motion m = new Motion(4, 10, null, s1);
@@ -201,17 +207,27 @@ public class MotionTest {
   }
 
   @Test
-  public void testIsConnect() {
+  public void testAdjNext() {
     init();
-    Motion m2 = new Motion(10, 13, s, s1);
-    assertEquals(true, m.isConnect(m2));
+    Motion m2 = new Motion(10, 13, s1, s);
+    assertEquals(true, m.adjNext(m2));
     m2.changeStartTick(11);
-    assertEquals(false, m.isConnect(m2));
+    assertEquals(false, m.adjNext(m2));
+  }
+
+  @Test
+  public void testAdjPrior() {
+    init();
+    Motion m2 = new Motion(10, 13, s1, s);
+    assertEquals(true, m2.adjPrior(m));
+    m2.changeStartTick(11);
+    assertEquals(false, m2.adjPrior(m));
   }
 
   @Test
   public void testClone() {
     Motion m2 = m.clone();
     assertFalse(m2 == m);
+    assertEquals(m2,m);
   }
 }
