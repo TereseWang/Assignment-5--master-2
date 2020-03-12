@@ -120,7 +120,7 @@ public class Motion {
    */
   public void pushBackward(int period) {
     if (period < 0) {
-      throw new IllegalArgumentException("Cannot push this motion forward");
+      throw new IllegalArgumentException("Cannot push this motion backward");
     }
     startTick = startTick + period;
     endTick = endTick + period;

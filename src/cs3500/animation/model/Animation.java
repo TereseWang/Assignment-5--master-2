@@ -1,5 +1,7 @@
 package cs3500.animation.model;
 
+import java.util.LinkedHashMap;
+
 /**
  * Represent an animation that allows multiple shapes coduct multiple movement. Work as Model of
  * this project.
@@ -48,7 +50,6 @@ public interface Animation<K> {
   void deleteMotion(String name, int startTick);
 
 
-
   /**
    * change the color of shape in the motion of given timeline.
    *
@@ -84,16 +85,36 @@ public interface Animation<K> {
   void changeSize(String name, int width, int height, int startTick, int endTick);
 
   /**
-   * change the length of the motion at the given start point to the end point.
+   * change the ending point of the motion whose start point as given to the point as given
+   * endTick.
    *
    * @param name      the name of the shape
    * @param startTick the start tick to find
-   * @param endTick   the end tick to
+   * @param endTick   the end tick to change
    * @throws IllegalArgumentException if the move couldn't be made.
    */
-  void changeSpeed(String name, int startTick, int endTick);
+  void changeSpeedAnchorStartPoint(String name, int startTick, int endTick);
+
+  /**
+   * change the starting point of the motion whose end point as given enTick to the point as given
+   * startTick.
+   *
+   * @param name      the name of the shape
+   * @param startTick the start tick to find
+   * @param endTick   the end tick to change
+   * @throws IllegalArgumentException if the move couldn't be made.
+   */
+  void changeSpeedAnchorEndPoint(String name, int startTick, int endTick);
 
   // getInfo
+
+  /**
+   * get all the shapes and its motion ready to play, which means it order by the time of
+   * appearance.
+   *
+   * @return Map as the
+   */
+  LinkedHashMap<String, K> getAnimate();
 
   /**
    * get the text description of all the motions of all shapes in this animation.
