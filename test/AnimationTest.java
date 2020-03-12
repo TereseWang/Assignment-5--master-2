@@ -50,6 +50,9 @@ public class AnimationTest {
     l.add(m.clone());
     l.add(m2.clone());
     l.add(m3.clone());
+    model.addMotion("Rectangle", m2);
+    System.out.print(model.getSequence("Rectangle"));
+    model.addMotion("Rectangle", m3);
     assertEquals(l, model.getSequence("Rectangle"));
   }
 

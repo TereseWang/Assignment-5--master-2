@@ -30,8 +30,11 @@ public class SimpleAnimation implements Animation<List<Motion>> {
     int size = sequence.size();
     if (size != 0) {
       Motion last = sequence.get(sequence.size() - 1);
+      System.out.print(last.isConnect(motion));
       if (last.isConnect(motion)) {
         sequence.add(motion.clone());
+      } else {
+        throw new IllegalArgumentException("The given motion is not adjacent to the sequence");
       }
     } else {
       sequence.add(motion.clone());
@@ -45,7 +48,9 @@ public class SimpleAnimation implements Animation<List<Motion>> {
    * @param name
    */
   private void validate(String name) {
-
+    if (!(animation.containsKey(name))) {
+      throw new IllegalArgumentException("counld'not find the shape");
+    }
   }
 
   @Override
@@ -101,10 +106,10 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       throw new IllegalArgumentException("Invalid name");
     }
     List<Motion> l = animation.get(name);
-    List<Motion> result = new ArrayList<Motion>() {};
+    List<Motion> result = new ArrayList<Motion>() {
+    };
     for (int i = 0; i < l.size(); i++) {
-      Motion a = l.get(i);
-      Motion b = new Motion(a);
+      Motion b = l.get(i).clone();
       result.add(b);
     }
     return result;
