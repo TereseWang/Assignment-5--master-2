@@ -1,8 +1,3 @@
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 import cs3500.animation.model.Color;
@@ -12,6 +7,7 @@ import cs3500.animation.model.Rectangle;
 import cs3500.animation.model.Shape;
 import cs3500.animation.model.SimpleAnimation;
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -237,18 +233,90 @@ public class AnimationTest {
 
   @Test
   public void testChangeSize() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m2);
+    assertEquals("shape Rectangle Rectangle\n"
+            + "motion Rectangle 5 100 100 3 3 100 100 100  10 100 200 5 5 0 0 255",
+        model.animateDescription());
+    model.changeSize("Rectangle", 1, 1, 5, 10);
+    assertEquals("shape Rectangle Rectangle\n"
+            + "motion Rectangle 5 100 100 3 3 100 100 100  10 100 200 1 1 0 0 255",
+        model.animateDescription());
+  }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangePositionNoName() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.changePosition("Rectangle!", new Posn(10, 10), 4, 5);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangePositionWrongS() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.changePosition("Rectangle", new Posn(100, 100), 43, 5);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testChanggPositionWrongE() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    model.changePosition("Rectangle", new Posn(100, 100), 4, 6);
   }
 
   @Test
   public void testChangePosition() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m);
+    assertEquals("shape Rectangle Rectangle\n"
+            + "motion Rectangle 4 10 10 3 3 100 100 100  5 100 100 3 3 100 100 100",
+        model.animateDescription());
+    model.changePosition("Rectangle", new Posn(500, 500), 4, 5);
+    assertEquals("shape Rectangle Rectangle\n"
+            + "motion Rectangle 4 10 10 3 3 100 100 100  5 500 500 3 3 100 100 100",
+        model.animateDescription());
+  }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeEndSpeedWrongName() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m2);
+    model.changeSpeedAnchorEndPoint("Circle", 5, 10);
   }
 
   @Test
-  public void testChangeSpeed() {
+  public void testChangeEndSpeedWrongS() {
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m4); 1 4
+    model.addMotion("Rectangle", m);  4 5
+    model.addMotion("Rectangle", m2);  5  10
+    model.addMotion("Rectangle", m3);  10 23
+    model.changeSpeedAnchorEndPoint("Rectangle", 6, 10);
+  }
+
+  @Test
+  public void testChangeEndSpeed() {
+  }
+
+  @Test
+  public void testChangeStartSpeed() {
+
 
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeStartSpeedWrongName() {
+
+  }
+
 
   @Test
   public void testAnimateDescription() {
