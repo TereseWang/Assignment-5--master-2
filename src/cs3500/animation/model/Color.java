@@ -4,6 +4,7 @@ package cs3500.animation.model;
  * represent a RGB Color.
  */
 public class Color {
+
   private final int r;
   private final int g;
   private final int b;
@@ -45,7 +46,6 @@ public class Color {
     this.b = c.getB();
   }
 
-
   /**
    * return Red attribute of this color.
    *
@@ -79,7 +79,7 @@ public class Color {
    * and smaller or equal to 255.
    *
    * @param i the given int
-   * @throws IllegalArgumentException if the int is invalid
+   * @throws IllegalArgumentException if the int is invalid either negative or greater than 255
    */
   private void checkValid(int i) {
     if (i < 0 || i > 255) {

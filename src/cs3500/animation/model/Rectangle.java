@@ -5,6 +5,14 @@ package cs3500.animation.model;
  */
 public class Rectangle extends AbstractShape {
 
+  /**
+   * Constructor for the rectangle.
+   *
+   * @param posn the position of the rectangle
+   * @param c    the color of the rectangle
+   * @param w    the width of the rectangle
+   * @param h    the height of the rectangle
+   */
   public Rectangle(Posn posn, Color c, int w, int h) {
     super(posn, c, w, h);
   }

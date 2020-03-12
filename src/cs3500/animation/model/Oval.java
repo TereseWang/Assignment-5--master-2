@@ -1,7 +1,7 @@
 package cs3500.animation.model;
 
 /**
- * represent the shape Oval.
+ * represent the shape Oval which is a round shaped shape.
  */
 public class Oval extends AbstractShape {
 

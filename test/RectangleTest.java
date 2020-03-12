@@ -1,13 +1,15 @@
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import cs3500.animation.model.Color;
 import cs3500.animation.model.Oval;
 import cs3500.animation.model.Posn;
 import cs3500.animation.model.Rectangle;
+import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
+/**
+ * To test all public methods in the Rectangle class.
+ */
 public class RectangleTest {
 
   Rectangle r = new Rectangle(new Posn(100, 100), new Color(200, 200, 200), 10, 20);

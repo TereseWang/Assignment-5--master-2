@@ -4,20 +4,18 @@ import java.util.LinkedHashMap;
 
 /**
  * Represent an animation that allows multiple shapes coduct multiple movement. Work as Model of
- * this project.
+ * this project. An animation has a list of shapes, and each shape has a list of motions.
  *
  * @param <K> the sequence of motions.
  */
 public interface Animation<K> {
 
-
-  //add
-
   /**
-   * Add a shape to this animation with given name.
+   * Add a shape to this animation with given name. Associated with the shape is a list of motions
+   * that will be setted to be empty and motions will be added later.
    *
    * @param name as the name of the shape
-   * @throws IllegalArgumentException if the name has been declared
+   * @throws IllegalArgumentException if the name has already be exist.
    */
   void declareShape(String name);
 
@@ -29,8 +27,6 @@ public interface Animation<K> {
    * @throws IllegalArgumentException if couldn't find the name or the motion can't be added
    */
   void addMotion(String name, Motion motion);
-
-  //delete
 
   /**
    * Delete a shape and all its motion as the name specified.
@@ -45,7 +41,9 @@ public interface Animation<K> {
    *
    * @param name
    * @param startTick
-   * @throws IllegalArgumentException if the move can't be made
+   * @throws IllegalArgumentException if the move can't be made, for example if the start tick
+   *                                  cannot be found or the delete will causes the motion to be
+   *                                  illogical
    */
   void deleteMotion(String name, int startTick);
 
@@ -57,7 +55,8 @@ public interface Animation<K> {
    * @param color     the color to change
    * @param startTick the start point of the time line
    * @param endTick   the end point of the time line
-   * @throws IllegalArgumentException if the move couldn't be made.
+   * @throws IllegalArgumentException if the motion cannot be found with the time line or the name
+   *                                  of the motion does not exist in the animation.
    */
   void changeColor(String name, Color color, int startTick, int endTick);
 
@@ -68,7 +67,8 @@ public interface Animation<K> {
    * @param position  the position to change
    * @param startTick the start point of the time line
    * @param endTick   the end point of the time line
-   * @throws IllegalArgumentException if the move couldn't be made.
+   * @throws IllegalArgumentException if the motion cannot be found with the time line or the name
+   *                                  of the motion does not exist in the animation
    */
   void changePosition(String name, Posn position, int startTick, int endTick);
 
@@ -80,7 +80,8 @@ public interface Animation<K> {
    * @param height    the height to change
    * @param startTick the start point of the time line
    * @param endTick   the end point of the time line
-   * @throws IllegalArgumentException if the move couldn't be made.
+   * @throws IllegalArgumentException if the motion cannot be found with the timeline or the name of
+   *                                  the motion does not exist in the animation
    */
   void changeSize(String name, int width, int height, int startTick, int endTick);
 
@@ -91,7 +92,9 @@ public interface Animation<K> {
    * @param name      the name of the shape
    * @param startTick the start tick to find
    * @param endTick   the end tick to change
-   * @throws IllegalArgumentException if the move couldn't be made.
+   * @throws IllegalArgumentException if the end tick does not exist in any motions in the given
+   *                                  sequence of the given shape, or the name cannot be found in
+   *                                  the animation
    */
   void changeSpeedAnchorStartPoint(String name, int startTick, int endTick);
 
@@ -102,24 +105,24 @@ public interface Animation<K> {
    * @param name      the name of the shape
    * @param startTick the start tick to find
    * @param endTick   the end tick to change
-   * @throws IllegalArgumentException if the move couldn't be made.
+   * @throws IllegalArgumentException if the end tick does not exist in any motions in the given
+   *                                  sequence of the given shape, or the name cannot be found in
+   *                                  the animation
    */
   void changeSpeedAnchorEndPoint(String name, int startTick, int endTick);
-
-  // getInfo
 
   /**
    * get all the shapes and its motion ready to play, which means it order by the time of
    * appearance.
    *
-   * @return Map as the
+   * @return Map the current model state of the animation.
    */
   LinkedHashMap<String, K> getAnimate();
 
   /**
    * get the text description of all the motions of all shapes in this animation.
    *
-   * @return string as description
+   * @return string that list all motions associate with their names
    */
   String animateDescription();
 
@@ -134,7 +137,7 @@ public interface Animation<K> {
   /**
    * compute the length of this animation.
    *
-   * @return int as the length
+   * @return int as the longest end tick of all motions inside of the animation.
    */
   int getLength();
 }

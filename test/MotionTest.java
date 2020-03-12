@@ -1,5 +1,5 @@
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import cs3500.animation.model.Color;
 import cs3500.animation.model.Motion;
@@ -7,10 +7,12 @@ import cs3500.animation.model.Oval;
 import cs3500.animation.model.Posn;
 import cs3500.animation.model.Rectangle;
 import cs3500.animation.model.Shape;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
+/**
+ * To test all public methods in the Motion class.
+ */
 public class MotionTest {
 
   private Motion m;
@@ -58,7 +60,7 @@ public class MotionTest {
   public void testInvalidIncompatibleType() {
     init();
     Oval oval = new Oval(new Posn(200, 200), new Color(200, 200, 200),
-            5, 5);
+        5, 5);
     Motion m = new Motion(4, 10, oval, s1);
   }
 

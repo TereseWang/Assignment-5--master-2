@@ -1,19 +1,21 @@
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import cs3500.animation.model.Color;
 import cs3500.animation.model.Oval;
 import cs3500.animation.model.Posn;
 import cs3500.animation.model.Rectangle;
+import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
+/**
+ * To test the method isSameType() in the shape interface.
+ */
 public class ShapeTest {
+
   Rectangle r;
   Rectangle r1;
   Oval o;
   Oval o1;
-
 
   public void reset() {
     r = new Rectangle(new Posn(0, 0), new Color(), 2, 2);

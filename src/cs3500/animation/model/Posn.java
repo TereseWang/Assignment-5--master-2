@@ -4,6 +4,7 @@ package cs3500.animation.model;
  * represent a position with x and y axis.
  */
 public class Posn {
+
   private final int x;
   private final int y;
 
@@ -20,6 +21,7 @@ public class Posn {
 
   /**
    * Copy constructor.
+   *
    * @param p the desired posn to be copied
    */
   public Posn(Posn p) {

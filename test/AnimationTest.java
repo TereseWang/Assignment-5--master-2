@@ -11,6 +11,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * A test class to test all public methods in the SimpleAnimation class.
+ */
 public class AnimationTest {
 
   SimpleAnimation model;
