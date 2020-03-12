@@ -85,10 +85,22 @@ public class AnimationTest {
     assertEquals(list, model.getSequence("Rectangle"));
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testDeleteShapeNotFound() {
+    init();
+    model.deleteShape("Rectangle");
+  }
 
   @Test
   public void testDeleteShape() {
-
+    init();
+    model.declareShape("Rectangle");
+    model.addMotion("Rectangle", m2);
+    model.addMotion("Rectangle", m3);
+    model.addMotion("Rectangle", m);
+    model.deleteShape("Rectangle");
+    model.declareShape("Rectangle");
+    assertEquals(0,model.getSequence("Rectangle").size());
   }
 
   @Test
