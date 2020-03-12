@@ -255,12 +255,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
     for (Entry<String, List<Motion>> entry : animation.entrySet()) {
       String key = entry.getKey().toString();
       List<Motion> l = entry.getValue();
-      String s = "";
-      if (l.get(0).getStartShape() instanceof Rectangle) {
-        s = "Rectangle";
-      } else {
-        s = "Oval";
-      }
+      String s = l.get(0).getStartShape().getShapeName();
       result += "shape " + key + " " + s + "\n";
       for (int i = 0; i < l.size(); i++) {
         result += "motion " + key + " " + l.get(i).toString() + "\n";

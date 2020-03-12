@@ -1,5 +1,5 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import org.junit.Before;
+import org.junit.Test;
 
 import cs3500.animation.model.Color;
 import cs3500.animation.model.Motion;
@@ -7,8 +7,9 @@ import cs3500.animation.model.Oval;
 import cs3500.animation.model.Posn;
 import cs3500.animation.model.Rectangle;
 import cs3500.animation.model.Shape;
-import org.junit.Before;
-import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class MotionTest {
 
@@ -18,7 +19,7 @@ public class MotionTest {
 
   @Before
   public void init() {
-    s = new Oval(new Posn(200, 200), new Color(200, 200, 200), 5, 5);
+    s = new Rectangle(new Posn(200, 200), new Color(200, 200, 200), 5, 5);
     s1 = new Rectangle(new Posn(100, 100), new Color(200, 200, 200), 5, 5);
     m = new Motion(4, 10, s, s1);
   }
@@ -51,6 +52,14 @@ public class MotionTest {
   public void testInvalidMotionInvalidEndShape() {
     init();
     Motion m = new Motion(4, 10, s1, null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidIncompatibleType() {
+    init();
+    Oval oval = new Oval(new Posn(200, 200), new Color(200, 200, 200),
+            5, 5);
+    Motion m = new Motion(4, 10, oval, s1);
   }
 
   @Test
@@ -152,7 +161,7 @@ public class MotionTest {
   public void testChangeColor() {
     init();
     m.changeColor(new Color(255, 0, 0));
-    assertEquals(new Oval(new Posn(200, 200), new Color(255, 0, 0), 5, 5), m.getStartShape());
+    assertEquals(new Rectangle(new Posn(200, 200), new Color(255, 0, 0), 5, 5), m.getStartShape());
   }
 
   @Test
@@ -228,6 +237,6 @@ public class MotionTest {
   public void testClone() {
     Motion m2 = m.clone();
     assertFalse(m2 == m);
-    assertEquals(m2,m);
+    assertEquals(m2, m);
   }
 }
