@@ -1,6 +1,7 @@
 package cs3500.animation.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,13 +62,14 @@ public class SimpleAnimation implements Animation<List<Motion>> {
   }
 
   /**
-   * Find the motion with the exact same starting point and the ending point.
+   * Find the motion with the exact same starting point and the ending point of a shpe.
    *
-   * @param startTick
-   * @param endTick
-   * @return
+   * @param name the name of the shape
+   * @param startTick the starting point
+   * @param endTick the ending point
+   * @return Motion as the result
    */
-  private Motion findMotion(int startTick, int endTick) {
+  private Motion findMotion(String name, int startTick, int endTick) {
     return null;
   }
 

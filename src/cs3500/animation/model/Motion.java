@@ -46,10 +46,18 @@ public class Motion {
    * @param other given motion
    * @return boolean as the result
    */
-  public boolean isConnect(Motion other) {
-    return endTick == other.getStartTick() && endShape.equals(other.getFinalImages());
+  public boolean adjNext(Motion other) {
+    return endTick == other.getStartTick() && endShape.equals(other.getStartShape());
   }
-
+  /**
+   * determine whether the given motion is come right before to this motion.
+   *
+   * @param other given motion
+   * @return boolean as the result
+   */
+  public boolean adjPrivious(Motion other) {
+    return other.getEndTick() == startTick && other.getFinalImages().equals(t);
+  }
   /**
    * make a copy of this Motion.
    *
