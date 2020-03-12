@@ -27,10 +27,16 @@ public class SimpleAnimation implements Animation<List<Motion>> {
   public void addMotion(String name, Motion motion) {
     validate(name);
     List<Motion> sequence = animation.get(name);
-    Motion last = sequence.get(sequence.size() - 1);
-    if (last.isConnect(motion)) {
+    int size = sequence.size();
+    if (size != 0) {
+      Motion last = sequence.get(sequence.size() - 1);
+      if (last.isConnect(motion)) {
+        sequence.add(motion.clone());
+      }
+    } else {
       sequence.add(motion.clone());
     }
+
   }
 
   /**
@@ -53,19 +59,20 @@ public class SimpleAnimation implements Animation<List<Motion>> {
   }
 
   /**
-   * Find the motion with the exact same starting point
+   * Find the motion with the exact same starting point and the ending point.
+   *
    * @param startTick
    * @param endTick
    * @return
    */
-  private Motion findMotion(int startTick, int endTick){
-
+  private Motion findMotion(int startTick, int endTick) {
+    return null;
   }
+
   @Override
   public void changeColor(String name, Color color, int startTick, int endTick) {
 
   }
-
 
 
   @Override
@@ -90,7 +97,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
 
   @Override
   public List<Motion> getSequence(String name) {
-    if(!animation.containsKey(name)){
+    if (!animation.containsKey(name)) {
       throw new IllegalArgumentException("Invalid name");
     }
     List<Motion> l = animation.get(name);
