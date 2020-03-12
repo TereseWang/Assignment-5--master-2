@@ -106,7 +106,6 @@ public class Motion {
    */
   public void changeColor(Color color){
     startShape.changeColor(color);
-    endShape.changeColor(color);
   }
 
   /**
