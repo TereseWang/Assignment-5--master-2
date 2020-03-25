@@ -4,6 +4,7 @@ package cs3500.animation.model;
  * an abstract calss for shape representation.
  */
 public abstract class AbstractShape implements Shape {
+
   protected Posn position;
   protected Color color;
   protected int width;
@@ -73,7 +74,7 @@ public abstract class AbstractShape implements Shape {
   @Override
   public String toString() {
     return String.format("%d %d %d %d %d %d %d", position.getX(), position.getY(), width, height,
-            color.getR(), color.getG(), color.getB());
+        color.getR(), color.getG(), color.getB());
   }
 
   @Override
@@ -83,14 +84,8 @@ public abstract class AbstractShape implements Shape {
   public abstract Shape copyShape();
 
   @Override
-  public int hashCode() {
-    return position.hashCode() + color.hashCode()
-            + Integer.hashCode(width) + Integer.hashCode(height);
-  }
-
-  @Override
   public boolean isSameType(Shape other) {
-    if(other == null){
+    if (other == null) {
       return false;
     }
     return other.getShapeName() == getShapeName();
@@ -98,4 +93,7 @@ public abstract class AbstractShape implements Shape {
 
   @Override
   public abstract String getShapeName();
+
+  @Override
+  public abstract int hashCode();
 }

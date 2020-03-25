@@ -21,6 +21,11 @@ public class SimpleAnimation implements Animation<List<Motion>> {
     animation = new LinkedHashMap<>();
   }
 
+  /**
+   * Constructor for testing.
+   *
+   * @param animation the map of string combined with a list of motions
+   */
   public SimpleAnimation(LinkedHashMap<String, List<Motion>> animation) {
     this.animation = animation;
   }
@@ -50,13 +55,13 @@ public class SimpleAnimation implements Animation<List<Motion>> {
     } else {
       sequence.add(motion.clone());
     }
-
   }
 
   /**
-   * check this animation contains a shape has name as given.
+   * check if the name exist in the animation.
    *
    * @param name the given name
+   * @throws IllegalArgumentException if the name is not in the animation.
    */
   private void validate(String name) {
     if (!animation.containsKey(name)) {
@@ -94,7 +99,8 @@ public class SimpleAnimation implements Animation<List<Motion>> {
    *
    * @param name      the name of the shape
    * @param startTick the starting point
-   * @return Motion as the result * @throws IllegalArgumentException if couldn't find such motion
+   * @return Motion as the result
+   * @throws IllegalArgumentException if couldn't find such motion
    */
   private Motion findMotionBaseOnS(String name, int startTick) {
     validate(name);
@@ -105,7 +111,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       }
     }
     throw new IllegalArgumentException("couldn't find the motion start at " + startTick +
-            " in the shape " + name);
+        " in the shape " + name);
   }
 
   /**
@@ -124,7 +130,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       }
     }
     throw new IllegalArgumentException("couldn't find the motion end at " + endTick +
-            " in the shape " + name);
+        " in the shape " + name);
   }
 
   /**
@@ -141,9 +147,8 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       return m;
     }
     throw new IllegalArgumentException("couldn't find the motion start at " + startTick +
-            "and end at " + endTick + " in the shape " + name);
+        "and end at " + endTick + " in the shape " + name);
   }
-
 
   @Override
   public void changeColor(String name, Color color, int startTick, int endTick) {
@@ -154,7 +159,6 @@ public class SimpleAnimation implements Animation<List<Motion>> {
     m.changeColor(color);
 
   }
-
 
   @Override
   public void changePosition(String name, Posn position, int startTick, int endTick) {

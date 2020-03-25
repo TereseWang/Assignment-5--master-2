@@ -4,7 +4,8 @@ import static java.lang.String.format;
 
 /**
  * represent a shape's transition with a timeline, which is inclusive at the start point but
- * exclusive at the endpoint.
+ * exclusive at the endpoint. The startShape is the start state of the motion and endshape is the
+ * end state of the motion.
  */
 public class Motion {
 
@@ -14,16 +15,16 @@ public class Motion {
   private Shape endShape;
 
   /**
-   * construct a Motion with given
+   * construct a Motion with given startshape, endshape, starttick and endtick.
    *
-   * @param start
-   * @param end
-   * @param startS
-   * @param enshape
+   * @param start   the start time of the motion
+   * @param end     the end time of the motion
+   * @param startS  the start shape of motion
+   * @param enshape the end shape of the motion
    */
   public Motion(int start, int end, Shape startS, Shape enshape) {
-    if (start < 0 || end <= start || startS == null || enshape == null||
-            !startS.isSameType(enshape)) {
+    if (start < 0 || end <= start || startS == null || enshape == null ||
+        !startS.isSameType(enshape)) {
       throw new IllegalArgumentException("can not construct a motion");
     }
     this.startTick = start;
@@ -35,7 +36,7 @@ public class Motion {
   /**
    * get the shape after motion.
    *
-   * @return shape as the shape after changing
+   * @return shape the end shape of this motion
    */
   public Shape getFinalImages() {
     return endShape.copyShape();
@@ -45,7 +46,7 @@ public class Motion {
    * determine whether the given motion is adjacent next to this motion.
    *
    * @param other given motion
-   * @return boolean as the result
+   * @return true if the other motion if right after this motion
    */
   public boolean adjNext(Motion other) {
     return endTick == other.getStartTick() && endShape.equals(other.getStartShape());
@@ -55,7 +56,7 @@ public class Motion {
    * determine whether the given motion is come right before to this motion.
    *
    * @param other given motion
-   * @return boolean as the result
+   * @return true if the other motion is right before this motion
    */
   public boolean adjPrior(Motion other) {
     return other.getEndTick() == startTick && other.getFinalImages().equals(startShape);
@@ -97,13 +98,12 @@ public class Motion {
     return this.endTick;
   }
 
-  //modify
-
   /**
    * push the timeline forward with the length of given period.
    *
    * @param period the given length
-   * @throws IllegalArgumentException if it can't be push forward at that long.
+   * @throws IllegalArgumentException if it can't be push forward at that long or the period is a
+   *                                  negative number
    */
   public void pushForward(int period) {
     if (startTick - period < 0 || period < 0) {
@@ -118,6 +118,7 @@ public class Motion {
    * push the timeline backward with the length of given period.
    *
    * @param period the given length
+   * @throws IllegalArgumentException if the period is a negative number
    */
   public void pushBackward(int period) {
     if (period < 0) {
@@ -128,7 +129,7 @@ public class Motion {
   }
 
   /**
-   * extend the timeline to the given point.
+   * extend the timeline to the given point from endpoint to the right.
    *
    * @param endpoint the given point
    */
@@ -139,6 +140,13 @@ public class Motion {
     endTick = endpoint;
   }
 
+  /**
+   * Extend the timeline to the given point from starter point to the left.
+   *
+   * @param startpoint the given startpoint
+   * @throws IllegalArgumentException if the startpoint is greater than the endpoint of the
+   *                                  startpoint is less than zero
+   */
   public void changeStartTick(int startpoint) {
     if (startpoint < 0 || startpoint >= endTick) {
       throw new IllegalArgumentException("Invalid startpoint");
@@ -147,7 +155,7 @@ public class Motion {
   }
 
   /**
-   * change the color of the shape within this timeLine
+   * change the color of the shape within this timeLine.
    *
    * @param color the desired color
    */
@@ -175,6 +183,11 @@ public class Motion {
     endShape.changeSize(width, height);
   }
 
+  /**
+   * Get the startshape of this motion.
+   *
+   * @return the startshape of the motion
+   */
   public Shape getStartShape() {
     return startShape.copyShape();
   }
@@ -182,7 +195,7 @@ public class Motion {
   @Override
   public String toString() {
     return format("%d " + startShape.toString() + "  %d " + endShape.toString(), startTick,
-            endTick);
+        endTick);
   }
 
   @Override
@@ -191,9 +204,9 @@ public class Motion {
       return true;
     } else if (o instanceof Motion) {
       return ((Motion) o).startTick == startTick &&
-              ((Motion) o).endTick == endTick &&
-              ((Motion) o).startShape.equals(startShape) &&
-              ((Motion) o).endShape.equals(endShape);
+          ((Motion) o).endTick == endTick &&
+          ((Motion) o).startShape.equals(startShape) &&
+          ((Motion) o).endShape.equals(endShape);
     }
     return false;
   }
@@ -201,6 +214,6 @@ public class Motion {
   @Override
   public int hashCode() {
     return Integer.hashCode(startTick + endTick) +
-            startShape.hashCode() + endShape.hashCode();
+        startShape.hashCode() + endShape.hashCode();
   }
 }
