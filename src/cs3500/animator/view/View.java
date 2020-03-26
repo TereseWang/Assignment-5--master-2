@@ -20,4 +20,11 @@ public interface View {
    * @param height the hight of the canvas
    */
   void setCanvas(int top,int left, int width, int height);
+
+  /**
+   * set tick per second for the rendering.
+   * @param tickPerSeocnd as ticks per second.
+   */
+  void setTickPerSeocnd(int tickPerSeocnd);
+
 }
