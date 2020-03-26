@@ -111,7 +111,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       }
     }
     throw new IllegalArgumentException("couldn't find the motion start at " + startTick +
-        " in the shape " + name);
+            " in the shape " + name);
   }
 
   /**
@@ -130,7 +130,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       }
     }
     throw new IllegalArgumentException("couldn't find the motion end at " + endTick +
-        " in the shape " + name);
+            " in the shape " + name);
   }
 
   /**
@@ -147,7 +147,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       return m;
     }
     throw new IllegalArgumentException("couldn't find the motion start at " + startTick +
-        "and end at " + endTick + " in the shape " + name);
+            "and end at " + endTick + " in the shape " + name);
   }
 
   @Override
@@ -258,7 +258,8 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       return "";
     }
     String result = new String();
-    for (Entry<String, List<Motion>> entry : animation.entrySet()) {
+    // make a change here: change from "animation.entrySet()" to getAnimate.entrySet() in line 262.
+    for (Entry<String, List<Motion>> entry : getAnimate().entrySet()) {
       String key = entry.getKey();
       List<Motion> l = entry.getValue();
       if (l.isEmpty()) {
