@@ -1,4 +1,4 @@
-package cs3500.animation.model;
+package cs3500.animatior.shape;
 
 /**
  * represent a RGB Color.
@@ -107,4 +107,5 @@ public class Color {
   public int hashCode() {
     return Integer.hashCode((int) r) + Integer.hashCode((int) g) + Integer.hashCode((int) b);
   }
+
 }

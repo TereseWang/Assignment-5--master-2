@@ -1,6 +1,10 @@
 package cs3500.animation.model;
 
 import java.util.LinkedHashMap;
+import java.awt.Rectangle;
+
+import cs3500.animatior.shape.Color;
+import cs3500.animatior.shape.Posn;
 
 /**
  * Represent an animation that allows multiple shapes coduct multiple movement. Work as Model of
@@ -15,9 +19,10 @@ public interface Animation<K> {
    * that will be setted to be empty and motions will be added later.
    *
    * @param name as the name of the shape
+   * @param type as the type of ths shape
    * @throws IllegalArgumentException if the name has already be exist.
    */
-  void declareShape(String name);
+  void declareShape(String name, String type);
 
   /**
    * Add a new motion to the shape with given name.
@@ -147,4 +152,10 @@ public interface Animation<K> {
    * @return int as the shortest start tick of all motions inside of the animation.
    */
   int getStartTime();
+
+  /**
+   * get the dimension for canvas of this animation.
+   * @return Rectangle (java.awt) as dimension of the canvas;.
+   */
+   Rectangle getBox();
 }

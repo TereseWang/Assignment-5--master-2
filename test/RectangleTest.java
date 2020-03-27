@@ -1,10 +1,9 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import cs3500.animation.model.Color;
-import cs3500.animation.model.Oval;
-import cs3500.animation.model.Posn;
-import cs3500.animation.model.Rectangle;
+import cs3500.animatior.shape.Color;
+import cs3500.animatior.shape.Posn;
+import cs3500.animatior.shape.Rectangle;
 import org.junit.Test;
 
 /**
@@ -104,7 +103,7 @@ public class RectangleTest {
   @Test
   public void testEquals() {
     Rectangle r3 = new Rectangle(new Posn(0, 0), new Color(200, 200, 200), 3, 4);
-    Oval o1 = new Oval(new Posn(0, 0), new Color(200, 200, 200), 3, 4);
+    Color.Oval o1 = new Color.Oval(new Posn(0, 0), new Color(200, 200, 200), 3, 4);
     assertFalse(r3.equals(o1));
     assertEquals(true, r.equals(r));
     assertEquals(true, r1.equals(r1));

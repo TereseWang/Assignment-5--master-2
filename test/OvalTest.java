@@ -1,10 +1,9 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import cs3500.animation.model.Color;
-import cs3500.animation.model.Oval;
-import cs3500.animation.model.Posn;
-import cs3500.animation.model.Rectangle;
+import cs3500.animatior.shape.Color;
+import cs3500.animatior.shape.Posn;
+import cs3500.animatior.shape.Rectangle;
 import org.junit.Test;
 
 /**
@@ -12,37 +11,37 @@ import org.junit.Test;
  */
 public class OvalTest {
 
-  Oval c = new Oval(new Posn(100, 100), new Color(200, 200, 200), 10, 20);
-  Oval c1 = new Oval(new Posn(200, 200), new Color(100, 40, 200), 5, 3);
+  Color.Oval c = new Color.Oval(new Posn(100, 100), new Color(200, 200, 200), 10, 20);
+  Color.Oval c1 = new Color.Oval(new Posn(200, 200), new Color(100, 40, 200), 5, 3);
 
   @Test(expected = IllegalArgumentException.class)
   public void invalidOvalNullPosn() {
-    Oval c = new Oval(null, new Color(200, 200, 200), 10, 20);
+    Color.Oval c = new Color.Oval(null, new Color(200, 200, 200), 10, 20);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void invalidOvalNullColor() {
-    Oval c = new Oval(new Posn(100, 200), null, 10, 20);
+    Color.Oval c = new Color.Oval(new Posn(100, 200), null, 10, 20);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void invalidOvalNullColorNullPosn() {
-    Oval c = new Oval(null, null, 10, 20);
+    Color.Oval c = new Color.Oval(null, null, 10, 20);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void invalidOvalInvalidWidth() {
-    Oval c = new Oval(new Posn(200, 200), new Color(200, 200, 200), -10, 20);
+    Color.Oval c = new Color.Oval(new Posn(200, 200), new Color(200, 200, 200), -10, 20);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void invalidOvalInvalidHeight() {
-    Oval c = new Oval(null, new Color(200, 200, 200), 10, -20);
+    Color.Oval c = new Color.Oval(null, new Color(200, 200, 200), 10, -20);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void invalidOvalInvalidWH() {
-    Oval c = new Oval(null, new Color(200, 200, 200), 0, -10);
+    Color.Oval c = new Color.Oval(null, new Color(200, 200, 200), 0, -10);
   }
 
   @Test
@@ -103,7 +102,7 @@ public class OvalTest {
 
   @Test
   public void testEquals() {
-    Oval o1 = new Oval(new Posn(0, 0), new Color(200, 200, 200), 3, 4);
+    Color.Oval o1 = new Color.Oval(new Posn(0, 0), new Color(200, 200, 200), 3, 4);
     Rectangle r1 = new Rectangle(new Posn(0, 0),
         new Color(200, 200, 200), 3, 4);
     assertFalse(o1.equals(r1));

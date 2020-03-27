@@ -1,6 +1,6 @@
 import static org.junit.Assert.assertEquals;
 
-import cs3500.animation.model.Color;
+import cs3500.animatior.shape.Color;
 import org.junit.Test;
 
 /**

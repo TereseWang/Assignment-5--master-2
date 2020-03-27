@@ -1,11 +1,10 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 
-import cs3500.animation.model.Color;
+import cs3500.animatior.shape.Color;
 import cs3500.animation.model.Motion;
-import cs3500.animation.model.Oval;
-import cs3500.animation.model.Posn;
-import cs3500.animation.model.Rectangle;
+import cs3500.animatior.shape.Posn;
+import cs3500.animatior.shape.Rectangle;
 import cs3500.animation.model.Shape;
 import cs3500.animation.model.SimpleAnimation;
 import cs3500.animator.view.VisualPanel;
@@ -52,8 +51,8 @@ public class VisualPanelTest {
     init();
     assertEquals(1, panel.getTime());
     animation.declareShape("b");
-    Shape s8 = new Oval(new Posn(10, 10), new Color(100, 100, 100), 4, 10);
-    Shape s9 = new Oval(new Posn(100, 100), new Color(100, 100, 100), 4, 10);
+    Shape s8 = new Color.Oval(new Posn(10, 10), new Color(100, 100, 100), 4, 10);
+    Shape s9 = new Color.Oval(new Posn(100, 100), new Color(100, 100, 100), 4, 10);
     animation.addMotion("b", new Motion(5, 13, s8, s9));
     assertEquals("", panel.allMotions());
   }

@@ -1,9 +1,9 @@
 import static org.junit.Assert.assertEquals;
 
-import cs3500.animation.model.Color;
+import cs3500.animatior.shape.Color;
 import cs3500.animation.model.Motion;
-import cs3500.animation.model.Posn;
-import cs3500.animation.model.Rectangle;
+import cs3500.animatior.shape.Posn;
+import cs3500.animatior.shape.Rectangle;
 import cs3500.animation.model.Shape;
 import cs3500.animation.model.SimpleAnimation;
 import java.util.ArrayList;

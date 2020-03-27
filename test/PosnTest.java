@@ -1,6 +1,6 @@
 import static org.junit.Assert.assertEquals;
 
-import cs3500.animation.model.Posn;
+import cs3500.animatior.shape.Posn;
 import org.junit.Test;
 
 /**

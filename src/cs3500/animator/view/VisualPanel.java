@@ -1,9 +1,9 @@
 package cs3500.animator.view;
 
-import cs3500.animation.model.Color;
+import cs3500.animatior.shape.Color;
 import cs3500.animation.model.Motion;
-import cs3500.animation.model.Posn;
-import cs3500.animation.model.Shape;
+import cs3500.animatior.shape.Posn;
+import cs3500.animatior.shape.Shape;
 import cs3500.animation.model.SimpleAnimation;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -155,7 +155,7 @@ public class VisualPanel extends JPanel {
     for (Motion m : list) {
       switch (m.getStartShape().getShapeName()) {
         case "Oval":
-          m.getStartShape()
+          m.getStartShape();
           break;
         case "Rectangle":
           break;

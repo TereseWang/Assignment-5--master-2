@@ -17,9 +17,11 @@ public class ViewCreator {
       case SVG:
         return new SVGView(model);
       case VISUAL:
-        return visu
+        return new VisualView(model);
       case TEXTUAL:
+        return new TextualView(model);
       default:
+        throw new IllegalArgumentException("can't create a view because invalid viewType");
     }
   }
 

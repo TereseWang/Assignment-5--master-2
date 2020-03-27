@@ -9,15 +9,12 @@ public class VisualView extends JFrame implements View {
   private VisualPanel panel;
   private Animation model;
 
-  public VisualView(Animation model){
-    super();
-    this.model = model;
-  }
-  public VisualView(int top, int left, int width, int height) {
+
+  public VisualView(Animation model) {
     super();
     this.model = model;
     this.setTitle("Animation player");
-    this.setBounds(top,left,width,height);
+    this.setBounds(model.getBox());
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 

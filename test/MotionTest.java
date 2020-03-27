@@ -1,11 +1,10 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import cs3500.animation.model.Color;
+import cs3500.animatior.shape.Color;
 import cs3500.animation.model.Motion;
-import cs3500.animation.model.Oval;
-import cs3500.animation.model.Posn;
-import cs3500.animation.model.Rectangle;
+import cs3500.animatior.shape.Posn;
+import cs3500.animatior.shape.Rectangle;
 import cs3500.animation.model.Shape;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,7 +58,7 @@ public class MotionTest {
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidIncompatibleType() {
     init();
-    Oval oval = new Oval(new Posn(200, 200), new Color(200, 200, 200),
+    Color.Oval oval = new Color.Oval(new Posn(200, 200), new Color(200, 200, 200),
         5, 5);
     Motion m = new Motion(4, 10, oval, s1);
   }

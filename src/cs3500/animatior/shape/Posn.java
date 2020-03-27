@@ -1,4 +1,4 @@
-package cs3500.animation.model;
+package cs3500.animatior.shape;
 
 /**
  * represent a position with x and y axis.

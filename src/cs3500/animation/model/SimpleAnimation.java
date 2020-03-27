@@ -1,12 +1,16 @@
 package cs3500.animation.model;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import cs3500.animatior.shape.Color;
+import cs3500.animatior.shape.Posn;
 import cs3500.animator.util.AnimationBuilder;
 
 
@@ -16,23 +20,36 @@ import cs3500.animator.util.AnimationBuilder;
 public class SimpleAnimation implements Animation<List<Motion>> {
 
   public static final class Builder implements AnimationBuilder<Animation> {
+    SimpleAnimation model;
+    public Builder(){
+      model = new SimpleAnimation();
+    }
+
     @Override
     public Animation build() {
-      return null;
+
+      return model;
     }
 
     @Override
     public AnimationBuilder<Animation> setBounds(int x, int y, int width, int height) {
-      return null;
+      model.canvas.setBounds(x,y,width,height);
+      return this;
     }
 
     @Override
     public AnimationBuilder<Animation> declareShape(String name, String type) {
-      return null;
+      //didn't design for type.
+      model.declareShape(name);
+      return this;
     }
 
     @Override
-    public AnimationBuilder<Animation> addMotion(String name, int t1, int x1, int y1, int w1, int h1, int r1, int g1, int b1, int t2, int x2, int y2, int w2, int h2, int r2, int g2, int b2) {
+    public AnimationBuilder<Animation> addMotion(String name, int t1, int x1, int y1, int w1,
+                                                 int h1, int r1, int g1, int b1, int t2, int x2,
+                                                 int y2, int w2, int h2, int r2, int g2, int b2) {
+
+
       return null;
     }
 
@@ -44,12 +61,20 @@ public class SimpleAnimation implements Animation<List<Motion>> {
   }
 
   private LinkedHashMap<String, List<Motion>> animation;
+  private HashMap<String, Shape> contact;
+  private Rectangle canvas;
+  private static int X = 0;
+  private static int Y = 0;
+  private static int WIDTH = 250;
+  private static int HEIGHT = 250;
 
   /**
    * construct an empty animation.
    */
   public SimpleAnimation() {
     animation = new LinkedHashMap<>();
+    contact = new LinkedHashMap<>();
+    canvas = new Rectangle(X, Y ,WIDTH,HEIGHT);
   }
 
   /**
@@ -62,9 +87,9 @@ public class SimpleAnimation implements Animation<List<Motion>> {
   }
 
   @Override
-  public void declareShape(String name) {
-    if (animation.containsKey(name)) {
-      throw new IllegalArgumentException("Shape " + name + "has benn declared.");
+  public void declareShape(String name, String type) {
+    if (animation.containsKey(name) || contact.containsKey(name)) {
+      throw new IllegalArgumentException("Shape " + name + "has been declared.");
     }
     animation.put(name, new ArrayList<>());
   }
@@ -358,4 +383,10 @@ public class SimpleAnimation implements Animation<List<Motion>> {
     }
     return result;
   }
+
+  @Override
+  public Rectangle getBox(){
+    return new Rectangle(canvas.getBounds());
+  }
+
 }

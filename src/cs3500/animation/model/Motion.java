@@ -1,5 +1,9 @@
 package cs3500.animation.model;
 
+import cs3500.animatior.shape.Color;
+import cs3500.animatior.shape.Posn;
+import cs3500.animatior.shape.Shape;
+
 import static java.lang.String.format;
 
 /**
@@ -24,7 +28,7 @@ public class Motion {
    */
   public Motion(int start, int end, Shape startS, Shape enshape) {
     if (start < 0 || end <= start || startS == null || enshape == null ||
-        !startS.isSameType(enshape)) {
+            !startS.isSameType(enshape)) {
       throw new IllegalArgumentException("can not construct a motion");
     }
     this.startTick = start;
@@ -195,7 +199,7 @@ public class Motion {
   @Override
   public String toString() {
     return format("%d " + startShape.toString() + "  %d " + endShape.toString(), startTick,
-        endTick);
+            endTick);
   }
 
   @Override
@@ -204,9 +208,9 @@ public class Motion {
       return true;
     } else if (o instanceof Motion) {
       return ((Motion) o).startTick == startTick &&
-          ((Motion) o).endTick == endTick &&
-          ((Motion) o).startShape.equals(startShape) &&
-          ((Motion) o).endShape.equals(endShape);
+              ((Motion) o).endTick == endTick &&
+              ((Motion) o).startShape.equals(startShape) &&
+              ((Motion) o).endShape.equals(endShape);
     }
     return false;
   }
@@ -214,6 +218,6 @@ public class Motion {
   @Override
   public int hashCode() {
     return Integer.hashCode(startTick + endTick) +
-        startShape.hashCode() + endShape.hashCode();
+            startShape.hashCode() + endShape.hashCode();
   }
 }

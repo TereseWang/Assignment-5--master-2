@@ -1,11 +1,10 @@
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import cs3500.animation.model.Color;
-import cs3500.animation.model.Oval;
-import cs3500.animation.model.Posn;
-import cs3500.animation.model.Rectangle;
-import java.util.ArrayList;
+import cs3500.animatior.shape.Color;
+import cs3500.animatior.shape.Posn;
+import cs3500.animatior.shape.Rectangle;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,14 +15,14 @@ public class ShapeTest {
 
   Rectangle r;
   Rectangle r1;
-  Oval o;
-  Oval o1;
+  Color.Oval o;
+  Color.Oval o1;
   @Before
   public void reset() {
     r = new Rectangle(new Posn(0, 0), new Color(), 2, 2);
     r1 = new Rectangle(new Posn(0, 0), new Color(), 3, 2);
-    o = new Oval(new Posn(0, 0), new Color(), 2, 2);
-    o1 = new Oval(new Posn(0, 0), new Color(), 3, 2);
+    o = new Color.Oval(new Posn(0, 0), new Color(), 2, 2);
+    o1 = new Color.Oval(new Posn(0, 0), new Color(), 3, 2);
   }
 
   @Test
