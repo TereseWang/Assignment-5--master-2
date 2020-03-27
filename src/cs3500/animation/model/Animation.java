@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 
 import cs3500.animatior.shape.Color;
 import cs3500.animatior.shape.Posn;
+import cs3500.animatior.shape.ShapeType;
 
 /**
  * Represent an animation that allows multiple shapes coduct multiple movement. Work as Model of
@@ -158,4 +159,12 @@ public interface Animation<K> {
    * @return Rectangle (java.awt) as dimension of the canvas;.
    */
    Rectangle getBox();
+
+  /**
+   * get the type of the shape whose name match the given name
+   *
+   * @param name the given name
+   * @return ShapeType
+   */
+  public ShapeType getShapeType(String name);
 }
