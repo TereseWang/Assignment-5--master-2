@@ -4,8 +4,8 @@ import cs3500.animatior.shape.Color;
 import cs3500.animation.model.Motion;
 import cs3500.animatior.shape.Posn;
 import cs3500.animatior.shape.Rectangle;
-import cs3500.animation.model.Shape;
 import cs3500.animation.model.SimpleAnimation;
+import cs3500.animatior.shape.Shape;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
@@ -42,8 +42,8 @@ public class AnimationTest {
   @Test
   public void testdeclareShape() {
     init();
-    model.declareShape("Rectangle");
-    model.declareShape("Circle");
+    model.declareShape("Rectangle", "Rectangle");
+    model.declareShape("Circle", "Oval");
     assertEquals(0, model.getSequence("Rectangle").size());
     assertEquals(0, model.getSequence("Circle").size());
   }
@@ -51,21 +51,21 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testdeclareShapeExisted() {
     init();
-    model.declareShape("Rectangle");
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testAddMotionInvalidName() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangleha", m2);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testAddMotionInvalidOrder() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.addMotion("Rectangle", m3);
   }
@@ -73,7 +73,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testAddMotionInvalidOrderTele() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m3);
     model.addMotion("Rectangle", m);
   }
@@ -81,7 +81,7 @@ public class AnimationTest {
   @Test
   public void testAddMotion() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m2);
     model.addMotion("Rectangle", m3);
     model.addMotion("Rectangle", m);
@@ -104,19 +104,19 @@ public class AnimationTest {
   @Test
   public void testDeleteShape() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m2);
     model.addMotion("Rectangle", m3);
     model.addMotion("Rectangle", m);
     model.deleteShape("Rectangle");
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     assertEquals(0, model.getSequence("Rectangle").size());
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testDeleteMotionInvalidS() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m2);
     model.addMotion("Rectangle", m3);
     model.addMotion("Rectangle", m);
@@ -126,7 +126,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testDeleteMotionNoName() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m2);
     model.addMotion("Rectangle", m3);
     model.addMotion("Rectangle", m);
@@ -136,7 +136,7 @@ public class AnimationTest {
   @Test
   public void testDeleteMotion() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m2);
     model.addMotion("Rectangle", m3);
     model.addMotion("Rectangle", m);
@@ -152,7 +152,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testDeleteMotionEmp() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     List l = new ArrayList();
     model.deleteMotion("Rectangle", 0);
     model.deleteMotion("Rectangle2", 5);
@@ -161,7 +161,7 @@ public class AnimationTest {
   @Test
   public void testDeleteMotionAll() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m2);
     model.addMotion("Rectangle", m3);
     model.addMotion("Rectangle", m);
@@ -174,7 +174,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testChangeColorNullC() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.changeColor("Rectangle", null, 4, 5);
 
@@ -183,7 +183,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testChangeColorWrongS() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.changeColor("Rectangle", new Color(), 3, 5);
 
@@ -192,7 +192,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testChangeColorWrongE() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.changeColor("Rectangle", new Color(), 4, 6);
 
@@ -201,7 +201,7 @@ public class AnimationTest {
   @Test
   public void testChangeColor() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.changeColor("Rectangle", new Color(), 4, 5);
     Shape sClone = new Rectangle(new Posn(10, 10), new Color(), 3, 3);
@@ -213,7 +213,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testChangeSizeNoName() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.changeSize("Rectangle!", 1, 1, 4, 5);
   }
@@ -221,7 +221,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testChangeSizeWrongS() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.changeSize("Rectangle", 1, 1, 43, 5);
   }
@@ -229,7 +229,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testChangeSizeWrongE() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.changeSize("Rectangle", 1, 1, 4, 6);
   }
@@ -237,7 +237,7 @@ public class AnimationTest {
   @Test
   public void testChangeSize() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m2);
     assertEquals("shape Rectangle Rectangle\n"
             + "motion Rectangle 5 100 100 3 3 100 100 100  10 100 200 5 5 0 0 255",
@@ -251,7 +251,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testChangePositionNoName() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.changePosition("Rectangle!", new Posn(10, 10), 4, 5);
   }
@@ -259,7 +259,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testChangePositionWrongS() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.changePosition("Rectangle", new Posn(100, 100), 43, 5);
   }
@@ -267,7 +267,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testChanggPositionWrongE() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.changePosition("Rectangle", new Posn(100, 100), 4, 6);
   }
@@ -275,7 +275,7 @@ public class AnimationTest {
   @Test
   public void testChangePosition() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     assertEquals("shape Rectangle Rectangle\n"
             + "motion Rectangle 4 10 10 3 3 100 100 100  5 100 100 3 3 100 100 100",
@@ -289,7 +289,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testChangeEndSpeedWrongName() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m2);
     model.changeSpeedAnchorEndPoint("Circle", 5, 10);
   }
@@ -297,7 +297,7 @@ public class AnimationTest {
   @Test
   public void testchangeSpeedAnchorEndPointContrast() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m4);// 1 4
     model.addMotion("Rectangle", m);  //4 5
     model.addMotion("Rectangle", m2); // 5  10
@@ -314,7 +314,7 @@ public class AnimationTest {
   @Test
   public void testchangeSpeedAnchorEndPointExpand() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);  //4 5
     model.addMotion("Rectangle", m2); // 5  10
     model.addMotion("Rectangle", m3); // 10 23
@@ -327,7 +327,7 @@ public class AnimationTest {
 
   @Test
   public void testAnimateDescription() {
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.addMotion("Rectangle", m2);
     assertEquals("shape Rectangle Rectangle\n"
@@ -338,7 +338,7 @@ public class AnimationTest {
 
   @Test
   public void testAnimatedDescriptionEmpty() {
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     assertEquals("", model.animateDescription());
   }
 
@@ -346,7 +346,7 @@ public class AnimationTest {
   @Test
   public void testGetSequence() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.addMotion("Rectangle", m2);
     model.addMotion("Rectangle", m3);
@@ -365,7 +365,7 @@ public class AnimationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testGetSequenceWrongName() {
     init();
-    model.declareShape("Rectangle");
+    model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m);
     model.addMotion("Rectangle", m2);
     model.addMotion("Rectangle", m3);
@@ -375,9 +375,9 @@ public class AnimationTest {
 
   @Test
   public void testGetLength() {
-    model.declareShape("a");
-    model.declareShape("b");
-    model.declareShape("c");
+    model.declareShape("a", "Rectangle");
+    model.declareShape("b", "Rectangle");
+    model.declareShape("c", "Rectangle");
     model.addMotion("a", m);
     model.addMotion("b", m4);
     model.addMotion("c", m3);
@@ -386,9 +386,9 @@ public class AnimationTest {
 
   @Test
   public void testGetLengthNotfromZero() {
-    model.declareShape("a");
-    model.declareShape("b");
-    model.declareShape("c");
+    model.declareShape("a", "Rectangle");
+    model.declareShape("b", "Rectangle");
+    model.declareShape("c", "Rectangle");
     model.addMotion("a", m);
     model.addMotion("c", m3);
     assertEquals(23, model.getLength());
@@ -401,9 +401,9 @@ public class AnimationTest {
 
   @Test
   public void testGetAnimate() {
-    model.declareShape("a");
-    model.declareShape("b");
-    model.declareShape("c");
+    model.declareShape("a", "Rectangle");
+    model.declareShape("b", "Rectangle");
+    model.declareShape("c", "Rectangle");
     model.addMotion("a", m);
     model.addMotion("b", m4);
     model.addMotion("c", m3);
@@ -420,7 +420,7 @@ public class AnimationTest {
 
   @Test
   public void testGetEmptyAnimate() {
-    model.declareShape("a");
+    model.declareShape("a", "Rectangle");
     assertEquals("", new SimpleAnimation(model.getAnimate()).animateDescription());
   }
 }

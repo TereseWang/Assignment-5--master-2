@@ -3,9 +3,10 @@ import static org.junit.Assert.assertFalse;
 
 import cs3500.animatior.shape.Color;
 import cs3500.animation.model.Motion;
+import cs3500.animatior.shape.Oval;
 import cs3500.animatior.shape.Posn;
 import cs3500.animatior.shape.Rectangle;
-import cs3500.animation.model.Shape;
+import cs3500.animatior.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,7 +59,7 @@ public class MotionTest {
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidIncompatibleType() {
     init();
-    Color.Oval oval = new Color.Oval(new Posn(200, 200), new Color(200, 200, 200),
+    Oval oval = new Oval(new Posn(200, 200), new Color(200, 200, 200),
         5, 5);
     Motion m = new Motion(4, 10, oval, s1);
   }

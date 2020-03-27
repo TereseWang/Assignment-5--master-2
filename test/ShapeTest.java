@@ -2,6 +2,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import cs3500.animatior.shape.Color;
+import cs3500.animatior.shape.Oval;
 import cs3500.animatior.shape.Posn;
 import cs3500.animatior.shape.Rectangle;
 
@@ -15,14 +16,14 @@ public class ShapeTest {
 
   Rectangle r;
   Rectangle r1;
-  Color.Oval o;
-  Color.Oval o1;
+  Oval o;
+  Oval o1;
   @Before
   public void reset() {
     r = new Rectangle(new Posn(0, 0), new Color(), 2, 2);
     r1 = new Rectangle(new Posn(0, 0), new Color(), 3, 2);
-    o = new Color.Oval(new Posn(0, 0), new Color(), 2, 2);
-    o1 = new Color.Oval(new Posn(0, 0), new Color(), 3, 2);
+    o = new Oval(new Posn(0, 0), new Color(), 2, 2);
+    o1 = new Oval(new Posn(0, 0), new Color(), 3, 2);
   }
 
   @Test

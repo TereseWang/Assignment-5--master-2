@@ -1,38 +1,45 @@
 package cs3500.animator.view;
 
-import cs3500.animatior.shape.Color;
 import cs3500.animation.model.Motion;
+import cs3500.animation.model.SimpleAnimation;
+import cs3500.animatior.shape.Color;
 import cs3500.animatior.shape.Posn;
 import cs3500.animatior.shape.Shape;
-import cs3500.animation.model.SimpleAnimation;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class VisualPanel extends JPanel {
+public class VisualPanel extends JPanel implements ActionListener {
 
   private SimpleAnimation animation;
   private int count;
+  Timer timer = new Timer(2000, this);
 
   public VisualPanel(SimpleAnimation animation) {
     super();
     this.animation = animation;
-    this.count = animation.getStartTime();
+    timer.start();
   }
 
-  public List<Motion> allMotions() {
-    List<Motion> temp = new ArrayList<Motion>();
+  public SimpleAnimation SetMotionOneTick() {
+    SimpleAnimation result = new SimpleAnimation();
     for (Entry<String, List<Motion>> entry : animation.getAnimate().entrySet()) {
+      result.declareShape(entry.getKey(), entry.getValue().get(0).getStartShape().getShapeName());
       List<Motion> value = entry.getValue();
       for (Motion m : value) {
         List<Motion> l = convertToMotions(m, entry.getKey());
-        temp.addAll(l);
+        for (Motion a : l) {
+          result.addMotion(entry.getKey(), a);
+        }
       }
     }
-    return sortMotion(temp);
+    return new SimpleAnimation(result.getAnimate());
   }
 
   public List<Motion> sortMotion(List<Motion> list) {
@@ -151,17 +158,48 @@ public class VisualPanel extends JPanel {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
-    List<Motion> list = allMotions();
-    for (Motion m : list) {
-      switch (m.getStartShape().getShapeName()) {
-        case "Oval":
-          m.getStartShape();
-          break;
-        case "Rectangle":
-          break;
-        default:
-          break;
+    for (Entry<String, List<Motion>> entry : SetMotionOneTick().getAnimate().entrySet()) {
+      for (Motion m : entry.getValue()) {
+
+        if (count == m.getStartTick()) {
+          Shape startShape = m.getStartShape();
+          Shape endShape = m.getFinalImages();
+          Color startColor = startShape.getColor();
+          Color endColor = endShape.getColor();
+          double startWidth = startShape.getWidth();
+          double endWidth = endShape.getWidth();
+          Posn startPosn = startShape.getPosition();
+          Posn endPosn = endShape.getPosition();
+          double startHeight = startShape.getHeight();
+          double endHeight = endShape.getHeight();
+
+          switch (startShape.getShapeName()) {
+            case "Oval":
+              g2d.setColor(new java.awt.Color((int) startColor.getR(), (int) startColor.getG(),
+                  (int) startColor.getB()));
+              g2d.fillOval((int) startPosn.getX(), (int) startPosn.getY(), (int) startWidth,
+                  (int) startHeight);
+              break;
+            case "Rectangle":
+              g2d.setColor(new java.awt.Color((int) startColor.getR(), (int) startColor.getG(),
+                  (int) startColor.getB()));
+              g2d.fillRect((int) startPosn.getX(), (int) startPosn.getY(), (int) startWidth,
+                  (int) startHeight);
+              break;
+            default:
+              break;
+          }
+        }
       }
     }
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if(count == animation.getLength()) {
+      timer.stop();
+    }
+    count++;
+    repaint();
   }
 }

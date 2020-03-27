@@ -3,10 +3,11 @@ import static org.junit.Assert.assertNotSame;
 
 import cs3500.animatior.shape.Color;
 import cs3500.animation.model.Motion;
+import cs3500.animatior.shape.Oval;
 import cs3500.animatior.shape.Posn;
 import cs3500.animatior.shape.Rectangle;
-import cs3500.animation.model.Shape;
 import cs3500.animation.model.SimpleAnimation;
+import cs3500.animatior.shape.Shape;
 import cs3500.animator.view.VisualPanel;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class VisualPanelTest {
   @Before
   public void init() {
     animation = new SimpleAnimation();
-    animation.declareShape("a");
+    animation.declareShape("a", "Rectangle");
     Shape s = new Rectangle(new Posn(10, 10), new Color(100, 100, 100), 3, 3);
     Shape s1 = new Rectangle(new Posn(100, 100), new Color(100, 100, 100), 3, 3);
     animation.addMotion("a", new Motion(4, 5, s, s1));
@@ -50,10 +51,9 @@ public class VisualPanelTest {
   public void testGetTime() {
     init();
     assertEquals(1, panel.getTime());
-    animation.declareShape("b");
-    Shape s8 = new Color.Oval(new Posn(10, 10), new Color(100, 100, 100), 4, 10);
-    Shape s9 = new Color.Oval(new Posn(100, 100), new Color(100, 100, 100), 4, 10);
+    animation.declareShape("b", "Oval");
+    Shape s8 = new Oval(new Posn(10, 10), new Color(100, 100, 100), 4, 10);
+    Shape s9 = new Oval(new Posn(100, 100), new Color(100, 100, 100), 4, 10);
     animation.addMotion("b", new Motion(5, 13, s8, s9));
-    assertEquals("", panel.allMotions());
   }
 }
