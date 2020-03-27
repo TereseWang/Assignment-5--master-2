@@ -1,5 +1,6 @@
 package cs3500.animator.view;
 
+import cs3500.animation.model.SimpleAnimation;
 import java.io.OutputStreamWriter;
 
 import cs3500.animation.model.Animation;
@@ -18,7 +19,7 @@ public class ViewCreator {
    * @param tickPerSec tic per second
    * @return a view as the result
    */
-  public static View create(ViewType viewType, Animation model, OutputStreamWriter out, int tickPerSec) {
+  public static View create(ViewType viewType, SimpleAnimation model, OutputStreamWriter out, int tickPerSec) {
     switch (viewType){
       case SVG:
         return new SVGView(model,out);

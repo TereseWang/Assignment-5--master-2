@@ -5,11 +5,15 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import cs3500.animation.model.Animation;
+import java.awt.Rectangle;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * A view that will generate a textual discription
  */
 public class TextualView implements View {
+
   private final Animation model;
   private final OutputStreamWriter out;
 
@@ -18,7 +22,7 @@ public class TextualView implements View {
    * Construct a TextualView with given Model
    *
    * @param model a given not null model
-   * @param out where the output should go
+   * @param out   where the output should go
    * @throws IllegalArgumentException if the model given is null
    */
   public TextualView(Animation model, OutputStreamWriter out) {
@@ -50,6 +54,7 @@ public class TextualView implements View {
       }
     }
 
+  public void setTickPerSeocnd(int tickPerSeocnd) {
 
-
+  }
 }

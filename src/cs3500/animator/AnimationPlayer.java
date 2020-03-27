@@ -20,6 +20,7 @@ import cs3500.animator.view.ViewCreator;
 /**
  * Entry point for this program.
  */
+
 public final class AnimationPlayer {
   public static void main(String[] args) {
 
@@ -81,7 +82,8 @@ public final class AnimationPlayer {
     view = null;
     try {
       ViewCreator viewCreator = new ViewCreator();
-      view = viewCreator.create(ViewCreator.ViewType.findViewType(viewName), model,out,tps);
+      view = viewCreator.create(ViewCreator.ViewType.findViewType(viewName),
+          (SimpleAnimation) model,out,tps);
     } catch (IllegalArgumentException e) {
       JOptionPane.showMessageDialog(frame,
               e.getMessage(),

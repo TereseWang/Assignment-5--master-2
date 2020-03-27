@@ -1,5 +1,7 @@
 package cs3500.animator.view;
 
+import java.io.IOException;
+
 public interface View {
   /**
    * Refresh the view to reflect any changes in the game state.
@@ -10,7 +12,7 @@ public interface View {
   /**
    * Make the view visible to start the game session.
    */
-  void display();
+  void display() throws IOException;
 
 
 

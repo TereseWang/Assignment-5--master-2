@@ -1,5 +1,4 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
 
 import cs3500.animatior.shape.Color;
 import cs3500.animation.model.Motion;
@@ -12,6 +11,9 @@ import cs3500.animator.view.VisualPanel;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * To test functions in VisualPanel.
+ */
 public class VisualPanelTest {
 
   private SimpleAnimation animation;
@@ -33,24 +35,13 @@ public class VisualPanelTest {
     Shape s6 = new Rectangle(new Posn(100, 200), new Color(100, 100, 100), 4, 10);
     Shape s7 = new Rectangle(new Posn(10, 10), new Color(100, 100, 100), 3, 3);
     animation.addMotion("a", new Motion(1, 4, s6, s7));
-    panel = new VisualPanel(animation);
-  }
-
-  @Test
-  public void testGetMotionState() {
-    init();
-    assertEquals("100 120 3 3 80 80 131", panel.getMotionState("a", 6).toString());
-    assertEquals("100 140 3 3 60 60 162", panel.getMotionState("a", 7).toString());
-    assertEquals("100 160 4 4 40 40 193", panel.getMotionState("a", 8).toString());
-    assertEquals("100 180 4 4 20 20 224", panel.getMotionState("a", 9).toString());
-    assertEquals("100 200 5 5 0 0 255", panel.getMotionState("a", 10).toString());
-    assertEquals("100 200 4 5 7 7 243", panel.getMotionState("a", 11).toString());
+    panel = new VisualPanel(animation, 1000);
   }
 
   @Test
   public void testGetTime() {
     init();
-    assertEquals(1, panel.getTime());
+    assertEquals(0, panel.getTime());
     animation.declareShape("b", "Oval");
     Shape s8 = new Oval(new Posn(10, 10), new Color(100, 100, 100), 4, 10);
     Shape s9 = new Oval(new Posn(100, 100), new Color(100, 100, 100), 4, 10);
