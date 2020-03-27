@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 
 import cs3500.animatior.shape.Color;
 import cs3500.animatior.shape.Posn;
+import cs3500.animatior.shape.ShapeCreator;
 import cs3500.animator.util.AnimationBuilder;
 
 
@@ -40,7 +41,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
     @Override
     public AnimationBuilder<Animation> declareShape(String name, String type) {
       //didn't design for type.
-      model.declareShape(name);
+      model.declareShape(name,type);
       return this;
     }
 
@@ -92,6 +93,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       throw new IllegalArgumentException("Shape " + name + "has been declared.");
     }
     animation.put(name, new ArrayList<>());
+    contact.put(name,new ShapeCreator().cr)
   }
 
   @Override
