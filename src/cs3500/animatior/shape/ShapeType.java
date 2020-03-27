@@ -17,9 +17,9 @@ public enum ShapeType {
     if (name.equalsIgnoreCase("Rectangle")) {
       return RECTANGLE;
     }
-    if (name.equalsIgnoreCase("Oval")) {
+    if (name.equalsIgnoreCase("Oval") || name.equalsIgnoreCase("ellipse")) {
       return OVAL;
     }
-    throw new IllegalArgumentException("can't find the type");
+    throw new IllegalArgumentException("can't find the type the given type name is" + name);
   }
 }
