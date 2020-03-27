@@ -20,6 +20,5 @@ public class SimpleController implements AnimationController {
 
   @Override
   public void execute() {
-    view.display();
   }
 }

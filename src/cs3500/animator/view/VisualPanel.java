@@ -1,6 +1,5 @@
 package cs3500.animator.view;
 
-import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
 import cs3500.animatior.shape.Color;
@@ -16,22 +15,70 @@ import java.util.Map.Entry;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * JPanel class that do all the drawings and motions.
+ */
 public class VisualPanel extends JPanel implements ActionListener {
 
-  SimpleAnimation animation;
+  private SimpleAnimation animation;
   private int count;
   private List<Shape> shapes;
-  Timer timer = new Timer(500, this);
+  private int tickPerSecond;
 
-  public VisualPanel(SimpleAnimation animation) {
+  /**
+   * Constructor to run the animation.
+   *
+   * @param animation     the model of the animation
+   * @param tickPerSecond the animation moving rate
+   */
+  public VisualPanel(SimpleAnimation animation, int tickPerSecond) {
     super();
+    this.tickPerSecond = tickPerSecond;
+    Timer timer = new Timer(1000 / tickPerSecond, this);
     this.shapes = new ArrayList<>();
     this.animation = (SimpleAnimation) animation;
-    SetMotionOneTick();
+    setMotionOneTick();
+    fillInBlankMotion();
     timer.start();
   }
 
-  public void SetMotionOneTick() {
+  /**
+   * If the shape does not have any motions in between the very start time of the whole animtion and
+   * the end time, add motions to make it just stay there and not move.
+   */
+  private void fillInBlankMotion() {
+    SimpleAnimation result = new SimpleAnimation(animation.getAnimate());
+    int startTime = animation.getStartTime();
+    int endTime = animation.getLength();
+    for (Entry<String, List<Motion>> entry : animation.getAnimate().entrySet()) {
+      List<Motion> l = entry.getValue();
+      int startMotionTime = l.get(0).getStartTick();
+      int endMotionTime = l.get(l.size() - 1).getEndTick();
+      if (startMotionTime > startTime) {
+        while (startMotionTime > startTime) {
+          Motion m = new Motion(startMotionTime - 1, startMotionTime, l.get(0).getStartShape(),
+              l.get(0).getStartShape());
+          result.addMotion(entry.getKey(), m);
+          startMotionTime--;
+        }
+      }
+      if (endMotionTime < endTime) {
+        while (endMotionTime < endTime) {
+          Motion m = new Motion(endMotionTime, endMotionTime + 1,
+              l.get(l.size() - 1).getFinalImages(), l.get(l.size() - 1).getFinalImages());
+          result.addMotion(entry.getKey(), m);
+          endMotionTime++;
+        }
+      }
+    }
+    animation = result;
+  }
+
+  /**
+   * Convert all motions with time period more than one tick to a list of motions with only one tick
+   * time period, and do that for the whole animation.
+   */
+  private void setMotionOneTick() {
     SimpleAnimation result = new SimpleAnimation();
     for (Entry<String, List<Motion>> entry : animation.getAnimate().entrySet()) {
       result.declareShape(entry.getKey(), entry.getValue().get(0).getStartShape().getShapeName());
@@ -46,16 +93,28 @@ public class VisualPanel extends JPanel implements ActionListener {
     animation = new SimpleAnimation(result.getAnimate());
   }
 
-  public List<Motion> convertToMotions(Motion m, String name) {
+  /**
+   * Convert all motions with time period more than one tick to a list of motions with only one
+   * tick.
+   *
+   * @param m    the given motion to convert
+   * @param name the name of the motion in the aniamtion
+   * @return a list of motions of that motion with every single motion has one tick period
+   */
+  private List<Motion> convertToMotions(Motion m, String name) {
     int startTime = m.getStartTick();
     int endTime = m.getEndTick();
     Shape currentShape = m.getStartShape();
     List<Motion> result = new ArrayList<Motion>();
-    for (int i = startTime; i < endTime; i++) {
-      Shape b = getMotionState(name, i + 1);
-      Motion a = new Motion(i, i + 1, currentShape, b);
-      result.add(a);
-      currentShape = b.copyShape();
+    if (startTime == endTime) {
+      result.add(m);
+    } else {
+      for (int i = startTime; i < endTime; i++) {
+        Shape b = getMotionState(name, i + 1);
+        Motion a = new Motion(i, i + 1, currentShape, b);
+        result.add(a);
+        currentShape = b.copyShape();
+      }
     }
     return result;
   }
@@ -67,7 +126,7 @@ public class VisualPanel extends JPanel implements ActionListener {
    * @param name the desired shape name
    * @return the state of the shape
    */
-  public Shape getMotionState(String name, int time) {
+  private Shape getMotionState(String name, int time) {
     if (time < count) {
       throw new IllegalArgumentException("Animation not started");
     }
@@ -120,23 +179,40 @@ public class VisualPanel extends JPanel implements ActionListener {
             startShape.changePosn(postion);
             startShape.changeSize(changeInWidth, changeInHeight);
             currentShape = startShape;
+          } else {
+            currentShape = startShape;
           }
+        } else {
+          currentShape = startShape;
         }
+      } else {
+        currentShape = startShape;
       }
     }
     return currentShape;
   }
 
-  public void setTickPerSecond(int tickPerSecond) {
-    timer = new Timer(1000/tickPerSecond,this);
-  }
-
+  /**
+   * The tweening function to help calculating the motion state of each shape with the given time.
+   *
+   * @param a    the start state
+   * @param b    the end state
+   * @param ta   the start time
+   * @param tb   the end time
+   * @param time the current time
+   * @return the result of the tweening function
+   */
   private double tweeningFunction(double a, double b, int ta, int tb, int time) {
     double taa = (double) ta;
     double tbb = (double) tb;
     return (a * ((tbb - time) / (tbb - taa))) + (b * ((time - taa) / (tbb - taa)));
   }
 
+  /**
+   * Get the time of the current time.
+   *
+   * @return the time of the current time
+   */
   public int getTime() {
     return count;
   }
@@ -182,8 +258,9 @@ public class VisualPanel extends JPanel implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if(count == animation.getLength()) {
-      timer.stop();
+    if (count == animation.getLength()) {
+      count = animation.getStartTime();
+      repaint();
     }
     count++;
     repaint();
