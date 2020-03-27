@@ -13,7 +13,6 @@ public class VisualView extends JFrame implements View {
   private SimpleAnimation model;
 
   /**
-   *
    * @param model
    * @param tickPerSec tick per second.
    */
@@ -24,15 +23,14 @@ public class VisualView extends JFrame implements View {
     this.setTitle("Animation player");
     this.setBounds(model.getBox());
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setTickPerSeocnd(tickPerSec);
 
     this.setLayout(new BorderLayout());
     panel = new VisualPanel(model);
-;
+
+    this.setTickPerSeocnd(tickPerSec);
 
     this.add(panel, BorderLayout.CENTER);
     pack();
-    this.setVisible(true);
   }
 
 
@@ -43,8 +41,16 @@ public class VisualView extends JFrame implements View {
 
   @Override
   public void display() {
-
+    this.setVisible(true);
   }
+
+  @Override
+  public void setCanvas(int top, int left, int width, int height) {
+    this.setBounds(top, left, width, height);
+  }
+
+  @Override
+  public void setTickPerSeocnd(int tickPerSeocnd) {
 
 
 }

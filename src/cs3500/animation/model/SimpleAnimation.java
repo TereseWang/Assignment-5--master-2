@@ -1,20 +1,19 @@
 package cs3500.animation.model;
 
-import java.awt.Rectangle;//only Rectangle
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map.Entry;
-
 import cs3500.animatior.shape.Color;
 import cs3500.animatior.shape.Posn;
 import cs3500.animatior.shape.Shape;
 import cs3500.animatior.shape.ShapeCreator;
 import cs3500.animatior.shape.ShapeType;
 import cs3500.animator.util.AnimationBuilder;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 
 /**
@@ -23,6 +22,7 @@ import cs3500.animator.util.AnimationBuilder;
 public class SimpleAnimation implements Animation<List<Motion>> {
 
   public static final class Builder implements AnimationBuilder<Animation> {
+
     SimpleAnimation model;
 
     public Builder() {
@@ -49,16 +49,16 @@ public class SimpleAnimation implements Animation<List<Motion>> {
 
     @Override
     public AnimationBuilder<Animation> addMotion(String name, int t1, int x1, int y1, int w1,
-                                                 int h1, int r1, int g1, int b1, int t2, int x2,
-                                                 int y2, int w2, int h2, int r2, int g2, int b2) {
+        int h1, int r1, int g1, int b1, int t2, int x2,
+        int y2, int w2, int h2, int r2, int g2, int b2) {
       Shape startShape;
       Shape endShape;
       Motion m;
       startShape = ShapeCreator.create(model.getShapeType(name), new Posn(x1, y1),
-              new Color(r1, g1, b1), w1, h1);
+          new Color(r1, g1, b1), w1, h1);
       endShape = ShapeCreator.create(model.getShapeType(name), new Posn(x2, y2), new Color(r2, g2,
-                      b2),
-              w2, h2);
+              b2),
+          w2, h2);
       m = new Motion(t1, t2, startShape, endShape);
       model.addMotion(name, m);
 
@@ -67,9 +67,9 @@ public class SimpleAnimation implements Animation<List<Motion>> {
 
     @Override
     public AnimationBuilder<Animation> addKeyframe(String name, int t, int x, int y, int w, int h,
-                                                   int r, int g, int b) {
+        int r, int g, int b) {
       Shape startShape = ShapeCreator.create(model.getShapeType(name), new Posn(x, y),
-              new Color(r, g, b), w, h);
+          new Color(r, g, b), w, h);
       Motion m = new Motion(t, t + 1, startShape, startShape);
 
       return this;
@@ -191,7 +191,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       }
     }
     throw new IllegalArgumentException("couldn't find the motion start at " + startTick +
-            " in the shape " + name);
+        " in the shape " + name);
   }
 
   /**
@@ -210,7 +210,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       }
     }
     throw new IllegalArgumentException("couldn't find the motion end at " + endTick +
-            " in the shape " + name);
+        " in the shape " + name);
   }
 
   /**
@@ -227,7 +227,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       return m;
     }
     throw new IllegalArgumentException("couldn't find the motion start at " + startTick +
-            "and end at " + endTick + " in the shape " + name);
+        "and end at " + endTick + " in the shape " + name);
   }
 
   @Override
@@ -302,33 +302,30 @@ public class SimpleAnimation implements Animation<List<Motion>> {
 
   @Override
   public LinkedHashMap<String, List<Motion>> getAnimate() {
-    LinkedHashMap<Integer, String> l = getAnimateHelper();
+    LinkedHashMap<String, Integer> l = getAnimateHelper();
     LinkedHashMap<String, List<Motion>> result = new LinkedHashMap<>();
-    for (Entry<Integer, String> entry : l.entrySet()) {
-      String s = entry.getValue();
+    for (Entry<String, Integer> entry : l.entrySet()) {
+      String s = entry.getKey();
       List<Motion> listMotion = getSequence(s);
       result.put(s, listMotion);
     }
     return result;
   }
 
-  private LinkedHashMap<Integer, String> getAnimateHelper() {
-    LinkedHashMap<Integer, String> result = new LinkedHashMap<>();
+  private LinkedHashMap<String, Integer> getAnimateHelper() {
+    LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
     ArrayList<Integer> l = new ArrayList<>();
-    LinkedHashMap<Integer, String> temp = new LinkedHashMap<>();
+    LinkedHashMap<String, Integer> temp = new LinkedHashMap<>();
     for (Entry<String, List<Motion>> entry : animation.entrySet()) {
       if (!entry.getValue().isEmpty()) {
         int i = entry.getValue().get(0).getStartTick();
         String s = entry.getKey();
         l.add(i);
-        temp.put(i, s);
+        temp.put(s, i);
       }
     }
-    Collections.sort(l);
-    for (int i = 0; i < l.size(); i++) {
-      int key = l.get(i);
-      result.put(key, temp.get(key));
-    }
+    temp.entrySet().stream().sorted(Map.Entry.comparingByValue())
+        .forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
     return result;
   }
 
