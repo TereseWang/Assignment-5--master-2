@@ -30,7 +30,7 @@ public final class AnimationPlayer {
     String outFilename = "";
     String viewName = "";
     View view;
-    Integer tps = null;
+    int tps = 0;
     JFrame frame = new JFrame("Warning");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.pack();
@@ -65,19 +65,9 @@ public final class AnimationPlayer {
     AnimationReader reader = new AnimationReader();
     AnimationBuilder<Animation> builder = new SimpleAnimation.Builder();
     model = reader.parseFile(in, builder);
-    // view
-    view = null;
-    try {
-      ViewCreator viewCreator = new ViewCreator();
-      view = viewCreator.create(ViewCreator.ViewType.findViewType(viewName), model);
-    } catch (IllegalArgumentException e) {
-      JOptionPane.showMessageDialog(frame,
-              e.getMessage(),
-              "Inane warning",
-              JOptionPane.WARNING_MESSAGE);
-      frame.setVisible(true);
-    }
+    // out to create view
     //out
+    out = null;
     if(!outFilename.equals("")){
       try{
         out=new FileWriter(outFilename);
@@ -88,6 +78,18 @@ public final class AnimationPlayer {
                 JOptionPane.WARNING_MESSAGE); e.printStackTrace();
       }
     }
+    view = null;
+    try {
+      ViewCreator viewCreator = new ViewCreator();
+      view = viewCreator.create(ViewCreator.ViewType.findViewType(viewName), model,out,tps);
+    } catch (IllegalArgumentException e) {
+      JOptionPane.showMessageDialog(frame,
+              e.getMessage(),
+              "Inane warning",
+              JOptionPane.WARNING_MESSAGE);
+      frame.setVisible(true);
+    }
+
 
     SimpleController controller = new SimpleController(view);
 

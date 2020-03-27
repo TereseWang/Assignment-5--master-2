@@ -1,5 +1,7 @@
 package cs3500.animator.view;
 
+import java.io.OutputStreamWriter;
+
 import cs3500.animation.model.Animation;
 
 /**
@@ -10,16 +12,19 @@ public class ViewCreator {
    * create a view according to given viewtype
    *
    * @param viewType given viewtype
+   * @param model the model
+   * @param out output stream
+   * @param tickPerSec tic per second
    * @return a view as the result
    */
-  public static View create(ViewType viewType, Animation model) {
+  public static View create(ViewType viewType, Animation model, OutputStreamWriter out, int tickPerSec) {
     switch (viewType){
       case SVG:
         return new SVGView(model);
       case VISUAL:
-        return new VisualView(model);
+        return new VisualView(model,tickPerSec);
       case TEXTUAL:
-        return new TextualView(model);
+        return new TextualView(model,out);
       default:
         throw new IllegalArgumentException("can't create a view because invalid viewType");
     }

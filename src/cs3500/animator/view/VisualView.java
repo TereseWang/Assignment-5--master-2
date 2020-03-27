@@ -11,25 +11,24 @@ public class VisualView extends JFrame implements View {
 
   private VisualPanel panel;
   private SimpleAnimation model;
-  private final int top;
-  private final int left;
-  private final int width;
-  private final int height;
 
-  public VisualView(SimpleAnimation model, int top, int left, int width, int height) {
+  /**
+   *
+   * @param model
+   * @param tickPerSec tick per second.
+   */
+  public VisualView(SimpleAnimation model, int tickPerSec) {
     super();
     this.model = model;
-    this.top = top;
-    this.left = left;
-    this.width = width;
-    this.height = height;
+
     this.setTitle("Animation player");
     this.setBounds(model.getBox());
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setTickPerSeocnd(tickPerSec);
 
     this.setLayout(new BorderLayout());
     panel = new VisualPanel(model);
-    panel.setPreferredSize(new Dimension(width, height));
+;
 
     this.add(panel, BorderLayout.CENTER);
     pack();
