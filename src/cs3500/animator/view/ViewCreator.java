@@ -15,8 +15,9 @@ public class ViewCreator {
   public static View create(ViewType viewType, Animation model) {
     switch (viewType){
       case SVG:
-        return new SVGView();
+        return new SVGView(model);
       case VISUAL:
+        return visu
       case TEXTUAL:
       default:
     }
