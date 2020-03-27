@@ -170,8 +170,8 @@ public class MotionTest {
   public void testChangeSize() {
     init();
     m.changeSize(10, 10);
-    assertEquals(10, m.getFinalImages().getHeight());
-    assertEquals(10, m.getFinalImages().getWidth());
+    assertEquals(10, m.getFinalImages().getHeight(),0.001);
+    assertEquals(10, m.getFinalImages().getWidth(),0.001);
   }
 
   @Test(expected = IllegalArgumentException.class)

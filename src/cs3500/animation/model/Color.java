@@ -5,9 +5,9 @@ package cs3500.animation.model;
  */
 public class Color {
 
-  private final int r;
-  private final int g;
-  private final int b;
+  private final double r;
+  private final double g;
+  private final double b;
 
   /**
    * Construct a color with given RGB attributes.
@@ -17,7 +17,7 @@ public class Color {
    * @param b represent blue
    * @throws IllegalArgumentException if the any of the given attributes is not valid
    */
-  public Color(int r, int g, int b) {
+  public Color(double r, double g, double b) {
     checkValid(r);
     checkValid(g);
     checkValid(b);
@@ -51,7 +51,7 @@ public class Color {
    *
    * @return int as red value
    */
-  public int getR() {
+  public double getR() {
     return r;
   }
 
@@ -60,7 +60,7 @@ public class Color {
    *
    * @return int as blue value
    */
-  public int getB() {
+  public double getB() {
     return b;
   }
 
@@ -69,7 +69,7 @@ public class Color {
    *
    * @return int as green value
    */
-  public int getG() {
+  public double getG() {
     return g;
   }
 
@@ -81,7 +81,7 @@ public class Color {
    * @param i the given int
    * @throws IllegalArgumentException if the int is invalid either negative or greater than 255
    */
-  private void checkValid(int i) {
+  private void checkValid(double i) {
     if (i < 0 || i > 255) {
       throw new IllegalArgumentException("Not a valid RGB attribute!");
     }
@@ -89,7 +89,7 @@ public class Color {
 
   @Override
   public String toString() {
-    return String.format("(%d, %d, %d)", r, g, b);
+    return String.format("(%d, %d, %d)", (int) r, (int) g, (int) b);
   }
 
   @Override
@@ -105,6 +105,6 @@ public class Color {
 
   @Override
   public int hashCode() {
-    return Integer.hashCode(r) + Integer.hashCode(g) + Integer.hashCode(b);
+    return Integer.hashCode((int) r) + Integer.hashCode((int) g) + Integer.hashCode((int) b);
   }
 }

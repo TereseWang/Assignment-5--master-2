@@ -63,12 +63,12 @@ public class RectangleTest {
 
   @Test
   public void testChangeSize() {
-    r.changeSize(5, 5);
-    assertEquals(5, r.getWidth());
-    assertEquals(5, r.getHeight());
-    r1.changeSize(4, 4);
-    assertEquals(4, r1.getHeight());
-    assertEquals(4, r1.getWidth());
+    r.changeSize(5.0, 5.0);
+    assertEquals(5.0, r.getWidth(), 0.001);
+    assertEquals(5.0, r.getHeight(), 0.001);
+    r1.changeSize(4.0, 4.0);
+    assertEquals(4.0, r1.getHeight(), 0.001);
+    assertEquals(4.0, r1.getWidth(), 0.001);
   }
 
   @Test
@@ -85,14 +85,14 @@ public class RectangleTest {
 
   @Test
   public void testGetWidth() {
-    assertEquals(10, r.getWidth());
-    assertEquals(5, r1.getWidth());
+    assertEquals(10, r.getWidth(), 0.001);
+    assertEquals(5, r1.getWidth(), 0.001);
   }
 
   @Test
   public void testGetHeight() {
-    assertEquals(20, r.getHeight());
-    assertEquals(3, r1.getHeight());
+    assertEquals(20, r.getHeight(), 0.001);
+    assertEquals(3, r1.getHeight(), 0.001);
   }
 
   @Test

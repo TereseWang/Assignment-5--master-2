@@ -42,17 +42,17 @@ public class ColorTest {
 
   @Test
   public void testGetR() {
-    assertEquals(200, c.getR());
+    assertEquals(200, c.getR(), 0.001);
   }
 
   @Test
   public void testGetG() {
-    assertEquals(100, c.getG());
+    assertEquals(100, c.getG(), 0.001);
   }
 
   @Test
   public void testGetB() {
-    assertEquals(240, c.getB());
+    assertEquals(240, c.getB(), 0.001);
   }
 
   @Test

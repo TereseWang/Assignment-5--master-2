@@ -26,7 +26,7 @@ public interface Shape {
    * @param height as y value
    * @throws IllegalArgumentException if the given width and height is smaller than 0
    */
-  void changeSize(int width, int height);
+  void changeSize(double width, double height);
 
   /**
    * get the position of the shape.
@@ -45,16 +45,16 @@ public interface Shape {
   /**
    * get the width of the shape.
    *
-   * @return int as the width of the shape
+   * @return double as the width of the shape
    */
-  int getWidth();
+  double getWidth();
 
   /**
    * get the height of the shape.
    *
-   * @return int as the height of the shape
+   * @return double as the height of the shape
    */
-  int getHeight();
+  double getHeight();
 
   /**
    * make a copy of the this shape.

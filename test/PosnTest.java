@@ -13,20 +13,20 @@ public class PosnTest {
 
   @Test
   public void testGetX() {
-    assertEquals(1, p.getX());
-    assertEquals(100, p1.getX());
+    assertEquals(1, p.getX(), 0.001);
+    assertEquals(100, p1.getX(), 0.001);
   }
 
   @Test
   public void testNegativePosn() {
     Posn p = new Posn(-100, 200);
-    assertEquals(-100, p.getX());
+    assertEquals(-100, p.getX(), 0.001);
   }
 
   @Test
   public void testGetY() {
-    assertEquals(1, p.getY());
-    assertEquals(200, p1.getY());
+    assertEquals(1, p.getY(), 0.001);
+    assertEquals(200, p1.getY(), 0.001);
   }
 
   @Test

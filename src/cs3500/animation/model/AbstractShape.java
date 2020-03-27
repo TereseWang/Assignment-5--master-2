@@ -7,8 +7,8 @@ public abstract class AbstractShape implements Shape {
 
   protected Posn position;
   protected Color color;
-  protected int width;
-  protected int height;
+  protected double width;
+  protected double height;
 
   /**
    * construct a shape with given attributes.
@@ -19,7 +19,7 @@ public abstract class AbstractShape implements Shape {
    * @param height   as the height of the shape
    * @throws IllegalArgumentException if the given position or color is null
    */
-  public AbstractShape(Posn position, Color color, int width, int height) {
+  public AbstractShape(Posn position, Color color, double width, double height) {
     if (position == null || color == null) {
       throw new IllegalArgumentException("position and color of a shape can't be null");
     }
@@ -43,7 +43,7 @@ public abstract class AbstractShape implements Shape {
   }
 
   @Override
-  public void changeSize(int width, int height) {
+  public void changeSize(double width, double height) {
     if (width <= 0 || height <= 0) {
       throw new IllegalArgumentException("the width and the height needed to br positive");
     }
@@ -62,19 +62,20 @@ public abstract class AbstractShape implements Shape {
   }
 
   @Override
-  public int getHeight() {
+  public double getHeight() {
     return height;
   }
 
   @Override
-  public int getWidth() {
+  public double getWidth() {
     return width;
   }
 
   @Override
   public String toString() {
-    return String.format("%d %d %d %d %d %d %d", position.getX(), position.getY(), width, height,
-        color.getR(), color.getG(), color.getB());
+    return String
+        .format("%d %d %d %d %d %d %d", (int) position.getX(), (int) position.getY(), (int) width,
+            (int) height, (int) color.getR(), (int) color.getG(), (int) color.getB());
   }
 
   @Override
