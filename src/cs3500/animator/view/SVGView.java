@@ -51,10 +51,20 @@ public class SVGView implements View {
       if (listOfMotion.hasNext()) {
         Motion first = listOfMotion.next();
         Shape startShape = first.getStartShape();
-        translated.append(String.format("<%s id=\"%s\" x=\"%d\" y=\"%d\" width=\"50\" " +
-                "height=\"100\" fill=\"rgb(128,0,128)\" visibility=\"visible\" >",getSVGShapeType(model.getShapeType(name)), name,
-                startShape.getPosition().getX(), startShape.getPosition().getX() ));
+        //shape
+        translated.append(String.format("<%s id=\"%s\" x=\"%d\" y=\"%d\" width=\"%d\" " +
+                "height=\"%d\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" >\n",
+                getSVGShapeType(model.getShapeType(name)), name, startShape.getPosition().getX(),
+                startShape.getPosition().getY(), startShape.getWidth(),startShape.getHeight(),
+                startShape.getColor().getR(), startShape.getColor().getG(),
+                startShape.getColor().getB()));
+        //first animation
+        translated.append(String.format(" <animate attributeType=\"xml\" begin=\"2000.0ms\"" +
+                " dur=\"5000.0ms\" attributeName=\"cx\" from=\"500\" to=\"600\" fill=\"freeze\" />",)
       }
+
+
+      translated.append(String.format("</%s>\n",  getSVGShapeType(model.getShapeType(name))));
     }
   }
 
