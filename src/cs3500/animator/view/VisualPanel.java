@@ -1,5 +1,6 @@
 package cs3500.animator.view;
 
+import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
 import cs3500.animatior.shape.Color;
@@ -17,17 +18,20 @@ import javax.swing.Timer;
 
 public class VisualPanel extends JPanel implements ActionListener {
 
-  private SimpleAnimation animation;
+  SimpleAnimation animation;
   private int count;
-  Timer timer = new Timer(2000, this);
+  private List<Shape> shapes;
+  Timer timer = new Timer(500, this);
 
   public VisualPanel(SimpleAnimation animation) {
     super();
-    this.animation = animation;
+    this.shapes = new ArrayList<>();
+    this.animation = (SimpleAnimation) animation;
+    SetMotionOneTick();
     timer.start();
   }
 
-  public SimpleAnimation SetMotionOneTick() {
+  public void SetMotionOneTick() {
     SimpleAnimation result = new SimpleAnimation();
     for (Entry<String, List<Motion>> entry : animation.getAnimate().entrySet()) {
       result.declareShape(entry.getKey(), entry.getValue().get(0).getStartShape().getShapeName());
@@ -39,25 +43,8 @@ public class VisualPanel extends JPanel implements ActionListener {
         }
       }
     }
-    return new SimpleAnimation(result.getAnimate());
+    animation = new SimpleAnimation(result.getAnimate());
   }
-
-  public List<Motion> sortMotion(List<Motion> list) {
-    List<Motion> result = new ArrayList<Motion>();
-    result.addAll(list);
-    int n = result.size();
-    for (int i = 1; i < n; ++i) {
-      Motion key = result.get(i);
-      int j = i - 1;
-      while (j >= 0 && result.get(j).getStartTick() > key.getStartTick()) {
-        result.set(j + 1, result.get(j));
-        j = j - 1;
-      }
-      result.set(j + 1, key);
-    }
-    return result;
-  }
-
 
   public List<Motion> convertToMotions(Motion m, String name) {
     int startTime = m.getStartTick();
@@ -140,6 +127,10 @@ public class VisualPanel extends JPanel implements ActionListener {
     return currentShape;
   }
 
+  public void setTickPerSecond(int tickPerSecond) {
+    timer = new Timer(1000/tickPerSecond,this);
+  }
+
   private double tweeningFunction(double a, double b, int ta, int tb, int time) {
     double taa = (double) ta;
     double tbb = (double) tb;
@@ -150,17 +141,12 @@ public class VisualPanel extends JPanel implements ActionListener {
     return count;
   }
 
-  private void setTime(int time) {
-    count = time;
-  }
-
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
-    for (Entry<String, List<Motion>> entry : SetMotionOneTick().getAnimate().entrySet()) {
+    for (Entry<String, List<Motion>> entry : animation.getAnimate().entrySet()) {
       for (Motion m : entry.getValue()) {
-
         if (count == m.getStartTick()) {
           Shape startShape = m.getStartShape();
           Shape endShape = m.getFinalImages();

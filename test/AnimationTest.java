@@ -1,10 +1,11 @@
 import static org.junit.Assert.assertEquals;
 
-import cs3500.animatior.shape.Color;
 import cs3500.animation.model.Motion;
+import cs3500.animation.model.SimpleAnimation;
+import cs3500.animatior.shape.Color;
+import cs3500.animatior.shape.Oval;
 import cs3500.animatior.shape.Posn;
 import cs3500.animatior.shape.Rectangle;
-import cs3500.animation.model.SimpleAnimation;
 import cs3500.animatior.shape.Shape;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,17 +102,6 @@ public class AnimationTest {
     model.deleteShape("Rectangle");
   }
 
-  @Test
-  public void testDeleteShape() {
-    init();
-    model.declareShape("Rectangle", "Rectangle");
-    model.addMotion("Rectangle", m2);
-    model.addMotion("Rectangle", m3);
-    model.addMotion("Rectangle", m);
-    model.deleteShape("Rectangle");
-    model.declareShape("Rectangle", "Rectangle");
-    assertEquals(0, model.getSequence("Rectangle").size());
-  }
 
   @Test(expected = IllegalArgumentException.class)
   public void testDeleteMotionInvalidS() {
