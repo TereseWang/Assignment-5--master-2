@@ -1,6 +1,7 @@
 package cs3500.animator.view;
 
 import java.awt.*;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import cs3500.animation.model.Animation;
@@ -38,23 +39,17 @@ public class TextualView implements View {
   public void display() {
     StringBuilder output = new StringBuilder("");
     Rectangle canvas = model.getBox();
-    out.append(String.format("canvas %d %d %d %d\n", canvas.y, canvas.x, canvas.width,
-            canvas.height));
-    out.append(model.animateDescription());
+    try{
     if(out == null){
     System.out.print(output);
-  }else{
-      out.write();
-    }}
+  }else{out.append(String.format("canvas %d %d %d %d\n", canvas.y, canvas.x, canvas.width,
+            canvas.height));
+      out.append(model.animateDescription());
+    }}catch (IOException e){
+      System.out.print("an error occured when appending");
+      }
+    }
 
 
-  @Override
-  public void setCanvas(int top, int left, int width, int height) {
 
-  }
-
-  @Override
-  public void setTickPerSeocnd(int tickPerSeocnd) {
-
-  }
 }

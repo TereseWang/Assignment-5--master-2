@@ -1,5 +1,7 @@
 package cs3500.animator.view;
 
+import java.io.OutputStreamWriter;
+
 import cs3500.animation.model.Animation;
 
 /**
@@ -9,10 +11,11 @@ public class SVGView implements View{
   Animation model;
 
   /**
-   * cons
+   *
    * @param model
+   * @param outputStreamWriter
    */
-  public SVGView(Animation model){
+  public SVGView(Animation model, OutputStreamWriter outputStreamWriter){
     if(model== null){
       throw new IllegalArgumentException("model can't be null");
     }

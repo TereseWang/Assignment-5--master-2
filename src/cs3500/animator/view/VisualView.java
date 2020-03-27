@@ -46,14 +46,7 @@ public class VisualView extends JFrame implements View {
 
   }
 
-  @Override
-  public void setCanvas(int top, int left, int width, int height) {
-  }
 
-  @Override
-  public void setTickPerSeocnd(int tickPerSeocnd) {
-
-  }
 }
 
 
