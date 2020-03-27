@@ -1,9 +1,15 @@
 package cs3500.animator;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
 
 import cs3500.animation.model.Animation;
+import cs3500.animation.model.SimpleAnimation;
+import cs3500.animator.controller.SimpleController;
+import cs3500.animator.util.AnimationBuilder;
+import cs3500.animator.util.AnimationReader;
+import cs3500.animator.view.View;
 
 /**
  * Entry point for this program.
@@ -12,18 +18,18 @@ public final class AnimationPlayer {
   public static void main(String[] args) {
 
     Animation model;
-    Scanner in;
+    FileReader in;
     FileWriter out;
+    View view;
 
-    // New Hotness: Graphical User Interface:
-    // 1. Create an instance of the model.
-    Animation model = new
-    // 2. Create an instance of the view.
-    TTTSwingViews view = new TTTSwingViews(model);
-    // 3. Create an instance of the controller, passing the view to its constructor.
-    TTTSwingController controller = new TTTSwingController(view);
-    // 4. Call playGame() on the controller.
-    controller.playGame(model);
+
+    AnimationReader reader = new AnimationReader();
+    AnimationBuilder builder = new SimpleAnimation.Builder();
+    Animation model = reader.parseFile(in,builder);
+
+    SimpleController controller = new SimpleController(view);
+
+    controller.execute();
 
   }
 }
