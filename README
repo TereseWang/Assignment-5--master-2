@@ -2,12 +2,14 @@
 
 // in in SimpleAnimtion class
 Implement a nested class Build.
-add a new field canvas which is a Rectangle.
-add a new method getBox() which return the value of canvas.
-add a new field contact which is HashMap<String, Shpae> inorder to store the information for each
+added a new field canvas which is a Rectangle.
+added a new method getBox() which return the value of canvas.
+added a new field contact which is HashMap<String, Shpae> inorder to store the information for each
 shape and its type.
- change the signature of declareShape method from "public void declareShape(String name)"  to
- "public void declareShape(String name, String type) in order to adjust to method in Build.
+ changed the signature of declareShape method from "public void declareShape(String name)"  to
+ "public void declareShape(String name, String type) in order to adjust to method in Build and modify
+ its code.
+ Modified addMotion();
 
  // new Implementation
 
