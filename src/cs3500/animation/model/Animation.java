@@ -140,4 +140,11 @@ public interface Animation<K> {
    * @return int as the longest end tick of all motions inside of the animation.
    */
   int getLength();
+
+  /**
+   * Get the start time of this animation.
+   *
+   * @return int as the shortest start tick of all motions inside of the animation.
+   */
+  int getStartTime();
 }

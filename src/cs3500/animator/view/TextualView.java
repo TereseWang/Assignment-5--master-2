@@ -68,4 +68,9 @@ public class TextualView implements View {
   public void setCanvas(int top, int left, int width, int height) {
 
   }
+
+  @Override
+  public void setTickPerSeocnd(int tickPerSeocnd) {
+
+  }
 }
