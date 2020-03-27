@@ -1,5 +1,7 @@
 package cs3500.animation.model;
 
+import java.awt.Graphics;
+
 /**
  * represent a immutable shape.
  */
@@ -77,4 +79,6 @@ public interface Shape {
    * @return String as the result
    */
   String getShapeName();
+
+  String toString();
 }

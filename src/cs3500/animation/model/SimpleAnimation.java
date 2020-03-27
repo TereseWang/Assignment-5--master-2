@@ -348,4 +348,14 @@ public class SimpleAnimation implements Animation<List<Motion>> {
     }
     return result;
   }
+
+  @Override
+  public int getStartTime() {
+    int result = 0;
+    for (Entry<String, List<Motion>> entry : getAnimate().entrySet()) {
+      result = entry.getValue().get(0).getStartTick();
+      break;
+    }
+    return result;
+  }
 }
