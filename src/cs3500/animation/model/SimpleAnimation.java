@@ -59,6 +59,7 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       endShape = ShapeCreator.create(model.getShapeType(name), new Posn(x2, y2), new Color(r2, g2,
               b2),
           w2, h2);
+
       m = new Motion(t1, t2, startShape, endShape);
       model.addMotion(name, m);
 

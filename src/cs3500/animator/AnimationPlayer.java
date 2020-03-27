@@ -23,7 +23,7 @@ import cs3500.animator.view.ViewCreator;
 public final class AnimationPlayer {
   public static void main(String[] args) {
 
-    Animation model;
+   Animation model;
     FileReader in = null;
     String inFilename = "";
     FileWriter out = null;

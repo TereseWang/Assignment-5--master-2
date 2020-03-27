@@ -27,10 +27,13 @@ public class Motion {
    * @param enshape the end shape of the motion
    */
   public Motion(int start, int end, Shape startS, Shape enshape) {
-    if (start < 0 || end <= start || startS == null || enshape == null ||
+    if (start < 0 || end < start || startS == null || enshape == null ||
             !startS.isSameType(enshape)) {
-      throw new IllegalArgumentException("can not construct a motion");
+      throw new IllegalArgumentException("can not construct a motion because 1condi: " + (start < 0)
+              + " 2condi: " + (end <= start) + " 3condi: " + (startS == null) + " 4condi: "
+              + (enshape == null) + " showStart tick: " + start + " endTick: " + end);
     }
+
     this.startTick = start;
     this.endTick = end;
     this.startShape = startS;

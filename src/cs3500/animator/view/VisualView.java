@@ -1,11 +1,10 @@
 package cs3500.animator.view;
 
+import java.awt.*;
+
+import javax.swing.*;
+
 import cs3500.animation.model.SimpleAnimation;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 
 public class VisualView extends JFrame implements View {
 
@@ -24,10 +23,11 @@ public class VisualView extends JFrame implements View {
     this.setBounds(model.getBox());
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
     this.setLayout(new BorderLayout());
     panel = new VisualPanel(model);
+    panel.setTickPerSecond(tickPerSec);
 
-    this.setTickPerSeocnd(tickPerSec);
 
     this.add(panel, BorderLayout.CENTER);
     pack();
@@ -44,15 +44,7 @@ public class VisualView extends JFrame implements View {
     this.setVisible(true);
   }
 
-  @Override
-  public void setCanvas(int top, int left, int width, int height) {
-    this.setBounds(top, left, width, height);
+
   }
-
-  @Override
-  public void setTickPerSeocnd(int tickPerSeocnd) {
-
-
-}
 
 

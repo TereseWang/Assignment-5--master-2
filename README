@@ -1,5 +1,7 @@
 //changes made in previous code
-
+// in Motion
+change the condition of construct a motion from "end <= start" to "end < start" in order to read
+from the supplied file.
 // in in SimpleAnimtion class
 Implement a nested class Build.
 added a new field canvas which is a Rectangle.
