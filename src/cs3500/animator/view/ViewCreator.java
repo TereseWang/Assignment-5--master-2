@@ -1,5 +1,7 @@
 package cs3500.animator.view;
 
+import cs3500.animation.model.Animation;
+
 /**
  * a factory class for the views of this program
  */
@@ -10,10 +12,10 @@ public class ViewCreator {
    * @param viewType given viewtype
    * @return a view as the result
    */
-  public static View create(ViewType viewType) {
+  public static View create(ViewType viewType, Animation model) {
     switch (viewType){
       case SVG:
-        return
+        return new SVGView();
       case VISUAL:
       case TEXTUAL:
       default:
