@@ -5,8 +5,8 @@ package cs3500.animation.model;
  */
 public class Posn {
 
-  private final int x;
-  private final int y;
+  private final double x;
+  private final double y;
 
   /**
    * construct a position with given x and y coordinates.
@@ -14,7 +14,7 @@ public class Posn {
    * @param x represent value in x axis
    * @param y represent value in y axis
    */
-  public Posn(int x, int y) {
+  public Posn(double x, double y) {
     this.x = x;
     this.y = y;
   }
@@ -34,7 +34,7 @@ public class Posn {
    *
    * @return int as value in x
    */
-  public int getX() {
+  public double getX() {
     return x;
   }
 
@@ -43,14 +43,14 @@ public class Posn {
    *
    * @return int as value in y
    */
-  public int getY() {
+  public double getY() {
     return y;
   }
 
 
   @Override
   public String toString() {
-    return String.format("(%d, %d)", x, y);
+    return String.format("(%d, %d)", (int) x, (int) y);
   }
 
   @Override
@@ -66,6 +66,6 @@ public class Posn {
 
   @Override
   public int hashCode() {
-    return Integer.hashCode(x) + Integer.hashCode(y);
+    return Integer.hashCode((int) x) + Integer.hashCode((int) y);
   }
 }

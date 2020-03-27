@@ -64,11 +64,11 @@ public class OvalTest {
   @Test
   public void testChangeSize() {
     c.changeSize(5, 5);
-    assertEquals(5, c.getWidth());
-    assertEquals(5, c.getHeight());
+    assertEquals(5, c.getWidth(), 0.001);
+    assertEquals(5, c.getHeight(), 0.001);
     c1.changeSize(4, 4);
-    assertEquals(4, c1.getHeight());
-    assertEquals(4, c1.getWidth());
+    assertEquals(4, c1.getHeight(), 0.001);
+    assertEquals(4, c1.getWidth(), 0.001);
   }
 
   @Test
@@ -85,14 +85,14 @@ public class OvalTest {
 
   @Test
   public void testGetWidth() {
-    assertEquals(10, c.getWidth());
-    assertEquals(5, c1.getWidth());
+    assertEquals(10, c.getWidth(), 0.001);
+    assertEquals(5, c1.getWidth(), 0.001);
   }
 
   @Test
   public void testGetHeight() {
-    assertEquals(20, c.getHeight());
-    assertEquals(3, c1.getHeight());
+    assertEquals(20, c.getHeight(), 0.001);
+    assertEquals(3, c1.getHeight(), 0.001);
   }
 
   @Test

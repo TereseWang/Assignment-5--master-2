@@ -14,7 +14,7 @@ public class Oval extends AbstractShape {
    * @param height   as the height of the shape
    * @throws IllegalArgumentException if the given position or color is null
    */
-  public Oval(Posn position, Color color, int width, int height) {
+  public Oval(Posn position, Color color, double width, double height) {
     super(position, color, width, height);
   }
 
@@ -43,6 +43,6 @@ public class Oval extends AbstractShape {
   @Override
   public int hashCode() {
     return position.hashCode() + color.hashCode()
-        + Integer.hashCode(width) + Integer.hashCode(height);
+        + Integer.hashCode((int) width) + Integer.hashCode((int) height);
   }
 }

@@ -13,7 +13,7 @@ public class Rectangle extends AbstractShape {
    * @param w    the width of the rectangle
    * @param h    the height of the rectangle
    */
-  public Rectangle(Posn posn, Color c, int w, int h) {
+  public Rectangle(Posn posn, Color c, double w, double h) {
     super(posn, c, w, h);
   }
 
@@ -42,6 +42,6 @@ public class Rectangle extends AbstractShape {
   @Override
   public int hashCode() {
     return position.hashCode() + color.hashCode()
-        + Integer.hashCode(width) + Integer.hashCode(height);
+        + Integer.hashCode((int) width) + Integer.hashCode((int) height);
   }
 }
