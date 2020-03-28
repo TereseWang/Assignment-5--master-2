@@ -3,12 +3,13 @@ package cs3500.animator.view;
 import cs3500.animation.model.SimpleAnimation;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 /**
  * To represent the visual view of the animation.
  */
 public class VisualView extends JFrame implements View {
-
+  private VisualPanel panel;
   /**
    * The constructor of the visual view which set up for animation to run.
    *
@@ -19,15 +20,18 @@ public class VisualView extends JFrame implements View {
     super();
 
     this.setTitle("Animation player");
-    this.setBounds(model.getBox());
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     this.setLayout(new BorderLayout());
-    VisualPanel panel = new VisualPanel(model, tickPerSec);
-    this.add(panel, BorderLayout.CENTER);
-    pack();
-  }
+    panel = new VisualPanel(model, tickPerSec);
 
+    JScrollPane scroll = new JScrollPane(panel);
+    scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    this.add(scroll);
+    pack();
+    this.setBounds(model.getBox());
+  }
 
   @Override
   public void refresh() {
@@ -39,5 +43,3 @@ public class VisualView extends JFrame implements View {
     this.setVisible(true);
   }
 }
-
-
