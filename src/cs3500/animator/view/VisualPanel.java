@@ -36,7 +36,7 @@ public class VisualPanel extends JPanel implements ActionListener {
     }
     Timer timer = new Timer(1000 / tickPerSecond, this);
     List<Shape> shapes = new ArrayList<>();
-    this.animation = (SimpleAnimation) animation;
+    this.animation = animation;
     setMotionOneTick();
     fillInBlankMotion();
     timer.start();
