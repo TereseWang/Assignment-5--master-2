@@ -1,0 +1,19 @@
+<svg viewBox="145 50 410 199" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+<rect id="disk1" x="190.00" y="161.00" width="20.00" height="11.00" fill="rgb(113,87,151)" visibility="visible" >
+</rect>
+<rect id="disk2" x="183.00" y="172.00" width="32.00" height="11.00" fill="rgb(35,173,73)" visibility="visible" >
+</rect>
+<rect id="disk3" x="177.00" y="183.00" width="45.00" height="11.00" fill="rgb(9,67,130)" visibility="visible" >
+</rect>
+<rect id="disk4" x="170.00" y="194.00" width="58.00" height="11.00" fill="rgb(96,198,208)" visibility="visible" >
+</rect>
+<rect id="disk5" x="164.00" y="205.00" width="71.00" height="11.00" fill="rgb(136,3,187)" visibility="visible" >
+</rect>
+<rect id="disk6" x="157.00" y="216.00" width="84.00" height="11.00" fill="rgb(53,8,157)" visibility="visible" >
+</rect>
+<rect id="disk7" x="151.00" y="227.00" width="97.00" height="11.00" fill="rgb(165,115,94)" visibility="visible" >
+</rect>
+<rect id="disk8" x="145.00" y="238.00" width="110.00" height="11.00" fill="rgb(153,156,239)" visibility="visible" >
+</rect>
+</svg>
