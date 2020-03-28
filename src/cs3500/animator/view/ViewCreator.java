@@ -21,7 +21,7 @@ public class ViewCreator {
                             OutputStreamWriter out, int tickPerSec) {
     switch (viewType) {
       case SVG:
-        return new SVGView(model, out);
+        return new SVGView(model, out, tickPerSec);
       case VISUAL:
         return new VisualView((SimpleAnimation) model, tickPerSec);
       case TEXTUAL:

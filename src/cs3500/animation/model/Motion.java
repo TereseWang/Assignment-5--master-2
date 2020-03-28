@@ -199,6 +199,19 @@ public class Motion {
     return startShape.copyShape();
   }
 
+  public boolean isChangeColor() {
+    return startShape.getColor().equals(endShape.getColor());
+  }
+
+  public boolean isChangeSize() {
+    return startShape.getWidth() == endShape.getWidth()
+            && startShape.getHeight() == endShape.getHeight();
+  }
+
+  public boolean isChangePosn() {
+    return startShape.getPosition().equals(endShape.getPosition());
+  }
+
   @Override
   public String toString() {
     return format("%d " + startShape.toString() + "  %d " + endShape.toString(), startTick,
