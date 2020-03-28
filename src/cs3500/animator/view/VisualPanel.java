@@ -52,16 +52,7 @@ public class VisualPanel extends JPanel implements ActionListener {
     int endTime = animation.getLength();
     for (Entry<String, List<Motion>> entry : animation.getAnimate().entrySet()) {
       List<Motion> l = entry.getValue();
-      int startMotionTime = l.get(0).getStartTick();
       int endMotionTime = l.get(l.size() - 1).getEndTick();
-      if (startMotionTime > startTime) {
-        while (startMotionTime > startTime) {
-          Motion m = new Motion(startMotionTime - 1, startMotionTime, l.get(0).getStartShape(),
-              l.get(0).getStartShape());
-          result.addMotion(entry.getKey(), m);
-          startMotionTime--;
-        }
-      }
       if (endMotionTime < endTime) {
         while (endMotionTime < endTime) {
           Motion m = new Motion(endMotionTime, endMotionTime + 1,
