@@ -57,6 +57,7 @@ public class SVGView implements View {
     Iterator<String> nameI = animation.keySet().iterator();
   while (nameI.hasNext()) {
       String name = nameI.next();
+      ShapeType type = model.getShapeType(name);
       Iterator<Motion> listOfMotion = animation.get(name).iterator();
       // only transalte the shape if it has animation.
       if (listOfMotion.hasNext()) {
@@ -65,34 +66,18 @@ public class SVGView implements View {
         //shape
         translated.append(String.format("<%s id=\"%s\" x=\"%.2f\" y=\"%.2f\" width=\"%.2f\" " +
                         "height=\"%.2f\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" >\n",
-                getSVGShapeType(model.getShapeType(name)), name, startShape.getPosition().getX(),
+                getSVGShapeType(type), name, startShape.getPosition().getX(),
                 startShape.getPosition().getY(), startShape.getWidth(), startShape.getHeight(),
                 (int)startShape.getColor().getR(), (int)startShape.getColor().getG(),
                 (int)startShape.getColor().getB()));
 
         //first animation
-        translated.append(String.format(" <animate attributeType=\"xml\" begin=\"%d\"" +
-                        " dur=\"%d\" attributeName=\"x\" from=\"%d\" to=\"%d\" fill=\"freeze\" />\n"
-                , first.getStartTick(), first.getEndTick(), startShape.getPosition().getX(),
-                first.getFinalImages().getPosition().getX()));
-        translated.append(String.format(" <animate attributeType=\"xml\" begin=\"%d\"" +
-                        " dur=\"%d\" attributeName=\"x\" from=\"%d\" to=\"%d\" fill=\"freeze\" />\n"
-                , first.getStartTick(), first.getEndTick(), startShape.getPosition().getY(),
-                first.getFinalImages().getPosition().getY()));
+        translated.append(translateMotions(first,type ));
 
+          //append the rest
         while (listOfMotion.hasNext()) {
           Motion current = listOfMotion.next();
-          Shape currentS = current.getStartShape();
-          translated.append(String.format(" <animate attributeType=\"xml\" begin=\"%d\"" +
-                          " dur=\"%d\" attributeName=\"x\" from=\"%d\" to=\"%d\" fill=\"freeze" +
-                          "\" />\n",
-                  current.getStartTick(), current.getEndTick(), currentS.getPosition().getX(),
-                  current.getFinalImages().getPosition().getX()));
-          translated.append(String.format(" <animate attributeType=\"xml\" begin=\"%d\"" +
-                          " dur=\"%d\" attributeName=\"x\" from=\"%d\" to=\"%d\" fill=\"freeze\"" +
-                          " />\n",
-                  current.getStartTick(), current.getEndTick(), currentS.getPosition().getY(),
-                  current.getFinalImages().getPosition().getY()));
+          translated.append(translateMotions(current,type));
 
         }
       }
@@ -106,6 +91,48 @@ public class SVGView implements View {
       e.printStackTrace();
     }
   }
+
+  /**
+   *
+   * @param motion
+   * @param type
+   * @return
+   */
+  private StringBuilder translateMotions(Motion motion, ShapeType type){
+    StringBuilder motionGroup = new StringBuilder();
+    Shape startShape = motion.getStartShape();
+    Shape endShape = motion.getFinalImages();
+    if(motion.isChangePosn()){
+      switch (type){
+        case RECTANGLE:
+      motionGroup.append(String.format(" <animate attributeType=\"xml\" begin=\"%.1fms\"" +
+                      " dur=\"%.1fms\" attributeName=\"x\" from=\"%.2f\" to=\"%.2f\" fill=\"freeze" +
+                      "\" />\n",
+              (double)(motion.getStartTick()/tick * 100), (double)(motion.getEndTick()/tick * 100),
+                startShape.getPosition().getX(),
+              endShape.getPosition().getX()));
+          motionGroup.append(String.format(" <animate attributeType=\"xml\" begin=\"%.1fms\"" +
+                          " dur=\"%.1fms\" attributeName=\"y\" from=\"%.2f\" to=\"%.2f\" fill=\"freeze" +
+                          "\" />\n",
+                  (double)(motion.getStartTick()/tick * 100), (double)(motion.getEndTick()/tick * 100),
+                  startShape.getPosition().getY(),
+                  endShape.getPosition().getY()));
+          break;
+        case OVAL:
+          break;
+        default:
+          throw new IllegalArgumentException("Wrong shape type");
+      }
+    }
+    if(motion.isChangeColor()){
+
+    }
+    if(motion.isChangeSize()){
+
+    }
+    return motionGroup;
+  }
+
 
   private String getSVGShapeType(ShapeType type) {
     switch (type) {
