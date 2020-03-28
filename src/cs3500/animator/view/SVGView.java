@@ -60,7 +60,7 @@ public class SVGView implements View {
                 startShape.getColor().getB()));
         //first animation
         translated.append(String.format(" <animate attributeType=\"xml\" begin=\"2000.0ms\"" +
-                " dur=\"5000.0ms\" attributeName=\"cx\" from=\"500\" to=\"600\" fill=\"freeze\" />",)
+                " dur=\"5000.0ms\" attributeName=\"cx\" from=\"500\" to=\"600\" fill=\"freeze\" />",2));
       }
 
 
