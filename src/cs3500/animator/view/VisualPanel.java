@@ -1,5 +1,10 @@
 package cs3500.animator.view;
 
+import cs3500.animation.model.Motion;
+import cs3500.animation.model.SimpleAnimation;
+import cs3500.animatior.shape.Color;
+import cs3500.animatior.shape.Posn;
+import cs3500.animatior.shape.Shape;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -7,15 +12,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
-import cs3500.animation.model.Motion;
-import cs3500.animation.model.SimpleAnimation;
-import cs3500.animatior.shape.Color;
-import cs3500.animatior.shape.Posn;
-import cs3500.animatior.shape.Shape;
 
 /**
  * JPanel class that do all the drawings and motions.
@@ -33,6 +31,9 @@ public class VisualPanel extends JPanel implements ActionListener {
    */
   public VisualPanel(SimpleAnimation animation, int tickPerSecond) {
     super();
+    if (tickPerSecond == 0) {
+      tickPerSecond = 100;
+    }
     Timer timer = new Timer(1000 / tickPerSecond, this);
     List<Shape> shapes = new ArrayList<>();
     this.animation = (SimpleAnimation) animation;
@@ -56,7 +57,7 @@ public class VisualPanel extends JPanel implements ActionListener {
       if (startMotionTime > startTime) {
         while (startMotionTime > startTime) {
           Motion m = new Motion(startMotionTime - 1, startMotionTime, l.get(0).getStartShape(),
-                  l.get(0).getStartShape());
+              l.get(0).getStartShape());
           result.addMotion(entry.getKey(), m);
           startMotionTime--;
         }
@@ -64,7 +65,7 @@ public class VisualPanel extends JPanel implements ActionListener {
       if (endMotionTime < endTime) {
         while (endMotionTime < endTime) {
           Motion m = new Motion(endMotionTime, endMotionTime + 1,
-                  l.get(l.size() - 1).getFinalImages(), l.get(l.size() - 1).getFinalImages());
+              l.get(l.size() - 1).getFinalImages(), l.get(l.size() - 1).getFinalImages());
           result.addMotion(entry.getKey(), m);
           endMotionTime++;
         }
@@ -160,18 +161,18 @@ public class VisualPanel extends JPanel implements ActionListener {
         if (timePerid != 0) {
           if (!startShape.equals(endShape)) {
             double changeInPosnX = tweeningFunction(startPosition.getX(), endPosition.getX(),
-                    startTime, endTime, time);
+                startTime, endTime, time);
             double changeInPosnY = tweeningFunction(startPosition.getY(), endPosition.getY(),
-                    startTime, endTime, time);
+                startTime, endTime, time);
             double changeInWidth = tweeningFunction(startWidth, endWidth, startTime, endTime, time);
             double changeInHeight = tweeningFunction(startHeight, endHeight, startTime, endTime,
-                    time);
+                time);
             double changeInR = tweeningFunction(startColor.getR(), endColor.getR(), startTime,
-                    endTime, time);
+                endTime, time);
             double changeInG = tweeningFunction(startColor.getG(), endColor.getG(), startTime,
-                    endTime, time);
+                endTime, time);
             double changeInB = tweeningFunction(startColor.getB(), endColor.getB(), startTime,
-                    endTime, time);
+                endTime, time);
             Posn postion = new Posn(changeInPosnX, changeInPosnY);
             Color color = new Color(changeInR, changeInG, changeInB);
             startShape.changeColor(color);
@@ -233,19 +234,20 @@ public class VisualPanel extends JPanel implements ActionListener {
           Posn endPosn = endShape.getPosition();
           double startHeight = startShape.getHeight();
           double endHeight = endShape.getHeight();
-
           switch (startShape.getShapeName()) {
             case "Oval":
               g2d.setColor(new java.awt.Color((int) startColor.getR(), (int) startColor.getG(),
-                      (int) startColor.getB()));
-              g2d.fillOval((int) startPosn.getX(), (int) startPosn.getY(), (int) startWidth,
-                      (int) startHeight);
+                  (int) startColor.getB()));
+              g2d.fillOval((int) startPosn.getX(), (int) startPosn.getY(),
+                  (int) startWidth,
+                  (int) startHeight);
               break;
             case "Rectangle":
               g2d.setColor(new java.awt.Color((int) startColor.getR(), (int) startColor.getG(),
-                      (int) startColor.getB()));
-              g2d.fillRect((int) startPosn.getX(), (int) startPosn.getY(), (int) startWidth,
-                      (int) startHeight);
+                  (int) startColor.getB()));
+              g2d.fillRect((int) startPosn.getX(), (int) startPosn.getY(),
+                  (int) startWidth,
+                  (int) startHeight);
               break;
             default:
               break;

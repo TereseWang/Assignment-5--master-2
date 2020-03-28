@@ -53,7 +53,7 @@ public final class AnimationPlayer {
         case "-out":
           outFilename = argsI.next();
           break;
-        case "speed":
+        case "-speed":
           tps = Integer.parseInt(argsI.next());
           break;
         default:
