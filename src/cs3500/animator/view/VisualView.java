@@ -9,9 +9,6 @@ import javax.swing.JFrame;
  */
 public class VisualView extends JFrame implements View {
 
-  private VisualPanel panel;
-  private SimpleAnimation model;
-
   /**
    * The constructor of the visual view which set up for animation to run.
    *
@@ -20,14 +17,13 @@ public class VisualView extends JFrame implements View {
    */
   public VisualView(SimpleAnimation model, int tickPerSec) {
     super();
-    this.model = model;
 
     this.setTitle("Animation player");
     this.setBounds(model.getBox());
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     this.setLayout(new BorderLayout());
-    panel = new VisualPanel(model, tickPerSec);
+    VisualPanel panel = new VisualPanel(model, tickPerSec);
     this.add(panel, BorderLayout.CENTER);
     pack();
   }

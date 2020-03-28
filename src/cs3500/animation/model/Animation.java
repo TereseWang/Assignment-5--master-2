@@ -1,7 +1,7 @@
 package cs3500.animation.model;
 
-import java.util.LinkedHashMap;
 import java.awt.Rectangle;
+import java.util.LinkedHashMap;
 
 import cs3500.animatior.shape.Color;
 import cs3500.animatior.shape.Posn;
@@ -45,7 +45,7 @@ public interface Animation<K> {
   /**
    * Delete all motion from the given startTick.
    *
-   * @param name the given name of the shape
+   * @param name      the given name of the shape
    * @param startTick the start time of the desired shape that we want to change
    * @throws IllegalArgumentException if the move can't be made, for example if the start tick
    *                                  cannot be found or the delete will causes the motion to be
@@ -156,12 +156,13 @@ public interface Animation<K> {
 
   /**
    * get the dimension for canvas of this animation.
+   *
    * @return Rectangle (java.awt) as dimension of the canvas;.
    */
-   Rectangle getBox();
+  Rectangle getBox();
 
   /**
-   * get the type of the shape whose name match the given name
+   * get the type of the shape whose name match the given name.
    *
    * @param name the given name
    * @return ShapeType

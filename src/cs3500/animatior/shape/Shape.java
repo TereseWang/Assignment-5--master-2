@@ -1,7 +1,5 @@
 package cs3500.animatior.shape;
 
-import java.awt.Graphics;
-
 /**
  * represent a immutable shape.
  */

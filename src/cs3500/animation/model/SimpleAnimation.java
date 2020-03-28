@@ -1,6 +1,6 @@
 package cs3500.animation.model;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,6 +22,9 @@ import cs3500.animator.util.AnimationBuilder;
  */
 public class SimpleAnimation implements Animation<List<Motion>> {
 
+  /**
+   * implement the nested class Builder.
+   */
   public static final class Builder implements AnimationBuilder<Animation> {
 
     SimpleAnimation model;
@@ -337,7 +340,8 @@ public class SimpleAnimation implements Animation<List<Motion>> {
       return "";
     } else {
       String result = new String();
-      // make a change here: change from "animation.entrySet()" to getAnimate.entrySet() in line 262.
+      // make a change here: change from "animation.entrySet()" to getAnimate.entrySet()
+      // in line 262.
       for (Entry<String, List<Motion>> entry : getAnimate().entrySet()) {
         String key = entry.getKey();
         List<Motion> l = entry.getValue();

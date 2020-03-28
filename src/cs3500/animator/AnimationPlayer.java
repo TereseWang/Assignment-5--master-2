@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import javax.swing.*;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import cs3500.animation.model.Animation;
 import cs3500.animation.model.SimpleAnimation;
@@ -22,9 +24,12 @@ import cs3500.animator.view.ViewCreator;
  */
 
 public final class AnimationPlayer {
+  /**
+   * entry point.
+   */
   public static void main(String[] args) {
 
-   Animation model;
+    Animation model;
     FileReader in = null;
     String inFilename = "";
     FileWriter out = null;
@@ -50,6 +55,7 @@ public final class AnimationPlayer {
           break;
         case "speed":
           tps = Integer.parseInt(argsI.next());
+          break;
         default:
           break;
       }
@@ -69,21 +75,22 @@ public final class AnimationPlayer {
     // out to create view
     //out
     out = null;
-    if(!outFilename.equals("")){
-      try{
-        out=new FileWriter(outFilename);
+    if (!outFilename.equals("")) {
+      try {
+        out = new FileWriter(outFilename);
       } catch (IOException e) {
         JOptionPane.showMessageDialog(frame,
                 e.getMessage(),
                 "Inane warning",
-                JOptionPane.WARNING_MESSAGE); e.printStackTrace();
+                JOptionPane.WARNING_MESSAGE);
+        e.printStackTrace();
       }
     }
     view = null;
     try {
       ViewCreator viewCreator = new ViewCreator();
       view = viewCreator.create(ViewCreator.ViewType.findViewType(viewName),
-          (SimpleAnimation) model,out,tps);
+              (SimpleAnimation) model, out, tps);
     } catch (IllegalArgumentException e) {
       JOptionPane.showMessageDialog(frame,
               e.getMessage(),
@@ -97,7 +104,7 @@ public final class AnimationPlayer {
 
     controller.execute();
     try {
-      if(out != null) {
+      if (out != null) {
         out.close();
       }
     } catch (IOException e) {

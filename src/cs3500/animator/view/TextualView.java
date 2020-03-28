@@ -1,16 +1,14 @@
 package cs3500.animator.view;
 
-import java.awt.*;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-
-import cs3500.animation.model.Animation;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import cs3500.animation.model.Animation;
+
+
 /**
- * A view that will generate a textual discription
+ * A view that will generate a textual discription.
  */
 public class TextualView implements View {
 
@@ -19,7 +17,7 @@ public class TextualView implements View {
 
 
   /**
-   * Construct a TextualView with given Model
+   * Construct a TextualView with given Model.
    *
    * @param model a given not null model
    * @param out   where the output should go
@@ -43,18 +41,18 @@ public class TextualView implements View {
   public void display() {
     StringBuilder output = new StringBuilder("");
     Rectangle canvas = model.getBox();
-    try{
-    if(out == null){
-    System.out.print(output);
-  }else{out.append(String.format("canvas %d %d %d %d\n", canvas.y, canvas.x, canvas.width,
-            canvas.height));
-      out.append(model.animateDescription());
-    }}catch (IOException e){
-      System.out.print("an error occured when appending");
+    try {
+      if (out == null) {
+        System.out.print(output);
+      } else {
+        out.append(String.format("canvas %d %d %d %d\n", canvas.y, canvas.x, canvas.width,
+                canvas.height));
+        out.append(model.animateDescription());
       }
+    } catch (IOException e) {
+      System.out.print("an error occured when appending");
     }
-
-  public void setTickPerSeocnd(int tickPerSeocnd) {
-
   }
+
+
 }

@@ -5,7 +5,7 @@ import java.io.IOException;
 import cs3500.animator.view.View;
 
 /**
- *
+ *controller for the proj.
  */
 public class SimpleController implements AnimationController {
   View view;

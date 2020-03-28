@@ -19,10 +19,10 @@ public class SVGView implements View {
   OutputStreamWriter out;
 
   /**
-   * construct a SVGVIew with given model
+   * construct a SVGVIew with given model.
    *
-   * @param model
-   * @param outputStreamWriter
+   * @param model              the given model
+   * @param outputStreamWriter output
    */
   public SVGView(Animation model, OutputStreamWriter outputStreamWriter) {
     if (model == null) {
@@ -43,7 +43,8 @@ public class SVGView implements View {
     LinkedHashMap<String, List<Motion>> animation = model.getAnimate();
 
     translated.append(String.format("<svg width=\"%d\" height=\"%d\" version=\"1.1\"\n" +
-            "     xmlns=\"http://www.w3.org/2000/svg\">\n"));
+                    "     xmlns=\"http://www.w3.org/2000/svg\">\n", (int) model.getBox().getWidth(),
+            (int) model.getBox().getHeight()));
     Iterator<String> nameI = animation.keySet().iterator();
     while (nameI.hasNext()) {
       String name = nameI.next();
@@ -53,23 +54,44 @@ public class SVGView implements View {
         Shape startShape = first.getStartShape();
         //shape
         translated.append(String.format("<%s id=\"%s\" x=\"%d\" y=\"%d\" width=\"%d\" " +
-                "height=\"%d\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" >\n",
+                        "height=\"%d\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" >\n",
                 getSVGShapeType(model.getShapeType(name)), name, startShape.getPosition().getX(),
-                startShape.getPosition().getY(), startShape.getWidth(),startShape.getHeight(),
+                startShape.getPosition().getY(), startShape.getWidth(), startShape.getHeight(),
                 startShape.getColor().getR(), startShape.getColor().getG(),
                 startShape.getColor().getB()));
         //first animation
-        translated.append(String.format(" <animate attributeType=\"xml\" begin=\"2000.0ms\"" +
-                " dur=\"5000.0ms\" attributeName=\"cx\" from=\"500\" to=\"600\" fill=\"freeze\" />",2));
+        translated.append(String.format(" <animate attributeType=\"xml\" begin=\"%d\"" +
+                        " dur=\"%d\" attributeName=\"x\" from=\"%d\" to=\"%d\" fill=\"freeze\" />\n"
+                , first.getStartTick(), first.getEndTick(), startShape.getPosition().getX(),
+                first.getFinalImages().getPosition().getX()));
+        translated.append(String.format(" <animate attributeType=\"xml\" begin=\"%d\"" +
+                        " dur=\"%d\" attributeName=\"x\" from=\"%d\" to=\"%d\" fill=\"freeze\" />\n"
+                , first.getStartTick(), first.getEndTick(), startShape.getPosition().getY(),
+                first.getFinalImages().getPosition().getY()));
+
+        while (listOfMotion.hasNext()) {
+          Motion current = listOfMotion.next();
+          Shape currentS = current.getStartShape();
+          translated.append(String.format(" <animate attributeType=\"xml\" begin=\"%d\"" +
+                          " dur=\"%d\" attributeName=\"x\" from=\"%d\" to=\"%d\" fill=\"freeze" +
+                          "\" />\n",
+                  current.getStartTick(), current.getEndTick(), currentS.getPosition().getX(),
+                  current.getFinalImages().getPosition().getX()));
+          translated.append(String.format(" <animate attributeType=\"xml\" begin=\"%d\"" +
+                          " dur=\"%d\" attributeName=\"x\" from=\"%d\" to=\"%d\" fill=\"freeze\"" +
+                          " />\n",
+                  current.getStartTick(), current.getEndTick(), currentS.getPosition().getY(),
+                  current.getFinalImages().getPosition().getY()));
+
+        }
       }
-
-
-      translated.append(String.format("</%s>\n",  getSVGShapeType(model.getShapeType(name))));
+      translated.append(String.format("</%s>\n", getSVGShapeType(model.getShapeType(name))));
     }
+    translated.append("</svg>");
   }
 
-  private String getSVGShapeType(ShapeType type){
-    switch (type){
+  private String getSVGShapeType(ShapeType type) {
+    switch (type) {
       case RECTANGLE:
         return "rect";
       case OVAL:
@@ -83,7 +105,7 @@ public class SVGView implements View {
 
   @Override
   public void display() {
-
+    translate();
   }
 
 

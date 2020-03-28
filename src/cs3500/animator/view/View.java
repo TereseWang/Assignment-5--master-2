@@ -2,6 +2,9 @@ package cs3500.animator.view;
 
 import java.io.IOException;
 
+/**
+ * the view for the project.
+ */
 public interface View {
   /**
    * Refresh the view to reflect any changes in the game state.
