@@ -84,8 +84,8 @@ public class SimpleAnimation implements Animation<List<Motion>> {
   private Rectangle canvas;
   private static int X = 0;
   private static int Y = 0;
-  private static int WIDTH = 250;
-  private static int HEIGHT = 250;
+  private static int WIDTH = 600;
+  private static int HEIGHT = 600;
 
   /**
    * construct an empty animation.

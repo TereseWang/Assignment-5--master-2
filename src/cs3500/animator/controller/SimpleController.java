@@ -1,5 +1,7 @@
 package cs3500.animator.controller;
 
+import java.io.IOException;
+
 import cs3500.animator.view.View;
 
 /**
@@ -20,5 +22,10 @@ public class SimpleController implements AnimationController {
 
   @Override
   public void execute() {
+    try {
+      view.display();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

@@ -97,7 +97,9 @@ public final class AnimationPlayer {
 
     controller.execute();
     try {
-      out.close();
+      if(out != null) {
+        out.close();
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
