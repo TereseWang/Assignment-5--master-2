@@ -199,17 +199,21 @@ public class Motion {
     return startShape.copyShape();
   }
 
+  /**
+   * check whether the motion has changed the color.
+   * @return boolean as
+   */
   public boolean isChangeColor() {
-    return startShape.getColor().equals(endShape.getColor());
+    return !startShape.getColor().equals(endShape.getColor());
   }
 
   public boolean isChangeSize() {
-    return startShape.getWidth() == endShape.getWidth()
-            && startShape.getHeight() == endShape.getHeight();
+    return !(startShape.getWidth() == endShape.getWidth()
+            && startShape.getHeight() == endShape.getHeight());
   }
 
   public boolean isChangePosn() {
-    return startShape.getPosition().equals(endShape.getPosition());
+    return !startShape.getPosition().equals(endShape.getPosition());
   }
 
   @Override
