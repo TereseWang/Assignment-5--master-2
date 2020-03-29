@@ -87,11 +87,6 @@ public class SVGView implements View {
     }
   }
 
-  /**
-   * @param motion
-   * @param type
-   * @return
-   */
   private StringBuilder translateMotions(Motion motion, ShapeType type) {
     StringBuilder motionGroup = new StringBuilder();
     Shape startShape = motion.getStartShape();
@@ -100,35 +95,35 @@ public class SVGView implements View {
       switch (type) {
         case RECTANGLE:
           motionGroup.append(String.format(" <animate attributeType=\"xml\" begin=\"%.1fms\"" +
-                          " dur=\"%.1fms\" attributeName=\"x\" from=\"%.2f\" to=\"%.2f\" fill=\"freeze" +
+                          " dur=\"%.1fms\" attributeName=\"x\" from=\""
+                          + startShape.getPosition().getX() + "\" to=\"" +
+                          endShape.getPosition().getX() + "\" fill=\"freeze" +
                           "\" />\n",
-                  (double) (motion.getStartTick()) / tick * 100, (double) (motion.getEndTick())
-                          / tick * 100,
-                  startShape.getPosition().getX(),
-                  endShape.getPosition().getX()));
+                  (double) (motion.getStartTick()) / tick * 1000, (double) (motion.getEndTick())
+                          / tick * 1000));
           motionGroup.append(String.format(" <animate attributeType=\"xml\" begin=\"%.1fms\"" +
-                          " dur=\"%.1fms\" attributeName=\"y\" from=\"%.2f\" to=\"%.2f\"" +
-                          " fill=\"freeze\" />\n",
-                  (double) (motion.getStartTick()) / tick * 100, (double) (motion.getEndTick())
-                          / tick * 100,
-                  startShape.getPosition().getY(),
-                  endShape.getPosition().getY()));
+                          " dur=\"%.1fms\" attributeName=\"y\" from=\""
+                          + startShape.getPosition().getY() + "\" to=\"" +
+                          endShape.getPosition().getY() + "\" fill=\"freeze" +
+                          "\" />\n",
+                  (double) (motion.getStartTick()) / tick * 1000, (double) (motion.getEndTick())
+                          / tick * 1000));
           break;
         case OVAL:
           motionGroup.append(String.format(" <animate attributeType=\"xml\" begin=\"%.2fms\"" +
-                          " dur=\"%.2fms\" attributeName=\"cx\" from=\"%.2f\" to=\"%.2f\"" +
+                          " dur=\"%.2fms\" attributeName=\"cx\" from=\"" +
+                          startShape.getPosition().getX() + "\" to=\""
+                          + endShape.getPosition().getX() + "\"" +
                           " fill=\"freeze\" />\n",
-                  (double) (motion.getStartTick()) / tick * 100, (double) motion.getEndTick()
-                          / tick * 100,
-                  startShape.getPosition().getX(),
-                  endShape.getPosition().getX()));
+                  (double) (motion.getStartTick()) / tick * 1000, (double) motion.getEndTick()
+                          / tick * 1000));
           motionGroup.append(String.format(" <animate attributeType=\"xml\" begin=\"%.2fms\"" +
-                          " dur=\"%.2fms\" attributeName=\"cy\" from=\"%.2f\" to=\"%.2f\" " +
+                          " dur=\"%.2fms\" attributeName=\"cy\" from=\""
+                          + startShape.getPosition().getY() + "\" to=\""
+                          + endShape.getPosition().getY() + "\" " +
                           "fill=\"freeze\" />\n",
-                  (double) (motion.getStartTick()) / tick * 100, (double) (motion.getEndTick()
-                  ) / tick * 100,
-                  startShape.getPosition().getY(),
-                  endShape.getPosition().getY()));
+                  (double) (motion.getStartTick()) / tick * 1000, (double) (motion.getEndTick()
+                  ) / tick * 1000));
           break;
         default:
           throw new IllegalArgumentException("Wrong shape type");
@@ -138,8 +133,8 @@ public class SVGView implements View {
       motionGroup.append(String.format(" <animate attributeType=\"xml\" begin=\"%.2fms\"" +
                       " dur=\"%.2fms\" attributeName=\"fill\" from=\"rgb%s\" to=\"rgb%s\"" +
                       " fill=\"freeze\" />\n",
-              (double) (motion.getStartTick()) / tick * 100, (double) motion.getEndTick()
-                      / tick * 100,
+              (double) (motion.getStartTick()) / tick * 1000, (double) motion.getEndTick()
+                      / tick * 1000,
               startShape.getColor().toString(),
               endShape.getColor().toString()));
     }
@@ -149,15 +144,15 @@ public class SVGView implements View {
           motionGroup.append(String.format(" <animate attributeType=\"xml\" begin=\"%.2fms\"" +
                           " dur=\"%.2fms\" attributeName=\"cx\" from=\"%.2f\" to=\"%.2f\"" +
                           " fill=\"freeze\" />\n",
-                  (double) (motion.getStartTick()) / tick * 100, (double) motion.getEndTick()
-                          / tick * 100,
+                  (double) (motion.getStartTick()) / tick * 1000, (double) motion.getEndTick()
+                          / tick * 1000,
                   startShape.getWidth(),
                   endShape.getWidth()));
           motionGroup.append(String.format(" <animate attributeType=\"xml\" begin=\"%.2fms\"" +
                           " dur=\"%.2fms\" attributeName=\"cy\" from=\"%.2f\" to=\"%.2f\" " +
                           "fill=\"freeze\" />\n",
-                  (double) (motion.getStartTick()) / tick * 100, (double) (motion.getEndTick()
-                  ) / tick * 100,
+                  (double) (motion.getStartTick()) / tick * 1000, (double) (motion.getEndTick()
+                  ) / tick * 1000,
                   startShape.getHeight(),
                   endShape.getHeight()));
 
@@ -167,15 +162,15 @@ public class SVGView implements View {
                           " dur=\"%.1fms\" attributeName=\"width\" from=\"%.2f\" to=\"%.2f\"" +
                           " fill=\"freeze" +
                           "\" />\n",
-                  (double) (motion.getStartTick()) / tick * 100, (double) (motion.getEndTick())
-                          / tick * 100,
+                  (double) (motion.getStartTick()) / tick * 1000, (double) (motion.getEndTick())
+                          / tick * 1000,
                   startShape.getWidth(), endShape.getWidth()));
           motionGroup.append(String.format(" <animate attributeType=\"xml\" begin=\"%.1fms\"" +
                           " dur=\"%.1fms\" attributeName=\"height\" from=\"%.2f\" to=\"%.2f\" " +
                           "fill=\"freeze" +
                           "\" />\n",
-                  (double) (motion.getStartTick()) / tick * 100, (double) (motion.getEndTick())
-                          / tick * 100,
+                  (double) (motion.getStartTick()) / tick * 1000, (double) (motion.getEndTick())
+                          / tick * 1000,
                   startShape.getHeight(), endShape.getHeight()));
           break;
         default:

@@ -1,10 +1,13 @@
 package cs3500.animator.view;
 
-import cs3500.animation.model.SimpleAnimation;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+
+
+import cs3500.animation.model.SimpleAnimation;
 
 /**
  * To represent the visual view of the animation.

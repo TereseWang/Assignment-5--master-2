@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Assignment-5--master-2:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Assignment_5__master_2_jar</output-path>
+  <artifact type="jar" build-on-make="true" name="Assignment-5--master-2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Animation_jar</output-path>
     <root id="archive" name="Assignment-5--master-2.jar">
       <element id="module-output" name="Assignment-5--master-2" />
     </root>
