@@ -1,4 +1,4 @@
-package cs3500.animatior.shape;
+package cs3500.animator.shape;
 
 /**
  * a class to create a shape.

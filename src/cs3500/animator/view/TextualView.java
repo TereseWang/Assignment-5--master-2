@@ -8,7 +8,7 @@ import cs3500.animation.model.Animation;
 
 
 /**
- * A view that will generate a textual discription.
+ * A view that take in an animation model and interpret it into a string description.
  */
 public class TextualView implements View {
 

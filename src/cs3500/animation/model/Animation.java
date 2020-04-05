@@ -3,9 +3,9 @@ package cs3500.animation.model;
 import java.awt.Rectangle;
 import java.util.LinkedHashMap;
 
-import cs3500.animatior.shape.Color;
-import cs3500.animatior.shape.Posn;
-import cs3500.animatior.shape.ShapeType;
+import cs3500.animator.shape.Color;
+import cs3500.animator.shape.Posn;
+import cs3500.animator.shape.ShapeType;
 
 /**
  * Represent an animation that allows multiple shapes coduct multiple movement. Work as Model of

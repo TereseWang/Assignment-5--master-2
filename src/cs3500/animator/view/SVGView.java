@@ -1,5 +1,11 @@
 package cs3500.animator.view;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+
 import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
@@ -17,6 +23,8 @@ import java.util.List;
  * a outputstreamwrite to keeps track and printout the desired result. We also add a tickPerSec to
  * keeps track of the speed * of each text added to the canavas. This view should be able to viewed
  * with an online browser.
+ * A view that interprets an animation model to a svg format file.
+ * Save the result to given file. Work as the view in this project.
  */
 public class SVGView implements View {
 
@@ -243,5 +251,6 @@ public class SVGView implements View {
   public void display() {
     translate();
   }
+
 
 }
