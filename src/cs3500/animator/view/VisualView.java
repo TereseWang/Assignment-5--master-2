@@ -1,5 +1,6 @@
 package cs3500.animator.view;
 
+import cs3500.animation.model.Animation;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -20,7 +21,7 @@ public class VisualView extends JFrame implements View {
    * @param model      the animation model to be run with.
    * @param tickPerSec tick per second.
    */
-  public VisualView(SimpleAnimation model, int tickPerSec) {
+  public VisualView(Animation model, int tickPerSec) {
     super();
 
     this.setTitle("Animation player");

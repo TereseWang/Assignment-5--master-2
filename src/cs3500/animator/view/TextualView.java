@@ -53,6 +53,4 @@ public class TextualView implements View {
       System.out.print("an error occured when appending");
     }
   }
-
-
 }

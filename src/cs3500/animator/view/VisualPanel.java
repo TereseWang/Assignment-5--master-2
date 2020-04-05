@@ -1,5 +1,6 @@
 package cs3500.animator.view;
 
+import cs3500.animation.model.Animation;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
 
@@ -23,7 +24,7 @@ import cs3500.animatior.shape.Shape;
  */
 public class VisualPanel extends JPanel implements ActionListener {
 
-  private SimpleAnimation animation;
+  private Animation<List<Motion>> animation;
   private int count;
 
   /**
@@ -32,7 +33,7 @@ public class VisualPanel extends JPanel implements ActionListener {
    * @param animation     the model of the animation
    * @param tickPerSecond the animation moving rate
    */
-  public VisualPanel(SimpleAnimation animation, int tickPerSecond) {
+  public VisualPanel(Animation animation, int tickPerSecond) {
     super();
     if (tickPerSecond == 0) {
       tickPerSecond = 100;
@@ -50,7 +51,7 @@ public class VisualPanel extends JPanel implements ActionListener {
    * the end time, add motions to make it just stay there and not move.
    */
   private void fillInBlankMotion() {
-    SimpleAnimation result = new SimpleAnimation(animation.getAnimate());
+    Animation result = new SimpleAnimation(animation.getAnimate());
     int startTime = animation.getStartTime();
     int endTime = animation.getLength();
     for (Entry<String, List<Motion>> entry : animation.getAnimate().entrySet()) {
