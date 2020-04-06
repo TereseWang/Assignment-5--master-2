@@ -7,11 +7,11 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-
-import cs3500.animation.model.SimpleAnimation;
-
 /**
- * To represent the visual view of the animation.
+ * To represent the visual view of the animation. This class allows display of moving shapes inside
+ * a window. This view will input an animation model and a tickPerSec to allows the moving of shapes
+ * either faster or slower. We used a timer in this class to fulfill the goal of moving shapes
+ * in the desired ticks per second.
  */
 public class VisualView extends JFrame implements View {
 
@@ -23,12 +23,12 @@ public class VisualView extends JFrame implements View {
    */
   public VisualView(Animation model, int tickPerSec) {
     super();
-
     this.setTitle("Animation player");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLayout(new BorderLayout());
 
     VisualPanel panel = new VisualPanel(model, tickPerSec);
+    panel.startTimer();
     JScrollPane scroll = new JScrollPane(panel);
     scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

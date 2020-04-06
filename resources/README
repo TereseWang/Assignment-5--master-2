@@ -89,7 +89,7 @@ the view creator class to create the desired view and also set up the desired sp
 HW7 Model, View, Controller revision, Support functionality of modify the animation.
 To makes each class more seprate from each other, we want to add abstract class to the model,
 so that we can add more functionalities by writing less code.
-Besides, in order to add new models and allows the view to run the new interface, we also changed
+Besides, in order to add new models and allows the view to run the new model class, we also changed
 each view class, which makes them input a Animation model rather than specifically a SimpleAnimation
 model.
 
@@ -98,4 +98,16 @@ Revision of visual view:
 Revision of SVG view:
 Revision of controller:
 Revision of animation model:
-Revision of view:
+Add EditorView:
+  We implement an editor view class that did the similar thing with visual panel,except that
+  it has editing features that stop, start, restart, resume, increase speed and decrease speed
+  of the animation. We ensured that stop, and resume cannot be activated if the start
+  has not be activated. We also ensured that resume can only be activated if the stop is activated
+  before. Increase speed and decrease speed button will increase or decrease speed by 10 tick
+  per second each time user click the button and the new speed will display onto the screen, and
+  restart will restart the animation with the new speed. Furthermore, we also allows features of
+  disable and enable looping button, which the button will display "enable" when the loop is
+  actually disabled, and vise versa. When the user clicked enable, the animation will rerun with
+  the loop allowed, meaning animation will play again from the start. Moreover when user clicked
+  enable, the button text will switched to disable and vise versa.
+  

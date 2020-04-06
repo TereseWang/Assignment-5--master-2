@@ -1,31 +1,31 @@
 package cs3500.animator.view;
-//random comment added by Lei Bao for testing git
 import cs3500.animation.model.Animation;
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
 import cs3500.animatior.shape.Color;
 import cs3500.animatior.shape.Posn;
 import cs3500.animatior.shape.Shape;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
 
 /**
- * JPanel class that do all the drawings and motions.
+ * JPanel class that do all the drawings and motions for the visual view.
  */
 public class VisualPanel extends JPanel implements ActionListener {
 
   private Animation<List<Motion>> animation;
   private int count;
+  private Timer timer;
+  private boolean loop;
+  private int tickPerSec;
 
   /**
    * Constructor to run the animation.
@@ -36,14 +36,59 @@ public class VisualPanel extends JPanel implements ActionListener {
   public VisualPanel(Animation animation, int tickPerSecond) {
     super();
     if (tickPerSecond == 0) {
-      tickPerSecond = 100;
+      tickPerSecond = 1;
     }
-    Timer timer = new Timer(1000 / tickPerSecond, this);
-    List<Shape> shapes = new ArrayList<>();
+    tickPerSec = tickPerSecond;
+    timer = new Timer(1000 / tickPerSec, this);
     this.animation = animation;
-    setMotionOneTick();
+    this.count = animation.getStartTime();
+    this.loop = true;
     fillInBlankMotion();
-    timer.start();
+    setMotionOneTick();
+  }
+
+  public void startTimer() {
+    if (count == animation.getStartTime()) {
+      timer.start();
+    }
+  }
+
+  public void stopTimer() {
+    if (count != animation.getStartTime()) {
+      timer.stop();
+    }
+  }
+
+  public void resumeTimer() {
+    if (!timer.isRunning() && count != animation.getStartTime()) {
+      timer.start();
+    }
+  }
+
+  public void restartTimer() {
+    if (count != animation.getStartTime()) {
+      count = animation.getStartTime();
+      timer.start();
+    }
+  }
+
+  public void loopEnableDisable() {
+    if(loop == true) {
+      loop = false;
+    }
+    else {
+      loop = true;
+      restartTimer();
+    }
+  }
+
+  public void changeSpeed(int tickPerSecond) {
+    this.tickPerSec = tickPerSecond;
+    timer.setDelay(1000 / tickPerSec);
+  }
+
+  public int getSpeed() {
+    return tickPerSec;
   }
 
   /**
@@ -52,18 +97,14 @@ public class VisualPanel extends JPanel implements ActionListener {
    */
   private void fillInBlankMotion() {
     Animation result = new SimpleAnimation(animation.getAnimate());
-    int startTime = animation.getStartTime();
     int endTime = animation.getLength();
     for (Entry<String, List<Motion>> entry : animation.getAnimate().entrySet()) {
       List<Motion> l = entry.getValue();
       int endMotionTime = l.get(l.size() - 1).getEndTick();
       if (endMotionTime < endTime) {
-        while (endMotionTime < endTime) {
-          Motion m = new Motion(endMotionTime, endMotionTime + 1,
-                  l.get(l.size() - 1).getFinalImages(), l.get(l.size() - 1).getFinalImages());
-          result.addMotion(entry.getKey(), m);
-          endMotionTime++;
-        }
+        Motion m = new Motion(endMotionTime, endTime, l.get(l.size() - 1).getFinalImages(),
+            l.get(l.size() - 1).getFinalImages());
+        result.addMotion(entry.getKey(), m);
       }
     }
     animation = result;
@@ -156,18 +197,18 @@ public class VisualPanel extends JPanel implements ActionListener {
         if (timePerid != 0) {
           if (!startShape.equals(endShape)) {
             double changeInPosnX = tweeningFunction(startPosition.getX(), endPosition.getX(),
-                    startTime, endTime, time);
+                startTime, endTime, time);
             double changeInPosnY = tweeningFunction(startPosition.getY(), endPosition.getY(),
-                    startTime, endTime, time);
+                startTime, endTime, time);
             double changeInWidth = tweeningFunction(startWidth, endWidth, startTime, endTime, time);
             double changeInHeight = tweeningFunction(startHeight, endHeight, startTime, endTime,
-                    time);
+                time);
             double changeInR = tweeningFunction(startColor.getR(), endColor.getR(), startTime,
-                    endTime, time);
+                endTime, time);
             double changeInG = tweeningFunction(startColor.getG(), endColor.getG(), startTime,
-                    endTime, time);
+                endTime, time);
             double changeInB = tweeningFunction(startColor.getB(), endColor.getB(), startTime,
-                    endTime, time);
+                endTime, time);
             Posn postion = new Posn(changeInPosnX, changeInPosnY);
             Color color = new Color(changeInR, changeInG, changeInB);
             startShape.changeColor(color);
@@ -232,17 +273,17 @@ public class VisualPanel extends JPanel implements ActionListener {
           switch (startShape.getShapeName()) {
             case "Oval":
               g2d.setColor(new java.awt.Color((int) startColor.getR(), (int) startColor.getG(),
-                      (int) startColor.getB()));
+                  (int) startColor.getB()));
               g2d.fillOval((int) startPosn.getX(), (int) startPosn.getY(),
-                      (int) startWidth,
-                      (int) startHeight);
+                  (int) startWidth,
+                  (int) startHeight);
               break;
             case "Rectangle":
               g2d.setColor(new java.awt.Color((int) startColor.getR(), (int) startColor.getG(),
-                      (int) startColor.getB()));
+                  (int) startColor.getB()));
               g2d.fillRect((int) startPosn.getX(), (int) startPosn.getY(),
-                      (int) startWidth,
-                      (int) startHeight);
+                  (int) startWidth,
+                  (int) startHeight);
               break;
             default:
               break;
@@ -254,9 +295,12 @@ public class VisualPanel extends JPanel implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if (count == animation.getLength()) {
+    if (loop == true && count == animation.getLength()) {
       count = animation.getStartTime();
       repaint();
+    }
+    if (loop == false && count == animation.getLength()) {
+      timer.stop();
     }
     count++;
     repaint();
