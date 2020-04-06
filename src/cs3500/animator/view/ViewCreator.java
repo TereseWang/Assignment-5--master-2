@@ -3,12 +3,11 @@ package cs3500.animator.view;
 import cs3500.animation.model.Animation;
 import java.io.OutputStreamWriter;
 
-import cs3500.animation.model.SimpleAnimation;
-
 /**
  * a factory class for the views of this program.
  */
 public class ViewCreator {
+
   /**
    * create a view according to given viewtype.
    *
@@ -19,7 +18,7 @@ public class ViewCreator {
    * @return a view as the result
    */
   public static View create(ViewType viewType, Animation model,
-                            OutputStreamWriter out, int tickPerSec) {
+      OutputStreamWriter out, int tickPerSec) {
     switch (viewType) {
       case SVG:
         return new SVGView(model, out, tickPerSec);
@@ -27,6 +26,8 @@ public class ViewCreator {
         return new VisualView(model, tickPerSec);
       case TEXTUAL:
         return new TextualView(model, out);
+      case EDIT:
+        return new EditorView(model, tickPerSec);
       default:
         throw new IllegalArgumentException("can't create a view because invalid viewType");
     }
@@ -38,6 +39,7 @@ public class ViewCreator {
   public enum ViewType {
     TEXTUAL,
     VISUAL,
+    EDIT,
     SVG;
 
     /**
@@ -58,6 +60,9 @@ public class ViewCreator {
         case "svg":
         case "Svg":
           return SVG;
+        case "edit":
+        case "Edit":
+          return EDIT;
         default:
           throw new IllegalArgumentException("can't identify input");
       }
