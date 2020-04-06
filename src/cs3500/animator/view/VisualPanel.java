@@ -1,5 +1,5 @@
 package cs3500.animator.view;
-
+//random comment added by Lei Bao for testing git
 import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
