@@ -81,7 +81,7 @@ public class AbstractAnimation implements Animation<List<Motion>> {
     // FILL IN HERE
   }
 
-  private LinkedHashMap<String, List<Motion>> animation;
+  private LinkedHashMap<String, List<Frame>> animation;
   private HashMap<String, ShapeType> contact;
   private Rectangle canvas;
   private static int X = 0;
