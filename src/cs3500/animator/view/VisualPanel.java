@@ -1,5 +1,4 @@
 package cs3500.animator.view;
-//random comment added by Lei Bao for testing git
 import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
@@ -85,6 +84,11 @@ public class VisualPanel extends JPanel implements ActionListener {
 
   public void changeSpeed(int tickPerSecond) {
     this.tickPerSec = tickPerSecond;
+    timer.setDelay(1000 / tickPerSec);
+  }
+
+  public int getSpeed() {
+    return tickPerSec;
   }
 
   /**
