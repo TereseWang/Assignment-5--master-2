@@ -2,10 +2,10 @@ import cs3500.animation.model.AbstractAnimation;
 import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
-import cs3500.animatior.shape.Color;
-import cs3500.animatior.shape.Posn;
-import cs3500.animatior.shape.Rectangle;
-import cs3500.animatior.shape.Shape;
+import cs3500.animator.shape.Color;
+import cs3500.animator.shape.Posn;
+import cs3500.animator.shape.Rectangle;
+import cs3500.animator.shape.Shape;
 import cs3500.animator.view.TextualView;
 import cs3500.animator.view.View;
 

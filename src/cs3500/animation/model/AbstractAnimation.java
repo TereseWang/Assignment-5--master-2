@@ -1,10 +1,10 @@
 package cs3500.animation.model;
 
-import cs3500.animatior.shape.Color;
-import cs3500.animatior.shape.Posn;
-import cs3500.animatior.shape.Shape;
-import cs3500.animatior.shape.ShapeCreator;
-import cs3500.animatior.shape.ShapeType;
+import cs3500.animator.shape.Color;
+import cs3500.animator.shape.Posn;
+import cs3500.animator.shape.Shape;
+import cs3500.animator.shape.ShapeCreator;
+import cs3500.animator.shape.ShapeType;
 import cs3500.animator.util.AnimationBuilder;
 import java.awt.Rectangle;
 import java.util.ArrayList;

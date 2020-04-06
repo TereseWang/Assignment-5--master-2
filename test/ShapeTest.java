@@ -1,10 +1,10 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import cs3500.animatior.shape.Color;
-import cs3500.animatior.shape.Oval;
-import cs3500.animatior.shape.Posn;
-import cs3500.animatior.shape.Rectangle;
+import cs3500.animator.shape.Color;
+import cs3500.animator.shape.Oval;
+import cs3500.animator.shape.Posn;
+import cs3500.animator.shape.Rectangle;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
