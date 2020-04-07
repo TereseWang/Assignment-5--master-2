@@ -2,18 +2,12 @@ package cs3500.animation.model;
 
 import cs3500.animator.shape.Color;
 import cs3500.animator.shape.Posn;
-import cs3500.animator.shape.Shape;
-import cs3500.animator.shape.ShapeCreator;
 import cs3500.animator.shape.ShapeType;
-import cs3500.animator.util.AnimationBuilder;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * This is an abstract animation class for animation model so that we can add more animation models
@@ -37,9 +31,6 @@ public abstract class AbstractAnimation<K> implements Animation<List<K>> {
     contact = new LinkedHashMap<>();
     canvas = new Rectangle(X, Y, WIDTH, HEIGHT);
   }
-
-
-
 
   @Override
   public void declareShape(String name, String type) {
@@ -110,5 +101,4 @@ public abstract class AbstractAnimation<K> implements Animation<List<K>> {
   public ShapeType getShapeType(String name) {
     return contact.get(name);
   }
-
 }

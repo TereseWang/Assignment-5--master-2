@@ -39,8 +39,6 @@ super();
     this.animation = animation;
   }
 
-
-
   @Override
   public void addMotion(String name, Motion motion) {
     super.validate(name);
@@ -65,9 +63,6 @@ super();
       throw new IllegalArgumentException("can't add that motion!");
     }
   }
-
-
-
 
   @Override
   public void deleteMotion(String name, int startTick) {

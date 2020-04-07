@@ -37,9 +37,7 @@ public class Frame {
     }
     this.state = frame.getShape();
     this.time = frame.getTime();
-
   }
-
 
   public Shape getShape() {
     return state.copyShape();

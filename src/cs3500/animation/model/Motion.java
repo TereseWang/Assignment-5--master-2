@@ -124,7 +124,6 @@ public class Motion {
     endTick = endTick - period;
     startKeyFrame.changeTime(startTick);
     endKeyFrame.changeTime(endTick);
-
   }
 
   /**
