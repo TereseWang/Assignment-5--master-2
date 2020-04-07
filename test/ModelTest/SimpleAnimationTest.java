@@ -240,11 +240,12 @@ public class SimpleAnimationTest {
     init();
     model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m2);
-    assertEquals(m2,
-        model.getSequence("Rectangle"));
+    ArrayList list = new ArrayList();
+    list.add(m2);
+    assertEquals(list, model.getSequence("Rectangle"));
     model.changeSize("Rectangle", 1, 1, 5);
-    assertEquals( "5 100 100 3 3 100 100 100  10 100 200 1 1 0 0 255",
-        model.getSequence("Rectangle"));
+
+    assertEquals(list, model.getSequence("Rectangle"));
   }
 
   @Test(expected = IllegalArgumentException.class)
