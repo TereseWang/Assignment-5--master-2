@@ -238,8 +238,6 @@ super();
     return result;
   }
 
-
-
   @Override
   public List<Motion> getSequence(String name) {
     if (!animation.containsKey(name)) {
