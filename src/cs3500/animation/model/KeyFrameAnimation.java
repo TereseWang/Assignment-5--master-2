@@ -69,8 +69,8 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
                                                    int r, int g, int b) {
       Shape startShape = ShapeCreator.create(model.getShapeType(name), new Posn(x, y),
               new Color(r, g, b), w, h);
-      Motion m = new Motion(t, t + 1, startShape, startShape);
-
+      Frame f = new Frame(startShape, t);
+      model.addKeyFrame(name, f);
       return this;
     }
   }
@@ -104,6 +104,29 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
               "that timeline");
     }
   }
+
+
+  @Override
+  public void addKeyFrame(String name, Frame kf) {
+    try {
+      findKeyFrame(name, kf.getTime());
+      throw new IllegalArgumentException("there is a keyFrame in existing timeline");
+    } catch (IllegalArgumentException ie) {
+      animation.get(name).add(findPosition(name, kf.getTime()), kf);
+    }
+  }
+
+  private int findPosition(String name, int time) {
+    validate(name);
+    List<Frame> copy = new ArrayList<>(animation.get(name));
+    for (int i = 0; i < copy.size(); i++) {
+      if (copy.get(i).getTime() > time) {
+        return i;
+      }
+    }
+    return copy.size();
+  }
+
 
   @Override
   /**

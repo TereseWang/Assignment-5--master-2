@@ -1,8 +1,6 @@
 package cs3500.animation.model;
 
-import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,23 +9,20 @@ import java.util.Map.Entry;
 
 import cs3500.animator.shape.Color;
 import cs3500.animator.shape.Posn;
-import cs3500.animator.shape.Shape;
-import cs3500.animator.shape.ShapeCreator;
 import cs3500.animator.shape.ShapeType;
-import cs3500.animator.util.AnimationBuilder;
 
 
 /**
  * a simple animation class, use list of motion as representation of sequence of motions.
  */
-public class SimpleAnimation extends AbstractAnimation<Motion>{
+public class SimpleAnimation extends AbstractAnimation<Motion> {
 
 
   /**
    * construct an empty animation.
    */
   public SimpleAnimation() {
-super();
+    super();
   }
 
   /**
@@ -38,6 +33,7 @@ super();
   public SimpleAnimation(LinkedHashMap<String, List<Motion>> animation) {
     this.animation = animation;
   }
+
 
   @Override
   public void addMotion(String name, Motion motion) {
@@ -63,6 +59,15 @@ super();
       throw new IllegalArgumentException("can't add that motion!");
     }
   }
+
+  @Override
+  public void addKeyFrame(String name, Frame kf) {
+    Frame f = new Frame(kf.getShape(), kf.getTime() + 1);
+    Motion m = new Motion(kf, f);
+    addMotion(name, m);
+
+  }
+
 
   @Override
   public void deleteMotion(String name, int startTick) {
@@ -237,6 +242,7 @@ super();
             .forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
     return result;
   }
+
 
   @Override
   public List<Motion> getSequence(String name) {
