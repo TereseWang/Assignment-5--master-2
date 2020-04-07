@@ -1,6 +1,7 @@
 package ModelTest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
@@ -146,9 +147,16 @@ public class FrameTest {
   public void testEqual() {
     init();
     Shape state1 = new Rectangle(new Posn(10, 10), new Color(100, 100, 100), 3, 3);
+    Shape state2 = new Rectangle(new Posn(100, 20), new Color(200, 10, 100), 4, 3);
     int time1 = 10;
     Frame frame1 = new Frame(state1, time1);
-    assertEquals(frame1, frame);
+    Frame frame2 = new Frame(state2, time1);
+    assertTrue(frame1.equals(frame));
+    assertTrue(frame.equals(frame1));
+    assertTrue(frame.equals(frame));
+    assertFalse(frame1.equals(new Frame(state2,time1)));
+    assertFalse(frame2.equals(frame));
+
   }
 
   @Test
@@ -164,8 +172,11 @@ public class FrameTest {
   @Test
   public void testToString() {
     init();
+    Shape state1 = new Rectangle(new Posn(10, 10), new Color(100, 100, 100), 3, 3);
+    int time1 = 20;
+    Frame frame1 = new Frame(state1,time1);
     assertEquals("10 " + "10 10 3 3 100 100 100", frame.toString());
+    assertEquals("20 10 10 3 3 100 100 100", frame1.toString());
   }
-
 
 }

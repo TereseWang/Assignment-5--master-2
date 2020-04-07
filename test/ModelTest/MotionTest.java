@@ -3,6 +3,7 @@ package ModelTest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import cs3500.animation.model.Frame;
 import cs3500.animator.shape.Color;
 import cs3500.animation.model.Motion;
 import cs3500.animator.shape.Oval;
@@ -32,8 +33,8 @@ public class MotionTest {
 
     s2 = new Rectangle(new Posn(100, 100), new Color(100, 100, 100), 5, 5);
     s3 = new Rectangle(new Posn (200, 200), new Color(100, 100, 100), 5, 5);
-    Frame f =
-    m = new Motion()
+    Frame f =new Frame(s,1);
+    m = new Motion(3,2,s,s1);
   }
 
   @Test(expected = IllegalArgumentException.class)
