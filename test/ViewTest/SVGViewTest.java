@@ -1,3 +1,5 @@
+package ViewTest;
+
 import static org.junit.Assert.*;
 
 import cs3500.animation.model.AbstractAnimation;
@@ -27,9 +29,8 @@ public class SVGViewTest {
 
   @Before
   public void setUp() {
-    model = new AbstractAnimation();
-    view = new SVGView(model, outputStreamWriter, tickPerSec);
     model = new SimpleAnimation();
+    view = new SVGView(model, outputStreamWriter, tickPerSec);
     Shape s = new Rectangle(new Posn(10, 10), new Color(100, 100, 100), 3, 3);
     Shape s1 = new Rectangle(new Posn(100, 100), new Color(100, 100, 100), 3, 3);
     m = new Motion(4, 5, s, s1);
@@ -38,7 +39,6 @@ public class SVGViewTest {
     m2 = new Motion(5, 10, s2, s3);
     Shape s4 = new Rectangle(new Posn(100, 200), new Color(0, 0, 255), 5, 5);
     Shape s5 = new Rectangle(new Posn(100, 200), new Color(100, 100, 100), 4, 10);
-
   }
 
   @Test(expected = UnsupportedOperationException.class)
@@ -59,7 +59,7 @@ public class SVGViewTest {
         outputStreamWriter
             .append(String.format("canvas %d %d %d %d\n", canvas.y, canvas.x, canvas.width,
                 canvas.height));
-        outputStreamWriter.append(model.animateDescription());
+        outputStreamWriter.append(view.toString());
         view.display();
 
         assertEquals(

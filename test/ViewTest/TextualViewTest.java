@@ -1,4 +1,5 @@
-import cs3500.animation.model.AbstractAnimation;
+package ViewTest;
+
 import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
@@ -9,7 +10,6 @@ import cs3500.animator.shape.Shape;
 import cs3500.animator.view.TextualView;
 import cs3500.animator.view.View;
 
-import java.awt.Canvas;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import org.junit.Assert;
@@ -29,7 +29,6 @@ public class TextualViewTest {
 
   @Before
   public void setUp() {
-    model = new AbstractAnimation();
     view = new TextualView(model, out);
 
     model = new SimpleAnimation();
@@ -62,7 +61,7 @@ public class TextualViewTest {
       while (out != null) {
         out.append(String.format("canvas %d %d %d %d\n", canvas.y, canvas.x, canvas.width,
             canvas.height));
-        out.append(model.animateDescription());
+        out.append(model.toString());
         view.display();
 
         assertEquals("canvas 50 145 410 220\n"
