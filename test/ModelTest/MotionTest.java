@@ -136,6 +136,35 @@ public class MotionTest {
   }
 
   @Test
+  public void testAdjNext() {
+    init();
+    Frame f = new Frame(s3, 20);
+    Frame f2 = new Frame(s3, 22);
+    Motion m3 = new Motion(f, f2);
+    assertEquals(true, m2.adjNext(m3));
+    f.changeTime(19);
+    assertEquals(false, m2.adjNext(m3));
+  }
+
+  @Test
+  public void testAdjPrior() {
+    init();
+    Frame f = new Frame(s2, 10);
+    Frame f2 = new Frame(s2, 11);
+    Motion m3 = new Motion(f, f2);
+    assertEquals(true, m2.adjPrior(m3));
+    f2.changeTime(12);
+    assertEquals(false, m2.adjPrior(m3));
+  }
+
+  @Test
+  public void testClone() {
+    Motion m2 = m.clone();
+    assertFalse(m2 == m);
+    assertEquals(m2, m);
+  }
+
+  @Test
   public void testGetPeriod() {
     init();
     assertEquals(6, m.getPeriod());
@@ -280,30 +309,5 @@ public class MotionTest {
     assertEquals("4 200 200 5 5 200 200 200  10 100 100 5 5 200 200 200", m.toString());
     m.changeColor(new Color(200, 100, 40));
     assertEquals("4 200 200 5 5 200 100 40  10 100 100 5 5 200 200 200", m.toString());
-  }
-
-  @Test
-  public void testAdjNext() {
-    init();
-    Motion m2 = new Motion(10, 13, s1, s);
-    assertEquals(true, m.adjNext(m2));
-    m2.changeStartTick(11);
-    assertEquals(false, m.adjNext(m2));
-  }
-
-  @Test
-  public void testAdjPrior() {
-    init();
-    Motion m2 = new Motion(10, 13, s1, s);
-    assertEquals(true, m2.adjPrior(m));
-    m2.changeStartTick(11);
-    assertEquals(false, m2.adjPrior(m));
-  }
-
-  @Test
-  public void testClone() {
-    Motion m2 = m.clone();
-    assertFalse(m2 == m);
-    assertEquals(m2, m);
   }
 }

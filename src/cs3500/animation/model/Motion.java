@@ -67,7 +67,7 @@ public class Motion {
    */
   public boolean adjNext(Motion other) {
     int endTick = endKeyFrame.getTime();
-    return endTick == other.getStartTick() && endKeyFrame.equals(other.getStartShape());
+    return endTick == other.getStartTick() && endKeyFrame.getShape().equals(other.getStartShape());
   }
 
   /**
@@ -78,7 +78,8 @@ public class Motion {
    */
   public boolean adjPrior(Motion other) {
     int startTick = startKeyFrame.getTime();
-    return other.getEndTick() == startTick && other.getFinalImages().equals(startKeyFrame);
+    return other.getEndTick() == startTick && other.getFinalImages()
+        .equals(startKeyFrame.getShape());
   }
 
   /**
