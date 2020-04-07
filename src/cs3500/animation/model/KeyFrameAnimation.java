@@ -9,6 +9,10 @@ import cs3500.animator.shape.Shape;
 import cs3500.animator.shape.ShapeCreator;
 import cs3500.animator.util.AnimationBuilder;
 
+/**
+ * a class represent an animation that uses frame to document the moving of shape. Work as the model
+ * for the project.
+ */
 public class KeyFrameAnimation extends AbstractAnimation<Frame> {
 
   /**
@@ -19,7 +23,7 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     AbstractAnimation model;
 
     public Builder() {
-      model = new SimpleAnimation();
+      model = new KeyFrameAnimation();
     }
 
     @Override
@@ -68,6 +72,13 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
 
       return this;
     }
+  }
+
+  /**
+   * construct an empty animation that use keyframe.
+   */
+  public KeyFrameAnimation(){
+
   }
 
   @Override

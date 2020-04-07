@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import cs3500.animation.model.Animation;
+import cs3500.animation.model.KeyFrameAnimation;
 import cs3500.animation.model.SimpleAnimation;
 import cs3500.animator.controller.SimpleController;
 import cs3500.animator.util.AnimationBuilder;
@@ -70,7 +71,7 @@ public final class AnimationPlayer {
     }
     //use input to model
     AnimationReader reader = new AnimationReader();
-    AnimationBuilder<Animation> builder = new SimpleAnimation.Builder();
+    AnimationBuilder<Animation> builder = new KeyFrameAnimation.Builder();
     model = reader.parseFile(in, builder);
     // out to create view
     //out
