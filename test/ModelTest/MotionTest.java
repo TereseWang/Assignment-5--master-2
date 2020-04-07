@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import cs3500.animation.model.Frame;
-import cs3500.animator.shape.Color;
 import cs3500.animation.model.Motion;
+import cs3500.animator.shape.Color;
 import cs3500.animator.shape.Oval;
 import cs3500.animator.shape.Posn;
 import cs3500.animator.shape.Rectangle;
@@ -32,9 +32,10 @@ public class MotionTest {
     m = new Motion(4, 10, s, s1);
 
     s2 = new Rectangle(new Posn(100, 100), new Color(100, 100, 100), 5, 5);
-    s3 = new Rectangle(new Posn (200, 200), new Color(100, 100, 100), 5, 5);
-    Frame f =new Frame(s,1);
-    m = new Motion(3,2,s,s1);
+    s3 = new Rectangle(new Posn(200, 200), new Color(100, 100, 100), 5, 5);
+    Frame f = new Frame(s2, 11);
+    Frame f2 = new Frame(s3, 20);
+    m2 = new Motion(f, f2);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -73,6 +74,56 @@ public class MotionTest {
     Oval oval = new Oval(new Posn(200, 200), new Color(200, 200, 200),
         5, 5);
     Motion m = new Motion(4, 10, oval, s1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidMotionInvalidStartFrame() {
+    init();
+    Frame f = new Frame(s, -3);
+    Frame f2 = new Frame(s1, 10);
+    Motion m = new Motion(f, f2);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidMotionInvalidEndFrame() {
+    init();
+    Frame f = new Frame(s, 10);
+    Frame f2 = new Frame(s1, 4);
+    Motion m = new Motion(f, f2);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidMotionInvalidEndNegFrame() {
+    init();
+    Frame f = new Frame(s, 10);
+    Frame f2 = new Frame(s1, -1);
+    Motion m = new Motion(f, f2);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidMotionInvalidStartShapeFrame() {
+    init();
+    Frame f = new Frame(null, 4);
+    Frame f2 = new Frame(s1, 10);
+    Motion m = new Motion(f, f2);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidMotionInvalidEndShapeFrame() {
+    init();
+    Frame f = new Frame(s1, 4);
+    Frame f2 = new Frame(null, 10);
+    Motion m = new Motion(f, f2);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidIncompatibleTypeFrame() {
+    init();
+    Oval oval = new Oval(new Posn(200, 200), new Color(200, 200, 200),
+        5, 5);
+    Frame f = new Frame(oval, 4);
+    Frame f2 = new Frame(s1, 10);
+    Motion m = new Motion(f, f2);
   }
 
   @Test
@@ -181,8 +232,8 @@ public class MotionTest {
   public void testChangeSize() {
     init();
     m.changeSize(10, 10);
-    assertEquals(10, m.getFinalImages().getHeight(),0.001);
-    assertEquals(10, m.getFinalImages().getWidth(),0.001);
+    assertEquals(10, m.getFinalImages().getHeight(), 0.001);
+    assertEquals(10, m.getFinalImages().getWidth(), 0.001);
   }
 
   @Test(expected = IllegalArgumentException.class)

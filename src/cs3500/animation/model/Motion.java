@@ -1,6 +1,5 @@
 package cs3500.animation.model;
 
-import static java.lang.String.format;
 
 import cs3500.animator.shape.Color;
 import cs3500.animator.shape.Posn;
@@ -44,7 +43,7 @@ public class Motion {
    */
   public Motion(Frame start, Frame end) {
     if (start == null || end == null || end.getTime() < start.getTime()
-        || start.getTime() < 0) {
+        || start.getTime() < 0 || !start.getShape().isSameType(end.getShape())) {
       throw new IllegalArgumentException("can't construct motion with null frames");
     }
     this.startKeyFrame = start;
@@ -235,7 +234,7 @@ public class Motion {
 
   @Override
   public String toString() {
-    return format("%d " + getStartShape().toString() + "  %d " + getFinalImages().toString(),
+    return String.format("%d " + getStartShape().toString() + "  %d " + getFinalImages().toString(),
         getStartTick(),
         getEndTick());
   }
