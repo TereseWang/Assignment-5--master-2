@@ -3,6 +3,7 @@ package cs3500.animation.model;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import cs3500.animator.shape.Color;
 import cs3500.animator.shape.Posn;
@@ -109,7 +110,7 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
    * deleting a keyframe.
    */
   public void deleteMotion(String name, int startTick) {
-    Frame f = findKeyFrame(name,startTick);
+    Frame f = findKeyFrame(name, startTick);
     animation.get(name).remove(f);
   }
 
@@ -127,9 +128,9 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
 
   @Override
   public void changeColor(String name, Color color, int startTick) {
-    Frame f = findKeyFrame(name,startTick);
-    if(color == null){
-      throw  new IllegalArgumentException("color can't be null");
+    Frame f = findKeyFrame(name, startTick);
+    if (color == null) {
+      throw new IllegalArgumentException("color can't be null");
     }
     f.changeColor(color);
 
@@ -137,43 +138,102 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
 
   @Override
   public void changePosition(String name, Posn position, int startTick) {
-    Frame f = findKeyFrame(name,startTick);
+    Frame f = findKeyFrame(name, startTick);
     f.changePosition(position);
   }
 
   @Override
   public void changeSize(String name, int width, int height, int startTick) {
-    Frame f = findKeyFrame(name,startTick);
-    f.changeSize(width,height);
+    Frame f = findKeyFrame(name, startTick);
+    f.changeSize(width, height);
   }
 
   @Override
   public void changeSpeedAnchorStartPoint(String name, int startTick, int endTick) {
-
+    Frame f = findKeyFrame(name, startTick);
+    try {
+      Frame frame = findKeyFrame(name, endTick);
+      throw new IllegalArgumentException("Can't change the keyframe to given time line because " +
+              "there is a keyframe.");
+    } catch (IllegalArgumentException ie) {
+      f.changeTime(endTick);
+    }
   }
 
   @Override
   public void changeSpeedAnchorEndPoint(String name, int startTick, int endTick) {
-
+    Frame f = findKeyFrame(name, endTick);
+    try {
+      Frame frame = findKeyFrame(name, startTick);
+      throw new IllegalArgumentException("Can't change the keyframe to given time line because " +
+              "there is a keyframe.");
+    } catch (IllegalArgumentException ie) {
+      f.changeTime(startTick);
+    }
   }
 
   @Override
   public LinkedHashMap<String, List<Frame>> getAnimate() {
-    return null;
+    LinkedHashMap<String, Integer> sorted = getAnimateHelper();
+    LinkedHashMap<String, List<Frame>> result = new LinkedHashMap<>();
+    for (Map.Entry<String, Integer> entry : sorted.entrySet()) {
+      String s = entry.getKey();
+      List<Frame> listMotion = getSequence(s);
+      result.put(s, listMotion);
+    }
+    return result;
+  }
+
+  private LinkedHashMap<String, Integer> getAnimateHelper() {
+    LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
+    LinkedHashMap<String, Integer> forSort = new LinkedHashMap<>();
+    for (Map.Entry<String, List<Frame>> entry : animation.entrySet()) {
+      if (!entry.getValue().isEmpty()) {
+        int i = entry.getValue().get(0).getTime();
+        String s = entry.getKey();
+        forSort.put(s, i);
+      }
+    }
+    forSort.entrySet().stream().sorted(Map.Entry.comparingByValue())
+            .forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
+    return result;
   }
 
   @Override
   public List<Frame> getSequence(String name) {
-    return null;
+    validate(name);
+    List<Frame> listOfFrame = animation.get(name);
+    List<Frame> result = new ArrayList<>();
+    for (Frame f : listOfFrame) {
+      Frame copy = new Frame(f);
+      result.add(copy);
+    }
+    return result;
   }
 
   @Override
   public int getLength() {
-    return 0;
+    int result = 0;
+    for (Map.Entry<String, List<Frame>> entry : animation.entrySet()) {
+      List<Frame> lof = entry.getValue();
+      if (!lof.isEmpty()) {
+        int time = lof.get(lof.size() - 1).getTime();
+        if (result < time) {
+          result = time;
+        }
+      }
+    }
+    return result;
   }
 
   @Override
   public int getStartTime() {
-    return 0;
+    int start = 0;
+    int result = 0;
+    for (Map.Entry<String, List<Frame>> entry : getAnimate().entrySet()) {
+      result = entry.getValue().get(0).getTime();
+      break;
+    }
+    return result;
   }
 }
