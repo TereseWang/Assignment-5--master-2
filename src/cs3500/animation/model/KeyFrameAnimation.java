@@ -69,8 +69,8 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
                                                    int r, int g, int b) {
       Shape startShape = ShapeCreator.create(model.getShapeType(name), new Posn(x, y),
               new Color(r, g, b), w, h);
-      Motion m = new Motion(t, t + 1, startShape, startShape);
-
+      Frame f = new Frame(startShape, t);
+      model.addKeyFrame(name, f);
       return this;
     }
   }
