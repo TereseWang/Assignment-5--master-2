@@ -35,6 +35,13 @@ public interface Animation<K> {
   void addMotion(String name, Motion motion);
 
   /**
+   * add a keyframe to existing motion.
+   * @param name the name of the shape
+   * @param keyframe the given key frame
+   */
+  void addKeyFrame(String name, Frame keyframe);
+
+  /**
    * Delete a shape and all its motion as the name specified.
    *
    * @param name the name of the shape

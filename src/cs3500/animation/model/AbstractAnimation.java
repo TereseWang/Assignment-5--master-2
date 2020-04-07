@@ -66,6 +66,9 @@ public abstract class AbstractAnimation<K> implements Animation<List<K>> {
   }
 
   @Override
+  public abstract void addKeyFrame(String name, Frame keyframe);
+
+  @Override
   public void deleteShape(String name) {
     validate(name);
     animation.remove(name);

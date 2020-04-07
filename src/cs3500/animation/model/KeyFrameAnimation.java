@@ -105,6 +105,29 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     }
   }
 
+
+  @Override
+  public void addKeyFrame(String name, Frame kf) {
+    try {
+      findKeyFrame(name, kf.getTime());
+      throw new IllegalArgumentException("there is a keyFrame in existing timeline");
+    } catch (IllegalArgumentException ie) {
+      animation.get(name).add(findPosition(name, kf.getTime()), kf);
+    }
+  }
+
+  private int findPosition(String name, int time) {
+    validate(name);
+    List<Frame> copy = new ArrayList<>(animation.get(name));
+    for (int i = 0; i < copy.size(); i++) {
+      if (copy.get(i).getTime() > time) {
+        return i;
+      }
+    }
+    return copy.size();
+  }
+
+
   @Override
   /**
    * deleting a keyframe.
