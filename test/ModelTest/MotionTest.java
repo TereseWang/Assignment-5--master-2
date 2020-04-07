@@ -18,14 +18,22 @@ import org.junit.Test;
 public class MotionTest {
 
   private Motion m;
+  private Motion m2;
   private Shape s;
   private Shape s1;
+  private Shape s2;
+  private Shape s3;
 
   @Before
   public void init() {
     s = new Rectangle(new Posn(200, 200), new Color(200, 200, 200), 5, 5);
     s1 = new Rectangle(new Posn(100, 100), new Color(200, 200, 200), 5, 5);
     m = new Motion(4, 10, s, s1);
+
+    s2 = new Rectangle(new Posn(100, 100), new Color(100, 100, 100), 5, 5);
+    s3 = new Rectangle(new Posn (200, 200), new Color(100, 100, 100), 5, 5);
+    Frame f =
+    m = new Motion()
   }
 
   @Test(expected = IllegalArgumentException.class)

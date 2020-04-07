@@ -111,7 +111,7 @@ public class Frame {
   @Override
   public boolean equals(Object o) {
     if (o instanceof Frame) {
-      return ((Frame) o).state == state && ((Frame) o).time == time;
+      return ((Frame) o).state.equals(state) && ((Frame) o).time == time;
     } else {
       return false;
     }

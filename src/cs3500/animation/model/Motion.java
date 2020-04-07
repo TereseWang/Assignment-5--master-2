@@ -1,10 +1,10 @@
 package cs3500.animation.model;
 
+import static java.lang.String.format;
+
 import cs3500.animator.shape.Color;
 import cs3500.animator.shape.Posn;
 import cs3500.animator.shape.Shape;
-
-import static java.lang.String.format;
 
 /**
  * represent a shape's transition with a timeline, which is inclusive at the start point but
@@ -12,6 +12,7 @@ import static java.lang.String.format;
  * end state of the motion.
  */
 public class Motion {
+
   private Frame startKeyFrame;
   private Frame endKeyFrame;
 
@@ -22,22 +23,32 @@ public class Motion {
    * @param end     the end time of the motion
    * @param startS  the start shape of motion
    * @param enshape the end shape of the motion
+   * @throws IllegalArgumentException if the given shapes is null of the time is invalid
    */
   public Motion(int start, int end, Shape startS, Shape enshape) {
     if (start < 0 || end < start || startS == null || enshape == null ||
-            !startS.isSameType(enshape)) {
+        !startS.isSameType(enshape)) {
       throw new IllegalArgumentException("can not construct a motion because 1condi: " + (start < 0)
-              + " 2condi: " + (end <= start) + " 3condi: " + (startS == null) + " 4condi: "
-              + (enshape == null) + " showStart tick: " + start + " endTick: " + end);
+          + " 2condi: " + (end <= start) + " 3condi: " + (startS == null) + " 4condi: "
+          + (enshape == null) + " showStart tick: " + start + " endTick: " + end);
     }
     this.startKeyFrame = new Frame(startS, start);
     this.endKeyFrame = new Frame(enshape, end);
   }
 
+  /**
+   * Construct a Motion that input start keyframe and end keyframe
+   *
+   * @param start the start keyframe
+   * @param end   the end keyframe
+   */
   public Motion(Frame start, Frame end) {
-    if (start == null || end == null) {
+    if (start == null || end == null || end.getTime() < start.getTime()
+        || start.getTime() < 0) {
       throw new IllegalArgumentException("can't construct motion with null frames");
     }
+    this.startKeyFrame = start;
+    this.endKeyFrame = end;
   }
 
   /**
@@ -215,7 +226,7 @@ public class Motion {
 
   public boolean isChangeSize() {
     return !(getStartShape().getWidth() == getFinalImages().getWidth()
-            && getStartShape().getHeight() == getFinalImages().getHeight());
+        && getStartShape().getHeight() == getFinalImages().getHeight());
   }
 
   public boolean isChangePosn() {
@@ -225,8 +236,8 @@ public class Motion {
   @Override
   public String toString() {
     return format("%d " + getStartShape().toString() + "  %d " + getFinalImages().toString(),
-            getStartTick(),
-            getEndTick());
+        getStartTick(),
+        getEndTick());
   }
 
   @Override
@@ -235,7 +246,7 @@ public class Motion {
       return true;
     } else if (o instanceof Motion) {
       return ((Motion) o).startKeyFrame.equals(startKeyFrame) &&
-              ((Motion) o).endKeyFrame.equals(endKeyFrame);
+          ((Motion) o).endKeyFrame.equals(endKeyFrame);
     }
     return false;
   }
