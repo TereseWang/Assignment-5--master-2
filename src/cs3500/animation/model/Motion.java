@@ -96,7 +96,7 @@ public class Motion {
    * @return int as the length of timeline
    */
   public int getPeriod() {
-    return startKeyFrame.getTime() - endKeyFrame.getTime();
+    return Math.abs(startKeyFrame.getTime() - endKeyFrame.getTime());
   }
 
   /**
@@ -148,6 +148,9 @@ public class Motion {
     }
     int startTick = startKeyFrame.getTime() + period;
     int endTick = endKeyFrame.getTime() + period;
+
+    startKeyFrame.changeTime(startTick);
+    endKeyFrame.changeTime(endTick);
   }
 
   /**

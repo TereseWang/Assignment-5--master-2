@@ -173,6 +173,9 @@ public class MotionTest {
   @Test
   public void testPushBackward() {
     init();
+    assertEquals(4, m.getStartTick());
+    assertEquals(10, m.getEndTick());
+
     m.pushBackward(100);
     assertEquals(104, m.getStartTick());
     assertEquals(110, m.getEndTick());
