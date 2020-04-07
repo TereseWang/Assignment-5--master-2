@@ -1,5 +1,6 @@
 package cs3500.animation.model;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -90,36 +91,60 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     Frame end = new Frame(motion.getFinalImages(), motion.getEndTick());
     List<Frame> sequence = animation.get(name);
     // add to last
-    if(sequence.get(sequence.size()-1).getTime() == start.getTime()){
-
-    }else if (){
-
-    } else{
+    if (sequence.get(sequence.size() - 1).getTime() == start.getTime()) {
+      sequence.add(start);
+      sequence.add(end);
+    } else if (sequence.get(0).getTime() == end.getTime())  // add to first
+    {
+      sequence.add(0, end);
+      sequence.add(0, start);
+    } else {
       throw new IllegalArgumentException("sorry can't add this motion because there is a motion in" +
               "that timeline");
     }
-    // add to first
-
   }
 
   @Override
+  /**
+   * deleting a keyframe.
+   */
   public void deleteMotion(String name, int startTick) {
-
+    Frame f = findKeyFrame(name,startTick);
+    animation.get(name).remove(f);
   }
+
+  private Frame findKeyFrame(String name, int tick) {
+    validate(name);
+    List<Frame> copy = new ArrayList<>(animation.get(name));
+    for (int i = 0; i < copy.size(); i++) {
+      if (copy.get(i).getTime() == tick) {
+        return animation.get(name).get(i);
+      }
+    }
+    throw new IllegalArgumentException("can't find any keyframe with given timeline");
+  }
+
 
   @Override
   public void changeColor(String name, Color color, int startTick) {
+    Frame f = findKeyFrame(name,startTick);
+    if(color == null){
+      throw  new IllegalArgumentException("color can't be null");
+    }
+    f.changeColor(color);
 
   }
 
   @Override
   public void changePosition(String name, Posn position, int startTick) {
-
+    Frame f = findKeyFrame(name,startTick);
+    f.changePosition(position);
   }
 
   @Override
   public void changeSize(String name, int width, int height, int startTick) {
-
+    Frame f = findKeyFrame(name,startTick);
+    f.changeSize(width,height);
   }
 
   @Override
