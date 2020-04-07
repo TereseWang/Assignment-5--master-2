@@ -91,12 +91,12 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     Frame start = new Frame(motion.getStartShape(), motion.getStartTick());
     Frame end = new Frame(motion.getFinalImages(), motion.getEndTick());
     List<Frame> sequence = animation.get(name);
-    if(sequence.isEmpty()){
+    if (sequence.isEmpty()) {
       sequence.add(start);
       sequence.add(end);
     }
     // add to last
-   else  if (sequence.get(sequence.size() - 1).getTime() == start.getTime()) {
+    else if (sequence.get(sequence.size() - 1).getTime() == start.getTime()) {
       sequence.add(start);
       sequence.add(end);
     } else if (sequence.get(0).getTime() == end.getTime())  // add to first
