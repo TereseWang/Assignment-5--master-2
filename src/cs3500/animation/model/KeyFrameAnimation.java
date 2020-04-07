@@ -28,7 +28,6 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
 
     @Override
     public Animation build() {
-
       return model;
     }
 
@@ -77,12 +76,29 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
   /**
    * construct an empty animation that use keyframe.
    */
-  public KeyFrameAnimation(){
-
+  public KeyFrameAnimation() {
+    super();
   }
 
   @Override
   public void addMotion(String name, Motion motion) {
+    if (motion == null) {
+      throw new IllegalArgumentException("given motion can't be null");
+    }
+    validate(name);
+    Frame start = new Frame(motion.getStartShape(), motion.getStartTick());
+    Frame end = new Frame(motion.getFinalImages(), motion.getEndTick());
+    List<Frame> sequence = animation.get(name);
+    // add to last
+    if(sequence.get(sequence.size()-1).getTime() == start.getTime()){
+
+    }else if (){
+
+    } else{
+      throw new IllegalArgumentException("sorry can't add this motion because there is a motion in" +
+              "that timeline");
+    }
+    // add to first
 
   }
 

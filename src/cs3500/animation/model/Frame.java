@@ -67,6 +67,13 @@ public class Frame {
     state.changeSize(width, height);
   }
 
+  public void changeTime(int time){
+    if (time<= 0){
+      throw new IllegalArgumentException("time can't be less than 0");
+    }
+    this.time = time;
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -80,6 +87,11 @@ public class Frame {
   @Override
   public String toString() {
     return time + " " + state.toString();
+  }
+
+  @Override
+  public int hashCode(){
+    return Integer.hashCode(time) + state.hashCode();
   }
 
 

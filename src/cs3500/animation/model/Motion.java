@@ -12,11 +12,8 @@ import static java.lang.String.format;
  * end state of the motion.
  */
 public class Motion {
-
-  private int startTick;
-  private int endTick;
-  private Shape startShape;
-  private Shape endShape;
+  private Frame startKeyFrame;
+  private Frame endKeyFrame;
 
   /**
    * construct a Motion with given startshape, endshape, starttick and endtick.
@@ -33,11 +30,14 @@ public class Motion {
               + " 2condi: " + (end <= start) + " 3condi: " + (startS == null) + " 4condi: "
               + (enshape == null) + " showStart tick: " + start + " endTick: " + end);
     }
+    this.startKeyFrame = new Frame(startS, start);
+    this.endKeyFrame = new Frame(enshape, end);
+  }
 
-    this.startTick = start;
-    this.endTick = end;
-    this.startShape = startS;
-    this.endShape = enshape;
+  public Motion(Frame start, Frame end) {
+    if (start == null || end == null) {
+      throw new IllegalArgumentException("can't construct motion with null frames");
+    }
   }
 
   /**
@@ -46,7 +46,7 @@ public class Motion {
    * @return shape the end shape of this motion
    */
   public Shape getFinalImages() {
-    return endShape.copyShape();
+    return endKeyFrame.getShape();
   }
 
   /**
@@ -56,7 +56,8 @@ public class Motion {
    * @return true if the other motion if right after this motion
    */
   public boolean adjNext(Motion other) {
-    return endTick == other.getStartTick() && endShape.equals(other.getStartShape());
+    int endTick = endKeyFrame.getTime();
+    return endTick == other.getStartTick() && endKeyFrame.equals(other.getStartShape());
   }
 
   /**
@@ -66,7 +67,8 @@ public class Motion {
    * @return true if the other motion is right before this motion
    */
   public boolean adjPrior(Motion other) {
-    return other.getEndTick() == startTick && other.getFinalImages().equals(startShape);
+    int startTick = startKeyFrame.getTime();
+    return other.getEndTick() == startTick && other.getFinalImages().equals(startKeyFrame);
   }
 
   /**
@@ -75,7 +77,7 @@ public class Motion {
    * @return Motion as the copy
    */
   public Motion clone() {
-    return new Motion(startTick, endTick, startShape.copyShape(), endShape.copyShape());
+    return new Motion(new Frame(startKeyFrame), new Frame(endKeyFrame));
   }
 
   /**
@@ -84,7 +86,7 @@ public class Motion {
    * @return int as the length of timeline
    */
   public int getPeriod() {
-    return endTick - startTick;
+    return startKeyFrame.getTime() - endKeyFrame.getTime();
   }
 
   /**
@@ -93,7 +95,7 @@ public class Motion {
    * @return int as the starting point
    */
   public int getStartTick() {
-    return this.startTick;
+    return this.startKeyFrame.getTime();
   }
 
   /**
@@ -102,7 +104,7 @@ public class Motion {
    * @return int as ending point
    */
   public int getEndTick() {
-    return this.endTick;
+    return this.endKeyFrame.getTime();
   }
 
   /**
@@ -113,11 +115,15 @@ public class Motion {
    *                                  negative number
    */
   public void pushForward(int period) {
+    int startTick = startKeyFrame.getTime();
+    int endTick = endKeyFrame.getTime();
     if (startTick - period < 0 || period < 0) {
       throw new IllegalArgumentException("can't push this motion forward");
     }
     startTick = startTick - period;
     endTick = endTick - period;
+    startKeyFrame.changeTime(startTick);
+    endKeyFrame.changeTime(endTick);
 
   }
 
@@ -131,8 +137,8 @@ public class Motion {
     if (period < 0) {
       throw new IllegalArgumentException("Cannot push this motion backward");
     }
-    startTick = startTick + period;
-    endTick = endTick + period;
+    int startTick = startKeyFrame.getTime() + period;
+    int endTick = endKeyFrame.getTime() + period;
   }
 
   /**
@@ -141,10 +147,10 @@ public class Motion {
    * @param endpoint the given point
    */
   public void changeEndTick(int endpoint) {
-    if (endpoint < 0 || endpoint <= startTick) {
+    if (endpoint < 0 || endpoint <= startKeyFrame.getTime()) {
       throw new IllegalArgumentException("Invalid endpoint");
     }
-    endTick = endpoint;
+    endKeyFrame.changeTime(endpoint);
   }
 
   /**
@@ -155,10 +161,10 @@ public class Motion {
    *                                  startpoint is less than zero
    */
   public void changeStartTick(int startpoint) {
-    if (startpoint < 0 || startpoint >= endTick) {
+    if (startpoint < 0 || startpoint >= endKeyFrame.getTime()) {
       throw new IllegalArgumentException("Invalid startpoint");
     }
-    startTick = startpoint;
+    startKeyFrame.changeTime(startpoint);
   }
 
   /**
@@ -167,7 +173,7 @@ public class Motion {
    * @param color the desired color
    */
   public void changeColor(Color color) {
-    startShape.changeColor(color);
+    startKeyFrame.changeColor(color);
   }
 
   /**
@@ -176,7 +182,7 @@ public class Motion {
    * @param position the desired position
    */
   public void changePosition(Posn position) {
-    endShape.changePosn(position);
+    endKeyFrame.changePosition(position);
   }
 
   /**
@@ -187,7 +193,7 @@ public class Motion {
    * @throws IllegalArgumentException if the given width and height are invalid.
    */
   public void changeSize(int width, int height) {
-    endShape.changeSize(width, height);
+    endKeyFrame.changeSize(width, height);
   }
 
   /**
@@ -196,30 +202,32 @@ public class Motion {
    * @return the startshape of the motion
    */
   public Shape getStartShape() {
-    return startShape.copyShape();
+    return startKeyFrame.getShape();
   }
 
   /**
    * check whether the motion has changed the color.
+   *
    * @return boolean as
    */
   public boolean isChangeColor() {
-    return !startShape.getColor().equals(endShape.getColor());
+    return !getStartShape().getColor().equals(getFinalImages().getColor());
   }
 
   public boolean isChangeSize() {
-    return !(startShape.getWidth() == endShape.getWidth()
-            && startShape.getHeight() == endShape.getHeight());
+    return !(getStartShape().getWidth() == getFinalImages().getWidth()
+            && getStartShape().getHeight() == getFinalImages().getHeight());
   }
 
   public boolean isChangePosn() {
-    return !startShape.getPosition().equals(endShape.getPosition());
+    return !getStartShape().getPosition().equals(getFinalImages().getPosition());
   }
 
   @Override
   public String toString() {
-    return format("%d " + startShape.toString() + "  %d " + endShape.toString(), startTick,
-            endTick);
+    return format("%d " + getStartShape().toString() + "  %d " + getFinalImages().toString(),
+            getStartTick(),
+            getEndTick());
   }
 
   @Override
@@ -227,17 +235,14 @@ public class Motion {
     if (o == this) {
       return true;
     } else if (o instanceof Motion) {
-      return ((Motion) o).startTick == startTick &&
-              ((Motion) o).endTick == endTick &&
-              ((Motion) o).startShape.equals(startShape) &&
-              ((Motion) o).endShape.equals(endShape);
+      return ((Motion) o).startKeyFrame.equals(startKeyFrame) &&
+              ((Motion) o).endKeyFrame.equals(endKeyFrame);
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Integer.hashCode(startTick + endTick) +
-            startShape.hashCode() + endShape.hashCode();
+    return startKeyFrame.hashCode() + endKeyFrame.hashCode();
   }
 }
