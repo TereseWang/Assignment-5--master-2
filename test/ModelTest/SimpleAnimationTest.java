@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * A test class to test all public methods in the SimpleAnimation class.
  */
-public class AnimationTest {
+public class SimpleAnimationTest {
 
   SimpleAnimation model;
   Motion m;
