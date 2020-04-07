@@ -8,7 +8,7 @@ import cs3500.animator.shape.Posn;
 import cs3500.animator.shape.ShapeType;
 
 /**
- * Represent an animation that allows multiple shapes coduct multiple movement. Work as Model of
+ * Represent an animation that allows multiple shapes conducting multiple movement. Work as Model of
  * this project. An animation has a list of shapes, and each shape has a list of motions.
  *
  * @param <K> the sequence of motions.
@@ -78,7 +78,6 @@ public interface Animation<K> {
    * @param name      the name of the shape
    * @param position  the position to change
    * @param startTick the start point of the time line
-
    * @throws IllegalArgumentException if the motion cannot be found with the time line or the name
    *                                  of the motion does not exist in the animation
    */

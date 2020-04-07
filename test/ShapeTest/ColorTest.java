@@ -1,3 +1,5 @@
+package ShapeTest;
+
 import static org.junit.Assert.assertEquals;
 
 import cs3500.animator.shape.Color;

@@ -113,5 +113,6 @@ Add EditorView:
   disable and enable looping button, which the button will display "enable" when the loop is
   actually disabled, and vise versa. When the user clicked enable, the animation will rerun with
   the loop allowed, meaning animation will play again from the start. Moreover when user clicked
-  enable, the button text will switched to disable and vise versa.
-  
+  enable, the button text will switched to disable and vise versa. Rather than using mouse listener
+  or key listener, we believed that button is more user friendly and easy to use.
+
