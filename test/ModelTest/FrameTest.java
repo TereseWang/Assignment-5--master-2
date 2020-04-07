@@ -92,8 +92,52 @@ public class FrameTest {
   public void testValidChangePosn() {
     init();
     assertTrue(frame.getShape().getColor().equals(new Color(100, 100, 100)));
-    frame.changeColor(new Color(0, 200, 0));
-    assertTrue(frame.getShape().getColor().equals(new Color(0, 200, 0)));
+    frame.changePosition(new Posn(100, 100));
+    assertTrue(frame.getShape().getPosition().equals(new Posn(100, 100)));
   }
 
+  @Test
+  public void testValidChangeSizeWidth() {
+    init();
+    assertTrue(frame.getShape().getWidth() == 3);
+    assertTrue(frame.getShape().getHeight() == 3);
+    frame.changeSize(10, 3);
+    assertTrue(frame.getShape().getWidth() == 10);
+    assertTrue(frame.getShape().getHeight() == 3);
+  }
+
+  @Test
+  public void testValidChangeSizeHeight() {
+    init();
+    assertTrue(frame.getShape().getWidth() == 3);
+    assertTrue(frame.getShape().getHeight() == 3);
+    frame.changeSize(3, 10);
+    assertTrue(frame.getShape().getWidth() == 3);
+    assertTrue(frame.getShape().getHeight() == 10);
+  }
+
+  @Test
+  public void testValidChangeSizeWidthHeight() {
+    init();
+    assertTrue(frame.getShape().getWidth() == 3);
+    assertTrue(frame.getShape().getHeight() == 3);
+    frame.changeSize(10, 10);
+    assertTrue(frame.getShape().getWidth() == 10);
+    assertTrue(frame.getShape().getHeight() == 10);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidChangeTimeNegativeTime() {
+    init();
+    assertTrue(frame.getTime() == 10);
+    frame.changeTime(-1);
+  }
+
+  @Test
+  public void testValidChangeTime() {
+    init();
+    assertTrue(frame.getTime() == 10);
+    frame.changeTime(100);
+    assertTrue(frame.getTime() == 100);
+  }
 }
