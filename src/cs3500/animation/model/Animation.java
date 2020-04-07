@@ -60,11 +60,10 @@ public interface Animation<K> {
    * @param name      the name of the shape
    * @param color     the color to change
    * @param startTick the start point of the time line
-   * @param endTick   the end point of the time line
    * @throws IllegalArgumentException if the motion cannot be found with the time line or the name
    *                                  of the motion does not exist in the animation.
    */
-  void changeColor(String name, Color color, int startTick, int endTick);
+  void changeColor(String name, Color color, int startTick);
 
   /**
    * Make a change of position to an existed motion.
@@ -72,11 +71,11 @@ public interface Animation<K> {
    * @param name      the name of the shape
    * @param position  the position to change
    * @param startTick the start point of the time line
-   * @param endTick   the end point of the time line
+
    * @throws IllegalArgumentException if the motion cannot be found with the time line or the name
    *                                  of the motion does not exist in the animation
    */
-  void changePosition(String name, Posn position, int startTick, int endTick);
+  void changePosition(String name, Posn position, int startTick);
 
   /**
    * Make a change of the size of  to an existed motion.
@@ -85,11 +84,10 @@ public interface Animation<K> {
    * @param width     the width to change
    * @param height    the height to change
    * @param startTick the start point of the time line
-   * @param endTick   the end point of the time line
    * @throws IllegalArgumentException if the motion cannot be found with the timeline or the name of
    *                                  the motion does not exist in the animation
    */
-  void changeSize(String name, int width, int height, int startTick, int endTick);
+  void changeSize(String name, int width, int height, int startTick);
 
   /**
    * change the ending point of the motion whose start point as given to the point as given
@@ -125,12 +123,6 @@ public interface Animation<K> {
    */
   LinkedHashMap<String, K> getAnimate();
 
-  /**
-   * get the text description of all the motions of all shapes in this animation.
-   *
-   * @return string that list all motions associate with their names
-   */
-  String animateDescription();
 
   /**
    * get the motion sequence of a shape.
@@ -167,5 +159,5 @@ public interface Animation<K> {
    * @param name the given name
    * @return ShapeType
    */
-  public ShapeType getShapeType(String name);
+  ShapeType getShapeType(String name);
 }

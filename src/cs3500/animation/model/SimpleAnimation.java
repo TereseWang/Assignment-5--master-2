@@ -36,17 +36,14 @@ super();
    * @param animation the map of string combined with a list of motions
    */
   public SimpleAnimation(LinkedHashMap<String, List<Motion>> animation) {
-    super();
+    this.animation = animation;
   }
 
-  @Override
-  public void declareShape(String name, String type) {
 
-  }
 
   @Override
   public void addMotion(String name, Motion motion) {
-    validate(name);
+    super.validate(name);
     List<Motion> sequence = animation.get(name);
     int size = sequence.size();
     if (size != 0) {
@@ -69,23 +66,8 @@ super();
     }
   }
 
-  /**
-   * check if the name exist in the animation.
-   *
-   * @param name the given name
-   * @throws IllegalArgumentException if the name is not in the animation.
-   */
-  private void validate(String name) {
-    if (!animation.containsKey(name)) {
-      throw new IllegalArgumentException("couldn't find the shape: " + name);
-    }
-  }
 
-  @Override
-  public void deleteShape(String name) {
-    validate(name);
-    animation.remove(name);
-  }
+
 
   @Override
   public void deleteMotion(String name, int startTick) {
@@ -163,27 +145,27 @@ super();
   }
 
   @Override
-  public void changeColor(String name, Color color, int startTick, int endTick) {
+  public void changeColor(String name, Color color, int startTick) {
     if (color == null) {
       throw new IllegalArgumentException("color can't be null");
     }
-    Motion m = findMotion(name, startTick, endTick);
+    Motion m = findMotionBaseOnS(name, startTick);
     m.changeColor(color);
 
   }
 
   @Override
-  public void changePosition(String name, Posn position, int startTick, int endTick) {
+  public void changePosition(String name, Posn position, int startTick) {
     if (position == null) {
       throw new IllegalArgumentException("position can't be null");
     }
-    Motion m = findMotion(name, startTick, endTick);
+    Motion m = findMotionBaseOnS(name, startTick);
     m.changePosition(position);
   }
 
   @Override
-  public void changeSize(String name, int width, int height, int startTick, int endTick) {
-    Motion m = findMotion(name, startTick, endTick);
+  public void changeSize(String name, int width, int height, int startTick) {
+    Motion m = findMotionBaseOnS(name, startTick);
     m.changeSize(width, height);
   }
 
@@ -261,35 +243,7 @@ super();
     return result;
   }
 
-  @Override
-  public String animateDescription() {
-    if (animation.isEmpty()) {
-      return "";
-    } else {
-      String result = new String();
-      // make a change here: change from "animation.entrySet()" to getAnimate.entrySet()
-      // in line 262.
-      for (Entry<String, List<Motion>> entry : getAnimate().entrySet()) {
-        String key = entry.getKey();
-        List<Motion> l = entry.getValue();
-        if (l.isEmpty()) {
-          return "";
-        } else {
-          String s = l.get(0).getStartShape().getShapeName();
-          result += "shape " + key + " " + s + "\n";
-          for (int i = 0; i < l.size(); i++) {
-            result += "motion " + key + " " + l.get(i).toString() + "\n";
-          }
-          result += "\n";
-        }
-      }
-      int i = result.lastIndexOf("\n");
-      if (result.length() != 0) {
-        result = result.substring(0, i - 1);
-      }
-      return result;
-    }
-  }
+
 
   @Override
   public List<Motion> getSequence(String name) {
@@ -337,16 +291,5 @@ super();
     }
     return result;
   }
-
-  @Override
-  public Rectangle getBox() {
-    return new Rectangle(canvas.getBounds());
-  }
-
-  @Override
-  public ShapeType getShapeType(String name) {
-    return contact.get(name);
-  }
-
 
 }

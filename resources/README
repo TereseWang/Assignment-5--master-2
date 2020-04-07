@@ -97,7 +97,11 @@ Revision of textual view:
 Revision of visual view:
 Revision of SVG view:
 Revision of controller:
-Revision of animation model:
+Revision of Animation interface:
+    change the signature of changeColor(), changeSize(), and ChangePosn();
+    delete method getAnimateDescription because similar process handled in textual.
+Revision of SimpleAnimation model:
+
 Add EditorView:
   We implement an editor view class that did the similar thing with visual panel,except that
   it has editing features that stop, start, restart, resume, increase speed and decrease speed

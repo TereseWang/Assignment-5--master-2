@@ -1,5 +1,7 @@
 package cs3500.animation.model;
 
+import cs3500.animator.shape.Color;
+import cs3500.animator.shape.Posn;
 import cs3500.animator.shape.Shape;
 
 /**
@@ -34,7 +36,7 @@ public class Frame {
       throw new IllegalArgumentException("given frame is null");
     }
     this.state = frame.getShape();
-    this.time = frame.getTime()
+    this.time = frame.getTime();
 
   }
 
@@ -46,6 +48,25 @@ public class Frame {
   public int getTime() {
     return time;
   }
+
+  public void changeColor(Color color) {
+    if (color == null) {
+      throw new IllegalArgumentException("color can't be null");
+    }
+    state.changeColor(color);
+  }
+
+  public void changePosition(Posn posn) {
+    if (posn == null) {
+      throw new IllegalArgumentException("given posn can't be null");
+    }
+    state.changePosn(posn);
+  }
+
+  public void changeSize(double width, double height) {
+    state.changeSize(width, height);
+  }
+
 
   @Override
   public boolean equals(Object o) {

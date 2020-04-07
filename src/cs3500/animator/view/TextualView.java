@@ -3,8 +3,12 @@ package cs3500.animator.view;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import cs3500.animation.model.Animation;
+import cs3500.animation.model.Motion;
 
 
 /**
@@ -47,10 +51,40 @@ public class TextualView implements View {
       } else {
         out.append(String.format("canvas %d %d %d %d\n", canvas.y, canvas.x, canvas.width,
                 canvas.height));
-        out.append(model.animateDescription());
+        out.append(animateDescription());
       }
     } catch (IOException e) {
       System.out.print("an error occured when appending");
     }
   }
+  private String animateDescription() {
+    LinkedHashMap<String, List<Motion>> animation = model.getAnimate();
+    if (animation.isEmpty()) {
+      return "";
+    } else {
+      String result = new String();
+      // make a change here: change from "animation.entrySet()" to getAnimate.entrySet()
+      // in line 262.
+      for (Map.Entry<String, List<Motion>> entry : animation.entrySet()) {
+        String key = entry.getKey();
+        List<Motion> l = entry.getValue();
+        if (l.isEmpty()) {
+          return "";
+        } else {
+          String s = l.get(0).getStartShape().getShapeName();
+          result += "shape " + key + " " + s + "\n";
+          for (int i = 0; i < l.size(); i++) {
+            result += "motion " + key + " " + l.get(i).toString() + "\n";
+          }
+          result += "\n";
+        }
+      }
+      int i = result.lastIndexOf("\n");
+      if (result.length() != 0) {
+        result = result.substring(0, i - 1);
+      }
+      return result;
+    }
+  }
+
 }
