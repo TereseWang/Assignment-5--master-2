@@ -65,7 +65,6 @@ public class SimpleAnimation extends AbstractAnimation<Motion> {
     Frame f = new Frame(kf.getShape(), kf.getTime() + 1);
     Motion m = new Motion(kf, f);
     addMotion(name, m);
-
   }
 
 
