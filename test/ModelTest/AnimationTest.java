@@ -52,7 +52,7 @@ public class AnimationTest {
   }
 
   @Test
-  public void testdeclareShape() {
+  public void testDeclareShape() {
     init();
     model.declareShape("Rectangle", "Rectangle");
     model.declareShape("Circle", "Oval");
@@ -240,12 +240,10 @@ public class AnimationTest {
     init();
     model.declareShape("Rectangle", "Rectangle");
     model.addMotion("Rectangle", m2);
-    assertEquals("shape Rectangle Rectangle\n"
-            + "motion Rectangle 5 100 100 3 3 100 100 100  10 100 200 5 5 0 0 255",
+    assertEquals(m2,
         model.getSequence("Rectangle"));
     model.changeSize("Rectangle", 1, 1, 5);
-    assertEquals("shape Rectangle Rectangle\n"
-            + "motion Rectangle 5 100 100 3 3 100 100 100  10 100 200 1 1 0 0 255",
+    assertEquals( "5 100 100 3 3 100 100 100  10 100 200 1 1 0 0 255",
         model.getSequence("Rectangle"));
   }
 
