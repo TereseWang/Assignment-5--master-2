@@ -11,11 +11,7 @@ import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
 import cs3500.animator.shape.Shape;
 import cs3500.animator.shape.ShapeType;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
+
 
 /**
  * A representation of view that output a svg format file, which is a textual description of the
