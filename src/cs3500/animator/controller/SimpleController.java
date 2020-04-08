@@ -18,7 +18,6 @@ public class SimpleController implements AnimationController {
    */
   public SimpleController(View v) {
     view = v;
-
   }
 
   @Override

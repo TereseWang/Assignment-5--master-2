@@ -9,7 +9,6 @@ import java.io.OutputStreamWriter;
  * a factory class for the views of this program.
  */
 public class ViewCreator {
-
   /**
    * create a view according to given viewtype.
    *

@@ -29,7 +29,6 @@ public class TweeningMotion extends AbstractTweening {
 
   @Override
   public void fillInBlankMotion() {
-    SimpleAnimation result = new SimpleAnimation(animation.getAnimate());
     int endTime = animation.getLength();
     for (Entry<String, List<Motion>> entry : animation.getAnimate().entrySet()) {
       List<Motion> l = entry.getValue();
@@ -37,10 +36,9 @@ public class TweeningMotion extends AbstractTweening {
       if (endMotionTime < endTime) {
         Motion m = new Motion(endMotionTime, endTime, l.get(l.size() - 1).getFinalImages(),
             l.get(l.size() - 1).getFinalImages());
-        result.addMotion(entry.getKey(), m);
+        animation.addMotion(entry.getKey(), m);
       }
     }
-    animation = result;
   }
 
   @Override
