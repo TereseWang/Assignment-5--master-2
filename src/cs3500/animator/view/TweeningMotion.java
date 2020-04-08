@@ -1,6 +1,5 @@
 package cs3500.animator.view;
 
-import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
 import cs3500.animator.shape.Color;
@@ -9,19 +8,17 @@ import cs3500.animator.shape.Shape;
 import java.util.List;
 import java.util.Map.Entry;
 
-public class Tweening {
-  private int count;
-  private Animation<List<Motion>> animation;
+public class TweeningMotion extends AbstractTweening {
 
-  public Tweening(Animation animation, int count) {
+  private SimpleAnimation animation;
+  private int count;
+
+  public TweeningMotion(SimpleAnimation animation, int count) {
     this.count = count;
     this.animation = animation;
   }
 
-  /**
-   * If the shape does not have any motions in between the very start time of the whole animtion and
-   * the end time, add motions to make it just stay there and not move.
-   */
+  @Override
   public void fillInBlankMotion() {
     SimpleAnimation result = new SimpleAnimation(animation.getAnimate());
     int endTime = animation.getLength();
@@ -37,13 +34,7 @@ public class Tweening {
     animation = result;
   }
 
-  /**
-   * Get the state of the shape with the given name with the current time count. Using the method
-   * tweening to find the appropriate motion state.
-   *
-   * @param name the desired shape name
-   * @return the state of the shape
-   */
+  @Override
   public Shape getMotionState(String name, int time) {
     if (time < count) {
       return null;
@@ -118,21 +109,5 @@ public class Tweening {
       }
     }
     return currentShape;
-  }
-
-  /**
-   * The tweening function to help calculating the motion state of each shape with the given time.
-   *
-   * @param a    the start state
-   * @param b    the end state
-   * @param ta   the start time
-   * @param tb   the end time
-   * @param time the current time
-   * @return the result of the tweening function
-   */
-  private double tweeningFunction(double a, double b, int ta, int tb, int time) {
-    double taa = ta;
-    double tbb = tb;
-    return (a * ((tbb - time) / (tbb - taa))) + (b * ((time - taa) / (tbb - taa)));
   }
 }
