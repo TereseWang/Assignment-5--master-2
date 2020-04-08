@@ -91,6 +91,7 @@ public class EditorPanel extends JPanel implements ActionListener {
 
   public void addKeyFrame(String name, Frame f) {
     animation.addKeyFrame(name, f);
+    new TweeningFrame(count, animation).fillInBlankMotion();
     repaint();
   }
 
