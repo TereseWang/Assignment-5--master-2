@@ -1,6 +1,12 @@
 package cs3500.animator.view;
 
+import cs3500.animation.model.Frame;
 import cs3500.animation.model.KeyFrameAnimation;
+import cs3500.animator.shape.Color;
+import cs3500.animator.shape.Posn;
+import cs3500.animator.shape.Shape;
+import cs3500.animator.shape.ShapeCreator;
+import cs3500.animator.shape.ShapeType;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -8,6 +14,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -161,6 +170,13 @@ public class EditorView extends JFrame implements View, ActionListener {
     delete.addActionListener(this);
     editorPanel.add(delete);
 
+    JLabel tip = new JLabel("All Fields Need to");
+    JLabel tip2 = new JLabel("be Integer except");
+    JLabel tip3 = new JLabel("ShapeName Field");
+    editorPanel.add(tip);
+    editorPanel.add(tip2);
+    editorPanel.add(tip3);
+
     errorMessage = new JLabel("");
     editorPanel.add(errorMessage);
 
@@ -211,16 +227,62 @@ public class EditorView extends JFrame implements View, ActionListener {
     }
   }
 
+  public void setInsertToEmpty() {
+    nameInsert.setText("");
+    timeInsert.setText("");
+    insertX.setText("");
+    insertY.setText("");
+    insertR.setText("");
+    insertG.setText("");
+    insertB.setText("");
+    insertW.setText("");
+    insertH.setText("");
+  }
+
   public void checkInsert(String name, String time, String x, String y, String r, String g,
-      String b) {
-    if (name.trim().length() == 0 && time.trim().length() != 0 && x.trim().length() != 0
-        && y.trim().length() != 0 && r.trim().length() != 0 && g.trim().length() != 0) {
-      errorMessage.setText("");
+      String b, String w, String h) {
+    List<String> list = new ArrayList<>(Arrays.asList(name, time, x, y, r, g, b, w, h));
+    boolean temp = true;
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).trim().length() == 0) {
+        temp = false;
+        errorMessage.setText("Has Empty Field/Fields");
+        setInsertToEmpty();
+        break;
+      }
     }
-    if (name.trim().length() == 0 && time.trim().length() != 0 && x.trim().length() != 0
-            && y.trim().length() != 0 && r.trim().length() != 0 && g.trim().length() != 0) {
-          errorMessage.setText("");
-        }
+    if (errorMessage.getText().trim().length() != 0 && temp == true) {
+      errorMessage.setText("");
+      try {
+        Integer.parseInt(time);
+        Integer.parseInt(x);
+        Integer.parseInt(y);
+        Integer.parseInt(r);
+        Integer.parseInt(g);
+        Integer.parseInt(b);
+        Integer.parseInt(w);
+        Integer.parseInt(h);
+      } catch (NumberFormatException a) {
+        setInsertToEmpty();
+        errorMessage.setText("Need Integer here");
+      }
+    }
+    if (errorMessage.getText().trim().length() == 0 && temp == true) {
+      errorMessage.setText("");
+      try {
+        Integer.parseInt(time);
+        Integer.parseInt(x);
+        Integer.parseInt(y);
+        Integer.parseInt(r);
+        Integer.parseInt(g);
+        Integer.parseInt(b);
+        Integer.parseInt(w);
+        Integer.parseInt(h);
+      } catch (NumberFormatException a) {
+        setInsertToEmpty();
+        errorMessage.setText("Need Integer Here");
+      }
+    }
   }
 
   @Override
@@ -264,8 +326,32 @@ public class EditorView extends JFrame implements View, ActionListener {
       }
     } else if (e.getSource() == insert) {
       String name = nameInsert.getText();
-
-
+      String time = timeInsert.getText();
+      String x = insertX.getText();
+      String y = insertY.getText();
+      String r = insertR.getText();
+      String g = insertG.getText();
+      String b = insertB.getText();
+      String w = insertW.getText();
+      String h = insertH.getText();
+      checkInsert(name, time, x, y, r, g, b, w, h);
+      if (errorMessage.getText().trim().length() == 0 && name.trim().length() != 0
+          && time.trim().length() != 0 && x.trim().length() != 0 && y.trim().length() != 0
+          && r.trim().length() != 0 && g.trim().length() != 0 && b.trim().length() != 0
+          && w.trim().length() != 0 && h.trim().length() != 0) {
+        try {
+          ShapeType type = animation.getShapeType(name);
+          ShapeCreator creator = new ShapeCreator();
+          Shape s = creator.create(type, new Posn(Integer.parseInt(x), Integer.parseInt(y)),
+              new Color(Integer.parseInt(g), Integer.parseInt(g),
+                  Integer.parseInt(b)),
+              Integer.parseInt(w), Integer.parseInt(h));
+          Frame f = new Frame(s, Integer.parseInt(time));
+          panel.addKeyFrame(name, f);
+        } catch (IllegalArgumentException erro) {
+          errorMessage.setText("Cannot found the shape");
+        }
+      }
     } else if (e.getSource() == delete) {
       String name = nameInsert.getText();
       String time = timeDelete.getText();
