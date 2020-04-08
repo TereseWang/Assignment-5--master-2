@@ -9,6 +9,9 @@ import cs3500.animator.shape.Shape;
 import java.util.List;
 import java.util.Map.Entry;
 
+/**
+ *
+ */
 public class Tweening {
   private int count;
   private Animation<List<Motion>> animation;
