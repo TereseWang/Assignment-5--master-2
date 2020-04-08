@@ -21,7 +21,7 @@ import javax.swing.Timer;
  */
 public class VisualPanel extends JPanel implements ActionListener {
 
-  private Animation<List<Motion>> animation;
+  private SimpleAnimation animation;
   private int count;
   private Timer timer;
   private boolean loop;
@@ -33,7 +33,7 @@ public class VisualPanel extends JPanel implements ActionListener {
    * @param animation     the model of the animation
    * @param tickPerSecond the animation moving rate
    */
-  public VisualPanel(Animation animation, int tickPerSecond) {
+  public VisualPanel(SimpleAnimation animation, int tickPerSecond) {
     super();
     if (tickPerSecond == 0) {
       tickPerSecond = 2;
@@ -42,7 +42,7 @@ public class VisualPanel extends JPanel implements ActionListener {
     timer = new Timer(1000 / tickPerSec, this);
     this.count = animation.getStartTime();
     this.animation = animation;
-    new Tweening(animation, count).fillInBlankMotion();
+    new TweeningMotion(animation, count).fillInBlankMotion();
     this.loop = true;
   }
 
@@ -94,7 +94,7 @@ public class VisualPanel extends JPanel implements ActionListener {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
     for (Entry<String, List<Motion>> entry : animation.getAnimate().entrySet()) {
-      Shape shape = new Tweening(animation, count).getMotionState(entry.getKey(), count);
+      Shape shape = new TweeningMotion(animation, count).getMotionState(entry.getKey(), count);
       if (shape != null) {
         Color shapeColor = shape.getColor();
         Posn shapePosn = shape.getPosition();
