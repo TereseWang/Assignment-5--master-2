@@ -1,6 +1,5 @@
 package cs3500.animator.view;
 
-import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
 import cs3500.animator.shape.Color;
