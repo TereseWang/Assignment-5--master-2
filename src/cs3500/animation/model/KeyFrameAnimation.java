@@ -24,6 +24,7 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
 
     AbstractAnimation model;
 
+
     public Builder() {
       model = new KeyFrameAnimation();
     }
