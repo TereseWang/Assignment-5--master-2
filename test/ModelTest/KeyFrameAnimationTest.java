@@ -10,6 +10,7 @@ import cs3500.animator.shape.Oval;
 import cs3500.animator.shape.Posn;
 import cs3500.animator.shape.Rectangle;
 import cs3500.animator.shape.Shape;
+import cs3500.animator.shape.ShapeType;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
@@ -162,20 +163,6 @@ public class KeyFrameAnimationTest {
   }
 
   @Test
-  public void testChangeSpeedAnchorStartPoint() {
-    init();
-    model.declareShape("Rectangle", "Rectangle");
-
-  }
-
-  @Test
-  public void testChangeSpeedAnchorEndPoint() {
-    init();
-    model.declareShape("Rectangle", "Rectangle");
-
-  }
-
-  @Test
   public void testGetAnimate() {
     init();
     model.declareShape("Rectangle", "Rectangle");
@@ -186,28 +173,59 @@ public class KeyFrameAnimationTest {
   public void testGetSequence() {
     init();
     model.declareShape("Rectangle", "Rectangle");
+    assertEquals(3, model.getSequence("a").size());
+    assertEquals("1 100 100 10 10 0 255 0",
+        model.getSequence("a").get(0).toString());
+    assertEquals("10 100 100 100 100 0 255 0",
+        model.getSequence("a").get(1).toString());
 
+    assertEquals(3, model.getSequence("b").size());
+    assertEquals("1 300 300 30 30 0 200 0",
+        model.getSequence("b").get(0).toString());
+    assertEquals("2 300 300 30 30 0 200 0",
+        model.getSequence("b").get(1).toString());
+    
   }
 
   @Test
   public void testGetLength() {
     init();
     model.declareShape("Rectangle", "Rectangle");
-
+    assertEquals(20, model.getLength());
   }
+
+  @Test
+  public void testGetLengthEmpty() {
+    init();
+    KeyFrameAnimation model1 = new KeyFrameAnimation();
+    model1.declareShape("Rectangle", "Rectangle");
+
+    assertEquals(0, model1.getLength());
+  }
+
+  @Test
+  public void testGetLengthNotfromZero() {
+    KeyFrameAnimation model1 = new KeyFrameAnimation();
+    model1.declareShape("Rectangle", "Rectangle");
+    model1.declareShape("a", "Rectangle");
+
+    model1.addKeyFrame("a", f5);
+    assertEquals(2, model1.getLength());
+  }
+
 
   @Test
   public void testGetStartTime() {
     init();
     model.declareShape("Rectangle", "Rectangle");
-
+    assertEquals(1, model.getStartTime());
   }
 
   @Test
   public void testGetBox() {
     init();
     model.declareShape("Rectangle", "Rectangle");
-
+    assertEquals(new java.awt.Rectangle(0, 0, 600, 600), model.getBox());
   }
 
   @Test
@@ -215,6 +233,8 @@ public class KeyFrameAnimationTest {
     init();
     model.declareShape("Rectangle", "Rectangle");
 
+    assertEquals(ShapeType.RECTANGLE, model.getShapeType("a"));
+    assertEquals(ShapeType.OVAL, model.getShapeType("b"));
   }
 
 
