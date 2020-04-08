@@ -50,13 +50,14 @@ public class TextualView implements View {
         System.out.print(output);
       } else {
         out.append(String.format("canvas %d %d %d %d\n", canvas.y, canvas.x, canvas.width,
-                canvas.height));
+            canvas.height));
         out.append(animateDescription());
       }
     } catch (IOException e) {
       System.out.print("an error occured when appending");
     }
   }
+
   private String animateDescription() {
     LinkedHashMap<String, List<Motion>> animation = model.getAnimate();
     if (animation.isEmpty()) {

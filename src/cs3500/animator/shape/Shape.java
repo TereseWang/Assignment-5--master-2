@@ -78,5 +78,10 @@ public interface Shape {
    */
   String getShapeName();
 
+  /**
+   * get the string description of the shape.
+   *
+   * @return a string representation of the shape
+   */
   String toString();
 }

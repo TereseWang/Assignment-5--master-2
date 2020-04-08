@@ -36,7 +36,7 @@ public class Motion {
   }
 
   /**
-   * Construct a Motion that input start keyframe and end keyframe
+   * Construct a Motion that input start keyframe and end keyframe.
    *
    * @param start the start keyframe
    * @param end   the end keyframe
@@ -83,7 +83,7 @@ public class Motion {
   }
 
   /**
-   * make a copy of this Motion.
+   * make a copy of this motion.
    *
    * @return Motion as the copy
    */

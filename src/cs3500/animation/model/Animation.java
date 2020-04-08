@@ -36,7 +36,8 @@ public interface Animation<K> {
 
   /**
    * add a keyframe to existing motion.
-   * @param name the name of the shape
+   *
+   * @param name     the name of the shape
    * @param keyframe the given key frame
    */
   void addKeyFrame(String name, Frame keyframe);

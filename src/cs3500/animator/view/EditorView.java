@@ -23,6 +23,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * represents the editable JFrame for visual view.
+ */
 public class EditorView extends JFrame implements View, ActionListener {
 
   KeyFrameAnimation animation;
@@ -50,6 +53,13 @@ public class EditorView extends JFrame implements View, ActionListener {
   EditorPanel panel;
   JPanel editorPanel;
 
+  /**
+   * constructs the editor view with given model and tickPerSec. Jbuttons for the editable view is
+   * constructed here.
+   *
+   * @param model      keyframeAnimation model
+   * @param tickPerSec number of tick per second
+   */
   public EditorView(KeyFrameAnimation model, int tickPerSec) {
     super();
     this.animation = model;
@@ -196,6 +206,13 @@ public class EditorView extends JFrame implements View, ActionListener {
     this.setVisible(true);
   }
 
+  /**
+   * check if the text is empty when using deletion. If it is, send an error message to stop
+   * deletion.
+   *
+   * @param name name of the action
+   * @param time time of the action
+   */
   public void checkEmptyDelte(String name, String time) {
     if (name.trim().length() == 0 && time.trim().length() != 0) {
       errorMessage.setText("Shape Name Empty!");
@@ -227,6 +244,9 @@ public class EditorView extends JFrame implements View, ActionListener {
     }
   }
 
+  /**
+   * set the text when text box is empty.
+   */
   public void setInsertToEmpty() {
     nameInsert.setText("");
     timeInsert.setText("");
@@ -239,6 +259,19 @@ public class EditorView extends JFrame implements View, ActionListener {
     insertH.setText("");
   }
 
+  /**
+   * check if the insertion is empty, and if it is, send an error message.
+   *
+   * @param name name of the action
+   * @param time time of the action
+   * @param x    x coordinate of the position
+   * @param y    y coordinate of the position
+   * @param r    color component of the redness
+   * @param g    color component of the greenness
+   * @param b    color component of the blueness
+   * @param w    width of the action
+   * @param h    height of the action
+   */
   public void checkInsert(String name, String time, String x, String y, String r, String g,
       String b, String w, String h) {
     List<String> list = new ArrayList<>(Arrays.asList(name, time, x, y, r, g, b, w, h));

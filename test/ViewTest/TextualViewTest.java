@@ -17,7 +17,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-
+/**
+ * test cases for textualView class to check if the textual view is working correctly.
+ */
 public class TextualViewTest {
 
   Animation model;

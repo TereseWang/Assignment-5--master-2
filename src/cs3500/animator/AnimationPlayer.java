@@ -23,6 +23,7 @@ import cs3500.animator.view.ViewCreator;
  */
 
 public final class AnimationPlayer {
+
   /**
    * entry point.
    */
@@ -63,9 +64,9 @@ public final class AnimationPlayer {
       in = new FileReader(inFilename);
     } catch (FileNotFoundException e) {
       JOptionPane.showMessageDialog(frame,
-              e.getMessage(),
-              "Inane warning",
-              JOptionPane.WARNING_MESSAGE);
+          e.getMessage(),
+          "Inane warning",
+          JOptionPane.WARNING_MESSAGE);
     }
     //use input to model
     AnimationReader reader = new AnimationReader();
@@ -84,9 +85,9 @@ public final class AnimationPlayer {
         out = new FileWriter(outFilename);
       } catch (IOException e) {
         JOptionPane.showMessageDialog(frame,
-                e.getMessage(),
-                "Inane warning",
-                JOptionPane.WARNING_MESSAGE);
+            e.getMessage(),
+            "Inane warning",
+            JOptionPane.WARNING_MESSAGE);
         e.printStackTrace();
       }
     }
@@ -94,15 +95,14 @@ public final class AnimationPlayer {
     try {
       ViewCreator viewCreator = new ViewCreator();
       view = viewCreator.create(ViewCreator.ViewType.findViewType(viewName),
-              model, out, tps);
+          model, out, tps);
     } catch (IllegalArgumentException e) {
       JOptionPane.showMessageDialog(frame,
-              e.getMessage(),
-              "Inane warning",
-              JOptionPane.WARNING_MESSAGE);
+          e.getMessage(),
+          "Inane warning",
+          JOptionPane.WARNING_MESSAGE);
       frame.setVisible(true);
     }
-
 
     SimpleController controller = new SimpleController(view);
 

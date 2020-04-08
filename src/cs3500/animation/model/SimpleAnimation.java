@@ -19,6 +19,7 @@ import cs3500.animator.util.AnimationBuilder;
  * a simple animation class, use list of motion as representation of sequence of motions.
  */
 public class SimpleAnimation extends AbstractAnimation<Motion> {
+
   /**
    * implement the nested class Builder.
    */
@@ -53,16 +54,16 @@ public class SimpleAnimation extends AbstractAnimation<Motion> {
 
     @Override
     public AnimationBuilder<Animation> addMotion(String name, int t1, int x1, int y1, int w1,
-                                                 int h1, int r1, int g1, int b1, int t2, int x2,
-                                                 int y2, int w2, int h2, int r2, int g2, int b2) {
+        int h1, int r1, int g1, int b1, int t2, int x2,
+        int y2, int w2, int h2, int r2, int g2, int b2) {
       Shape startShape;
       Shape endShape;
       Motion m;
       startShape = ShapeCreator.create(model.getShapeType(name), new Posn(x1, y1),
-              new Color(r1, g1, b1), w1, h1);
+          new Color(r1, g1, b1), w1, h1);
       endShape = ShapeCreator.create(model.getShapeType(name), new Posn(x2, y2), new Color(r2, g2,
-                      b2),
-              w2, h2);
+              b2),
+          w2, h2);
 
       m = new Motion(t1, t2, startShape, endShape);
       model.addMotion(name, m);
@@ -72,9 +73,9 @@ public class SimpleAnimation extends AbstractAnimation<Motion> {
 
     @Override
     public AnimationBuilder<Animation> addKeyframe(String name, int t, int x, int y, int w, int h,
-                                                   int r, int g, int b) {
+        int r, int g, int b) {
       Shape startShape = ShapeCreator.create(model.getShapeType(name), new Posn(x, y),
-              new Color(r, g, b), w, h);
+          new Color(r, g, b), w, h);
       Frame f = new Frame(startShape, t);
       model.addKeyFrame(name, f);
       return this;
@@ -168,7 +169,7 @@ public class SimpleAnimation extends AbstractAnimation<Motion> {
       }
     }
     throw new IllegalArgumentException("couldn't find the motion start at " + startTick +
-            " in the shape " + name);
+        " in the shape " + name);
   }
 
   /**
@@ -187,7 +188,7 @@ public class SimpleAnimation extends AbstractAnimation<Motion> {
       }
     }
     throw new IllegalArgumentException("couldn't find the motion end at " + endTick +
-            " in the shape " + name);
+        " in the shape " + name);
   }
 
   /**
@@ -204,7 +205,7 @@ public class SimpleAnimation extends AbstractAnimation<Motion> {
       return m;
     }
     throw new IllegalArgumentException("couldn't find the motion start at " + startTick +
-            "and end at " + endTick + " in the shape " + name);
+        "and end at " + endTick + " in the shape " + name);
   }
 
   @Override
@@ -302,7 +303,7 @@ public class SimpleAnimation extends AbstractAnimation<Motion> {
       }
     }
     temp.entrySet().stream().sorted(Map.Entry.comparingByValue())
-            .forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
+        .forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
     return result;
   }
 

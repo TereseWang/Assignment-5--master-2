@@ -8,11 +8,20 @@ import cs3500.animator.shape.Shape;
 import java.util.List;
 import java.util.Map.Entry;
 
+/**
+ * represents the tweening class by using key frame animation.
+ */
 public class TweeningFrame extends AbstractTweening {
 
   private int count;
   private KeyFrameAnimation animation;
 
+  /**
+   * constructs a tweening frame with given count and model.
+   *
+   * @param count current time in running animation
+   * @param animation keyFrameAnimation model
+   */
   public TweeningFrame(int count, KeyFrameAnimation animation) {
     this.count = count;
     this.animation = animation;

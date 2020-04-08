@@ -1,8 +1,5 @@
 package cs3500.animator.shape;
 
-import cs3500.animator.shape.Color;
-import cs3500.animator.shape.Posn;
-
 /**
  * an abstract calss for shape representation.
  */

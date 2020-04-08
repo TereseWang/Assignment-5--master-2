@@ -18,9 +18,8 @@ import cs3500.animator.shape.ShapeType;
  * animation that is used to describe images and animations. This view input an animation model and
  * a outputstreamwrite to keeps track and printout the desired result. We also add a tickPerSec to
  * keeps track of the speed * of each text added to the canavas. This view should be able to viewed
- * with an online browser.
- * A view that interprets an animation model to a svg format file.
- * Save the result to given file. Work as the view in this project.
+ * with an online browser. A view that interprets an animation model to a svg format file. Save the
+ * result to given file. Work as the view in this project.
  */
 public class SVGView implements View {
 

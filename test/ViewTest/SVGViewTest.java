@@ -2,7 +2,6 @@ package ViewTest;
 
 import static org.junit.Assert.*;
 
-import cs3500.animation.model.AbstractAnimation;
 import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
@@ -18,6 +17,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * test cases for svgView class to check if the svg view is working correctly.
+ */
 public class SVGViewTest {
 
   Animation model;

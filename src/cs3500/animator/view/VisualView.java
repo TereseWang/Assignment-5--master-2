@@ -1,6 +1,5 @@
 package cs3500.animator.view;
 
-import cs3500.animation.model.Animation;
 import cs3500.animation.model.SimpleAnimation;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -11,8 +10,8 @@ import javax.swing.JScrollPane;
 /**
  * To represent the visual view of the animation. This class allows display of moving shapes inside
  * a window. This view will input an animation model and a tickPerSec to allows the moving of shapes
- * either faster or slower. We used a timer in this class to fulfill the goal of moving shapes
- * in the desired ticks per second.
+ * either faster or slower. We used a timer in this class to fulfill the goal of moving shapes in
+ * the desired ticks per second.
  */
 public class VisualView extends JFrame implements View {
 

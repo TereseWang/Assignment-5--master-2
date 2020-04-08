@@ -16,6 +16,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * test cases for key frame animation class to test all public methods in the frame class to see if
+ * they works properly as desired.
+ */
 public class KeyFrameAnimationTest {
 
   KeyFrameAnimation model;

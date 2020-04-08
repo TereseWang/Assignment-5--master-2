@@ -1,6 +1,5 @@
 package cs3500.animator.shape;
 
-
 /**
  * represent the shape Oval which is a round shaped shape.
  */
@@ -25,7 +24,7 @@ public class Oval extends AbstractShape {
       return true;
     } else if (o instanceof Oval) {
       return ((Oval) o).position.equals(position) && ((Oval) o).color.equals(color)
-              && ((Oval) o).width == width && ((Oval) o).height == height;
+          && ((Oval) o).width == width && ((Oval) o).height == height;
     } else {
       return false;
     }
@@ -44,6 +43,6 @@ public class Oval extends AbstractShape {
   @Override
   public int hashCode() {
     return position.hashCode() + color.hashCode()
-            + Integer.hashCode((int) width) + Integer.hashCode((int) height);
+        + Integer.hashCode((int) width) + Integer.hashCode((int) height);
   }
 }

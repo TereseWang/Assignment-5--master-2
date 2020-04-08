@@ -15,6 +15,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * test cases for builder class to test all public methods in the frame class to see if they works properly
+ * as desired.
+ */
 public class BuilderTest {
 
   Builder builder;

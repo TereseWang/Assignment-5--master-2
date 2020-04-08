@@ -14,6 +14,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * test cases for tweening frame class to check if it's working correctly.
+ */
 public class TweeningFrameTest {
 
   KeyFrameAnimation model;

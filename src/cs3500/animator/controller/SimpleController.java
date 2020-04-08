@@ -5,15 +5,16 @@ import java.io.IOException;
 import cs3500.animator.view.View;
 
 /**
- *controller for the proj.
+ * controller for the project.
  */
 public class SimpleController implements AnimationController {
+
   View view;
 
   /**
-   * construct a view with given view.
+   * construct a controller with given view.
    *
-   * @param v given v
+   * @param v given view
    */
   public SimpleController(View v) {
     view = v;

@@ -43,6 +43,11 @@ public class VisualPanel extends JPanel implements ActionListener {
     timer.start();
   }
 
+  /**
+   * finds the speed of the animation.
+   *
+   * @return speed of the animation
+   */
   public int getSpeed() {
     return tickPerSec;
   }

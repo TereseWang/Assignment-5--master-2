@@ -1,7 +1,6 @@
 package cs3500.animator.view;
 
 import cs3500.animation.model.Animation;
-import cs3500.animation.model.Frame;
 import cs3500.animation.model.KeyFrameAnimation;
 import cs3500.animation.model.SimpleAnimation;
 import java.io.OutputStreamWriter;
@@ -28,7 +27,7 @@ public class ViewCreator {
       case TEXTUAL:
         return new TextualView(model, out);
       case VISUAL:
-          return new VisualView((SimpleAnimation)model, tickPerSec);
+        return new VisualView((SimpleAnimation) model, tickPerSec);
       case EDIT:
         return new EditorView((KeyFrameAnimation) model, tickPerSec);
       default:

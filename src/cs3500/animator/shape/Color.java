@@ -1,7 +1,7 @@
 package cs3500.animator.shape;
 
 /**
- * represent a RGB Color.
+ * represent a self- designed RGB Color.
  */
 public class Color {
 

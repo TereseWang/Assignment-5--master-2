@@ -2,6 +2,10 @@ package cs3500.animator.view;
 
 import cs3500.animator.shape.Shape;
 
+/**
+ * represents an abstract class for tweening, which is a function class that keeps the motion of
+ * frame lasts if there is no image in between the given time.
+ */
 public abstract class AbstractTweening {
 
   /**

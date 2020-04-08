@@ -14,6 +14,9 @@ import java.util.Map.Entry;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * represents the editable panel for visual view.
+ */
 public class EditorPanel extends JPanel implements ActionListener {
 
   private KeyFrameAnimation animation;
@@ -41,24 +44,36 @@ public class EditorPanel extends JPanel implements ActionListener {
     this.loop = true;
   }
 
+  /**
+   * get the timer started.
+   */
   public void startTimer() {
     if (count == animation.getStartTime()) {
       timer.start();
     }
   }
 
+  /**
+   * stop the timer.
+   */
   public void stopTimer() {
     if (count != animation.getStartTime()) {
       timer.stop();
     }
   }
 
+  /**
+   * resume the timer.
+   */
   public void resumeTimer() {
     if (!timer.isRunning() && count != animation.getStartTime()) {
       timer.start();
     }
   }
 
+  /**
+   * restart the timer.
+   */
   public void restartTimer() {
     if (count != animation.getStartTime()) {
       count = animation.getStartTime();
@@ -66,6 +81,9 @@ public class EditorPanel extends JPanel implements ActionListener {
     }
   }
 
+  /**
+   * enable or disable the loop.
+   */
   public void loopEnableDisable() {
     if (loop == true) {
       loop = false;
@@ -75,20 +93,42 @@ public class EditorPanel extends JPanel implements ActionListener {
     }
   }
 
+  /**
+   * change the speed of the animation.
+   *
+   * @param tickPerSecond number of tick passes per second
+   */
   public void changeSpeed(int tickPerSecond) {
     this.tickPerSec = tickPerSecond;
     timer.setDelay(1000 / tickPerSec);
   }
 
+  /**
+   * get the current speed.
+   *
+   * @return the current speed
+   */
   public int getSpeed() {
     return this.tickPerSec;
   }
 
+  /**
+   * delete the selected key frame.
+   *
+   * @param name      name of the key frame
+   * @param startTick startTick of the key frame
+   */
   public void deleteKeyFrame(String name, int startTick) {
     animation.deleteMotion(name, startTick);
     repaint();
   }
 
+  /**
+   * add a key frame.
+   *
+   * @param name name of the key frame
+   * @param f    the key frame to be added
+   */
   public void addKeyFrame(String name, Frame f) {
     animation.addKeyFrame(name, f);
     new TweeningFrame(count, animation).fillInBlankMotion();

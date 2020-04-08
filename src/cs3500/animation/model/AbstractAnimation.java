@@ -26,7 +26,7 @@ public abstract class AbstractAnimation<K> implements Animation<List<K>> {
   /**
    * construct an empty animation.
    */
-  public AbstractAnimation(){
+  public AbstractAnimation() {
     animation = new LinkedHashMap<>();
     contact = new LinkedHashMap<>();
     canvas = new Rectangle(X, Y, WIDTH, HEIGHT);
@@ -97,7 +97,7 @@ public abstract class AbstractAnimation<K> implements Animation<List<K>> {
 
   @Override
   public Rectangle getBox() {
-      return new Rectangle(canvas.getBounds());
+    return new Rectangle(canvas.getBounds());
   }
 
   @Override

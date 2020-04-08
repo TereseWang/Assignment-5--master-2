@@ -79,12 +79,17 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
   }
 
   /**
-   * construct an empty animation that use keyframe.
+   * construct an empty animation that uses keyframe.
    */
   public KeyFrameAnimation() {
     super();
   }
 
+  /**
+   * construct an animation that uses keyframe.
+   *
+   * @param animation the animation using ketframe
+   */
   public KeyFrameAnimation(LinkedHashMap<String, List<Frame>> animation) {
     this.animation = animation;
   }
@@ -145,10 +150,10 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
   }
 
 
-  @Override
   /**
    * deleting a keyframe.
    */
+  @Override
   public void deleteMotion(String name, int startTick) {
     Frame f = findKeyFrame(name, startTick);
     animation.get(name).remove(f);
