@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class KeyFrameAnimationTest {
+
   KeyFrameAnimation model;
   List<Frame> list1;
   List<Frame> list2;
@@ -38,7 +39,7 @@ public class KeyFrameAnimationTest {
     model = new KeyFrameAnimation();
     list1 = new ArrayList<>();
     list2 = new ArrayList<>();
-    s = new Rectangle(new Posn(100, 100), new Color(0, 255,0), 10, 10);
+    s = new Rectangle(new Posn(100, 100), new Color(0, 255, 0), 10, 10);
     f = new Frame(s, 1);
     list1.add(f);
     s2 = new Rectangle(new Posn(100, 100), new Color(0, 255, 0), 100, 100);
@@ -120,6 +121,102 @@ public class KeyFrameAnimationTest {
 
 
   }
+
+  @Test
+  public void testDeleteShape() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+
+  }
+
+  @Test
+  public void testDeleteMotion() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+
+  }
+
+  @Test
+  public void testChangeColor() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+
+  }
+
+
+  @Test
+  public void testChangePosition() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+  }
+
+  @Test
+  public void testChangeSize() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+  }
+
+  @Test
+  public void testChangeSpeedAnchorStartPoint() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+  }
+
+  @Test
+  public void testChangeSpeedAnchorEndPoint() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+  }
+
+  @Test
+  public void testGetAnimate() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+  }
+
+  @Test
+  public void testGetSequence() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+  }
+
+  @Test
+  public void testGetLength() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+  }
+
+  @Test
+  public void testGetStartTime() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+  }
+
+  @Test
+  public void testGetBox() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+  }
+
+  @Test
+  public void testGetShapeType() {
+    init();
+    model.declareShape("Rectangle", "Rectangle");
+
+  }
+
 
 
 }
