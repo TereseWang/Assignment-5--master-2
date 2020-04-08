@@ -1,15 +1,14 @@
 package cs3500.animation.model;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import cs3500.animator.shape.Color;
 import cs3500.animator.shape.Posn;
 import cs3500.animator.shape.Shape;
 import cs3500.animator.shape.ShapeCreator;
 import cs3500.animator.util.AnimationBuilder;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * a class represent an animation that uses frame to document the moving of shape. Work as the model
@@ -24,9 +23,12 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
 
     AbstractAnimation model;
 
-
     public Builder() {
       model = new KeyFrameAnimation();
+    }
+
+    public Builder(KeyFrameAnimation model) {
+      this.model = model;
     }
 
     @Override
@@ -48,16 +50,16 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
 
     @Override
     public AnimationBuilder<Animation> addMotion(String name, int t1, int x1, int y1, int w1,
-                                                 int h1, int r1, int g1, int b1, int t2, int x2,
-                                                 int y2, int w2, int h2, int r2, int g2, int b2) {
+        int h1, int r1, int g1, int b1, int t2, int x2,
+        int y2, int w2, int h2, int r2, int g2, int b2) {
       Shape startShape;
       Shape endShape;
       Motion m;
       startShape = ShapeCreator.create(model.getShapeType(name), new Posn(x1, y1),
-              new Color(r1, g1, b1), w1, h1);
+          new Color(r1, g1, b1), w1, h1);
       endShape = ShapeCreator.create(model.getShapeType(name), new Posn(x2, y2), new Color(r2, g2,
-                      b2),
-              w2, h2);
+              b2),
+          w2, h2);
 
       m = new Motion(t1, t2, startShape, endShape);
       model.addMotion(name, m);
@@ -67,9 +69,9 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
 
     @Override
     public AnimationBuilder<Animation> addKeyframe(String name, int t, int x, int y, int w, int h,
-                                                   int r, int g, int b) {
+        int r, int g, int b) {
       Shape startShape = ShapeCreator.create(model.getShapeType(name), new Posn(x, y),
-              new Color(r, g, b), w, h);
+          new Color(r, g, b), w, h);
       Frame f = new Frame(startShape, t);
       model.addKeyFrame(name, f);
       return this;
@@ -105,7 +107,8 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
       sequence.add(0, end);
       sequence.add(0, start);
     } else {
-      throw new IllegalArgumentException("sorry can't add this motion because there is a motion in" +
+      throw new IllegalArgumentException(
+          "sorry can't add this motion because there is a motion in" +
               "that timeline");
     }
   }
@@ -113,11 +116,16 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
 
   @Override
   public void addKeyFrame(String name, Frame kf) {
-    try {
-      findKeyFrame(name, kf.getTime());
+    if (checkKeyFrame(name, kf.getTime())) {
+      for (int i = 0; i < animation.get(name).size(); i++) {
+        if (animation.get(name).get(i).getTime() == kf.getTime()) {
+          if (!animation.get(name).get(i).equals(kf)) {
+            animation.get(name).set(i, new Frame(kf));
+          }
+        }
+      }
+    } else {
       animation.get(name).add(findPosition(name, kf.getTime()), kf);
-    } catch (IllegalArgumentException ie) {
-      throw new IllegalArgumentException("there is a keyFrame in existing timeline");
     }
   }
 
@@ -143,14 +151,32 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
   }
 
   private Frame findKeyFrame(String name, int tick) {
-    validate(name);
+    if (checkKeyFrame(name, tick) == false) {
+      throw new IllegalArgumentException("Cannot find the keyframe at the given time");
+    }
     List<Frame> copy = new ArrayList<>(animation.get(name));
+    Frame result = null;
     for (int i = 0; i < copy.size(); i++) {
       if (copy.get(i).getTime() == tick) {
-        return animation.get(name).get(i);
+        result = animation.get(name).get(i);
+        break;
       }
     }
-    throw new IllegalArgumentException("can't find any keyframe with given timeline");
+    return result;
+  }
+
+  private boolean checkKeyFrame(String name, int tick) {
+    boolean result = false;
+    if (animation.containsKey(name)) {
+      List<Frame> copy = new ArrayList<>(animation.get(name));
+      for (int i = 0; i < copy.size(); i++) {
+        if (copy.get(i).getTime() == tick) {
+          result = true;
+          break;
+        }
+      }
+    }
+    return result;
   }
 
 
@@ -182,7 +208,7 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     try {
       Frame frame = findKeyFrame(name, endTick);
       throw new IllegalArgumentException("Can't change the keyframe to given time line because " +
-              "there is a keyframe.");
+          "there is a keyframe.");
     } catch (IllegalArgumentException ie) {
       f.changeTime(endTick);
     }
@@ -194,7 +220,7 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     try {
       Frame frame = findKeyFrame(name, startTick);
       throw new IllegalArgumentException("Can't change the keyframe to given time line because " +
-              "there is a keyframe.");
+          "there is a keyframe.");
     } catch (IllegalArgumentException ie) {
       f.changeTime(startTick);
     }
@@ -223,7 +249,7 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
       }
     }
     forSort.entrySet().stream().sorted(Map.Entry.comparingByValue())
-            .forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
+        .forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
     return result;
   }
 
