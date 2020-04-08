@@ -43,14 +43,19 @@ public class TweeningFrameTest {
     model.declareShape("a", "Rectangle");
     model.addKeyFrame("a", f1);
     model.addKeyFrame("a", f);
-    model.addKeyFrame("a", f2);
+
 
   }
 
 
-
   @Test
   public void fillInBlankMotion() {
+    init();
+    assertEquals(10, model.getLength());
+    assertEquals(2, model.getSequence("a").size());
+    tweeningFrame = new TweeningFrame(3, model);
+    tweeningFrame.fillInBlankMotion();
+    assertEquals(3, model.getSequence("a").size());
   }
 
   @Test
