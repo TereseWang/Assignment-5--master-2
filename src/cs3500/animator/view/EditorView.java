@@ -25,7 +25,7 @@ public class EditorView extends JFrame implements View, ActionListener {
   JButton increase;
   JButton decrease;
   JLabel speed;
-  VisualPanel panel;
+  EditorPanel panel;
 
   public EditorView(Animation<List<Motion>> model, int tickPerSec) {
     super();
@@ -34,7 +34,7 @@ public class EditorView extends JFrame implements View, ActionListener {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLayout(new BorderLayout());
 
-    panel = new VisualPanel(model, tickPerSec);
+    panel = new EditorPanel(model, tickPerSec);
     this.add(panel);
 
     JPanel buttonPanel = new JPanel();
