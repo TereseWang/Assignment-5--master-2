@@ -85,6 +85,10 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     super();
   }
 
+  public KeyFrameAnimation(LinkedHashMap<String, List<Frame>> animation) {
+    this.animation = animation;
+  }
+
   @Override
   public void addMotion(String name, Motion motion) {
     if (motion == null) {

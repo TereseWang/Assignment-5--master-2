@@ -1,6 +1,7 @@
 package cs3500.animator.view;
 
 import cs3500.animation.model.Animation;
+import cs3500.animation.model.SimpleAnimation;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -21,14 +22,13 @@ public class VisualView extends JFrame implements View {
    * @param model      the animation model to be run with.
    * @param tickPerSec tick per second.
    */
-  public VisualView(Animation model, int tickPerSec) {
+  public VisualView(SimpleAnimation model, int tickPerSec) {
     super();
     this.setTitle("Animation player");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLayout(new BorderLayout());
 
     VisualPanel panel = new VisualPanel(model, tickPerSec);
-    panel.startTimer();
     JScrollPane scroll = new JScrollPane(panel);
     scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

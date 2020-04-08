@@ -28,9 +28,9 @@ public class ViewCreator {
       case TEXTUAL:
         return new TextualView(model, out);
       case VISUAL:
-          return new VisualView(model, tickPerSec);
+          return new VisualView((SimpleAnimation)model, tickPerSec);
       case EDIT:
-        return new EditorView(model, tickPerSec);
+        return new EditorView((KeyFrameAnimation) model, tickPerSec);
       default:
         throw new IllegalArgumentException("can't create a view because invalid viewType");
     }

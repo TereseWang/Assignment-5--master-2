@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import cs3500.animation.model.Animation;
 import cs3500.animation.model.KeyFrameAnimation;
@@ -71,7 +69,12 @@ public final class AnimationPlayer {
     }
     //use input to model
     AnimationReader reader = new AnimationReader();
-    AnimationBuilder<Animation> builder = new KeyFrameAnimation.Builder();
+    AnimationBuilder<Animation> builder;
+    if (viewName.equalsIgnoreCase("edit")) {
+      builder = new KeyFrameAnimation.Builder();
+    } else {
+      builder = new SimpleAnimation.SimpleBuilder();
+    }
     model = reader.parseFile(in, builder);
     // out to create view
     //out
