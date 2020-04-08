@@ -84,6 +84,16 @@ public class EditorPanel extends JPanel implements ActionListener {
     return this.tickPerSec;
   }
 
+  public void deleteKeyFrame(String name, int startTick) {
+    animation.deleteMotion(name, startTick);
+    repaint();
+  }
+
+  public void addKeyFrame(String name, Frame f) {
+    animation.addKeyFrame(name, f);
+    repaint();
+  }
+
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
