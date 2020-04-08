@@ -91,7 +91,7 @@ public final class AnimationPlayer {
     try {
       ViewCreator viewCreator = new ViewCreator();
       view = viewCreator.create(ViewCreator.ViewType.findViewType(viewName),
-              (SimpleAnimation) model, out, tps);
+              model, out, tps);
     } catch (IllegalArgumentException e) {
       JOptionPane.showMessageDialog(frame,
               e.getMessage(),

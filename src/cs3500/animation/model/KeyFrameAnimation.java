@@ -92,8 +92,12 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     Frame start = new Frame(motion.getStartShape(), motion.getStartTick());
     Frame end = new Frame(motion.getFinalImages(), motion.getEndTick());
     List<Frame> sequence = animation.get(name);
+    if (sequence.isEmpty()) {
+      sequence.add(start);
+      sequence.add(end);
+    }
     // add to last
-    if (sequence.get(sequence.size() - 1).getTime() == start.getTime()) {
+    else if (sequence.get(sequence.size() - 1).getTime() == start.getTime()) {
       sequence.add(start);
       sequence.add(end);
     } else if (sequence.get(0).getTime() == end.getTime())  // add to first
@@ -111,9 +115,9 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
   public void addKeyFrame(String name, Frame kf) {
     try {
       findKeyFrame(name, kf.getTime());
-      throw new IllegalArgumentException("there is a keyFrame in existing timeline");
-    } catch (IllegalArgumentException ie) {
       animation.get(name).add(findPosition(name, kf.getTime()), kf);
+    } catch (IllegalArgumentException ie) {
+      throw new IllegalArgumentException("there is a keyFrame in existing timeline");
     }
   }
 
