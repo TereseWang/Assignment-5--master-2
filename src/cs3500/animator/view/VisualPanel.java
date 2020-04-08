@@ -22,8 +22,6 @@ public class VisualPanel extends JPanel implements ActionListener {
 
   private SimpleAnimation animation;
   private int count;
-  private Timer timer;
-  private boolean loop;
   private int tickPerSec;
 
   /**
@@ -38,50 +36,11 @@ public class VisualPanel extends JPanel implements ActionListener {
       tickPerSecond = 2;
     }
     tickPerSec = tickPerSecond;
-    timer = new Timer(1000 / tickPerSec, this);
+    Timer timer = new Timer(1000 / tickPerSec, this);
     this.count = animation.getStartTime();
     this.animation = animation;
     new TweeningMotion(animation, count).fillInBlankMotion();
-    this.loop = true;
-  }
-
-  public void startTimer() {
-    if (count == animation.getStartTime()) {
-      timer.start();
-    }
-  }
-
-  public void stopTimer() {
-    if (count != animation.getStartTime()) {
-      timer.stop();
-    }
-  }
-
-  public void resumeTimer() {
-    if (!timer.isRunning() && count != animation.getStartTime()) {
-      timer.start();
-    }
-  }
-
-  public void restartTimer() {
-    if (count != animation.getStartTime()) {
-      count = animation.getStartTime();
-      timer.start();
-    }
-  }
-
-  public void loopEnableDisable() {
-    if (loop == true) {
-      loop = false;
-    } else {
-      loop = true;
-      restartTimer();
-    }
-  }
-
-  public void changeSpeed(int tickPerSecond) {
-    this.tickPerSec = tickPerSecond;
-    timer.setDelay(1000 / tickPerSec);
+    timer.start();
   }
 
   public int getSpeed() {
@@ -123,12 +82,9 @@ public class VisualPanel extends JPanel implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if (loop == true && count == animation.getLength()) {
+    if (count == animation.getLength()) {
       count = animation.getStartTime();
       repaint();
-    }
-    if (loop == false && count == animation.getLength()) {
-      timer.stop();
     }
     count++;
     repaint();

@@ -60,8 +60,8 @@ public class KeyFrameAnimationTest {
     list2.add(f6);
     model.declareShape("a", "Rectangle");
     model.declareShape("b", "Oval");
-    model.addKeyFrame("a", f);
     model.addKeyFrame("a", f1);
+    model.addKeyFrame("a", f);
     model.addKeyFrame("a", f2);
     model.addKeyFrame("b", f3);
     model.addKeyFrame("b", f4);
@@ -375,5 +375,14 @@ public class KeyFrameAnimationTest {
 
     assertEquals(ShapeType.RECTANGLE, model.getShapeType("a"));
     assertEquals(ShapeType.OVAL, model.getShapeType("b"));
+  }
+
+  @Test
+  public void testGetAnimate() {
+    init();
+    assertEquals(
+        "{a=[1 100 100 10 10 0 255 0, 10 100 100 100 100 0 255 0, 20 200 200 100 100 0 255 0], "
+            + "b=[1 300 300 30 30 0 200 0, 2 300 300 30 30 0 200 0, 10 300 300 30 30 0 200 0]}",
+        model.getAnimate().toString());
   }
 }

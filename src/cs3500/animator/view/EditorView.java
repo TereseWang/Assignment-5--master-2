@@ -1,22 +1,19 @@
 package cs3500.animator.view;
 
-import cs3500.animation.model.Animation;
-import cs3500.animation.model.Motion;
+import cs3500.animation.model.KeyFrameAnimation;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.List;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 public class EditorView extends JFrame implements View, ActionListener {
 
+  KeyFrameAnimation animation;
   JButton start;
   JButton stop;
   JButton resume;
@@ -27,14 +24,14 @@ public class EditorView extends JFrame implements View, ActionListener {
   JLabel speed;
   EditorPanel panel;
 
-  public EditorView(Animation<List<Motion>> model, int tickPerSec) {
+  public EditorView(KeyFrameAnimation model, int tickPerSec) {
     super();
-
+    this.animation = model;
     this.setTitle("Animation player");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLayout(new BorderLayout());
 
-    panel = new EditorPanel(model, tickPerSec);
+    panel = new EditorPanel(animation, tickPerSec);
     this.add(panel);
 
     JPanel buttonPanel = new JPanel();
