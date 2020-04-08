@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map.Entry;
 
 public class Tweening {
-
   private int count;
   private Animation<List<Motion>> animation;
 
@@ -24,7 +23,7 @@ public class Tweening {
    * the end time, add motions to make it just stay there and not move.
    */
   public void fillInBlankMotion() {
-    Animation result = new SimpleAnimation(animation.getAnimate());
+    SimpleAnimation result = new SimpleAnimation(animation.getAnimate());
     int endTime = animation.getLength();
     for (Entry<String, List<Motion>> entry : animation.getAnimate().entrySet()) {
       List<Motion> l = entry.getValue();

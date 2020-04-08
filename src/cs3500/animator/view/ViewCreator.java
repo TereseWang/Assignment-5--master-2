@@ -1,6 +1,9 @@
 package cs3500.animator.view;
 
 import cs3500.animation.model.Animation;
+import cs3500.animation.model.Frame;
+import cs3500.animation.model.KeyFrameAnimation;
+import cs3500.animation.model.SimpleAnimation;
 import java.io.OutputStreamWriter;
 
 /**
@@ -22,10 +25,10 @@ public class ViewCreator {
     switch (viewType) {
       case SVG:
         return new SVGView(model, out, tickPerSec);
-      case VISUAL:
-        return new VisualView(model, tickPerSec);
       case TEXTUAL:
         return new TextualView(model, out);
+      case VISUAL:
+          return new VisualView(model, tickPerSec);
       case EDIT:
         return new EditorView(model, tickPerSec);
       default:
