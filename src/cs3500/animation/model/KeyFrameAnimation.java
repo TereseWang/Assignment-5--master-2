@@ -114,9 +114,9 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
   public void addKeyFrame(String name, Frame kf) {
     try {
       findKeyFrame(name, kf.getTime());
-      throw new IllegalArgumentException("there is a keyFrame in existing timeline");
-    } catch (IllegalArgumentException ie) {
       animation.get(name).add(findPosition(name, kf.getTime()), kf);
+    } catch (IllegalArgumentException ie) {
+      throw new IllegalArgumentException("there is a keyFrame in existing timeline");
     }
   }
 
