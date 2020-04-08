@@ -5,8 +5,8 @@ import cs3500.animator.shape.Shape;
 public abstract class AbstractTweening {
 
   /**
-   * If the shape does not have any motions in between the very start time of the whole animtion and
-   * the end time, add motions to make it just stay there and not move.
+   * If the shape does not have any motions in between the very start time of the whole animation
+   * and the end time, add motions to make it just stay there and not move.
    */
   abstract public void fillInBlankMotion();
 
