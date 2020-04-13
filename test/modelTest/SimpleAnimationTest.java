@@ -1,4 +1,4 @@
-package ModelTest;
+package modelTest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +16,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * A test class to test all public methods in the SimpleAnimation class.
+ * A test class to test all public methods in the SimpleAnimation class and also some methods
+ * in the abstract animation class.
  */
 public class SimpleAnimationTest {
 

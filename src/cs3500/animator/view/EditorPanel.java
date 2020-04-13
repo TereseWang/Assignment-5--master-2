@@ -15,7 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 /**
- * represents the editable panel for visual view.
+ * represents the editable panel for visual view which allows feature such as stop, resume, pause
+ * restart, insert keyframe and delete keyframe. This class is mainly a panel class that do the
+ * functionality of painting on canvas, actionPerformed for starting timer and setting things up.
  */
 public class EditorPanel extends JPanel implements ActionListener {
 
@@ -72,7 +74,7 @@ public class EditorPanel extends JPanel implements ActionListener {
   }
 
   /**
-   * restart the timer.
+   * restart the whole animation.
    */
   public void restartTimer() {
     if (count != animation.getStartTime()) {
@@ -82,10 +84,11 @@ public class EditorPanel extends JPanel implements ActionListener {
   }
 
   /**
-   * enable or disable the loop.
+   * enable or disable the loop. If the loop is disabled the animation will stop at the very end of
+   * the animation. If the loop is enabled, the animation will restart from the beginning.
    */
   public void loopEnableDisable() {
-    if (loop == true) {
+    if (loop) {
       loop = false;
     } else {
       loop = true;
@@ -124,7 +127,8 @@ public class EditorPanel extends JPanel implements ActionListener {
   }
 
   /**
-   * add a key frame.
+   * add a key frame. If the key frame is added after the end of animation, fill all shapes with
+   * empty animation to ensure that they can just stay on the canvas.
    *
    * @param name name of the key frame
    * @param f    the key frame to be added
@@ -171,11 +175,11 @@ public class EditorPanel extends JPanel implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (count == animation.getLength()) {
-      if (loop == true && count == animation.getLength()) {
+      if (loop && count == animation.getLength()) {
         count = animation.getStartTime();
         repaint();
       }
-      if (loop == false && count == animation.getLength()) {
+      if (!loop && count == animation.getLength()) {
         timer.stop();
       }
     }

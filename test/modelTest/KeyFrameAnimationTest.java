@@ -1,4 +1,4 @@
-package ModelTest;
+package modelTest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,7 +18,8 @@ import org.junit.Test;
 
 /**
  * test cases for key frame animation class to test all public methods in the frame class to see if
- * they works properly as desired.
+ * they works properly as desired, which we test all public methods in keyframe animation class
+ * and also some methods in the abstract animation class.
  */
 public class KeyFrameAnimationTest {
 

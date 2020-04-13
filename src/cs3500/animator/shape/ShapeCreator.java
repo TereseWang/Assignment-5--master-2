@@ -1,13 +1,14 @@
 package cs3500.animator.shape;
 
 /**
- * a class to create a shape.
+ * a class to create a shape with the given name and throws Illegal argument exception if the
+ * shape name is not created as now.
  */
 public class ShapeCreator {
 
 
   /**
-   * create a shape accoring to the given type.
+   * create a shape according to the given type.
    *
    * @param type   type of the shape
    * @param posn   position of the shape

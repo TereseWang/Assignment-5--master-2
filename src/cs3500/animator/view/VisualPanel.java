@@ -85,6 +85,7 @@ public class VisualPanel extends JPanel implements ActionListener {
     }
   }
 
+  // automatically replay the animation when it ended
   @Override
   public void actionPerformed(ActionEvent e) {
     if (count == animation.getLength()) {

@@ -21,7 +21,7 @@ public abstract class AbstractTweening {
    * @param name the desired shape name
    * @return the state of the shape
    */
-  abstract public Shape getMotionState(String name, int Time);
+  abstract public Shape getMotionState(String name, int time);
 
   /**
    * The tweening function to help calculating the motion state of each shape with the given time.

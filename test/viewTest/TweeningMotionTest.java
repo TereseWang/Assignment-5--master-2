@@ -1,4 +1,4 @@
-package ViewTest;
+package viewTest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,12 +14,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * test cases for tweening motion class to check if it's working correctly.
+ * test cases for tweening motion class to check if it's working correctly. Test all public methods
+ * in the tweening motion class.
  */
 public class TweeningMotionTest {
 
-  TweeningMotion frame;
-  SimpleAnimation model;
+  private TweeningMotion frame;
+  private SimpleAnimation model;
 
   @Before
   public void init() {

@@ -24,34 +24,34 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * represents the editable JFrame for visual view.
+ * represents the editable JFrame for visual view which allows stop, resume, start, restart,
+ * enable, disable loop, add keyframe and delete key frame.
  */
 public class EditorView extends JFrame implements View, ActionListener {
 
-  KeyFrameAnimation animation;
-  JButton start;
-  JButton stop;
-  JButton resume;
-  JButton restart;
-  JButton loop;
-  JButton increase;
-  JButton decrease;
-  JButton insert;
-  JButton delete;
-  JTextField nameInsert;
-  JLabel speed;
-  JLabel errorMessage;
-  JTextField timeInsert;
-  JTextField insertX;
-  JTextField insertY;
-  JTextField insertR;
-  JTextField insertG;
-  JTextField insertB;
-  JTextField insertW;
-  JTextField insertH;
-  JTextField timeDelete;
-  EditorPanel panel;
-  JPanel editorPanel;
+  private KeyFrameAnimation animation;
+  private JButton start;
+  private JButton stop;
+  private JButton resume;
+  private JButton restart;
+  private JButton loop;
+  private JButton increase;
+  private JButton decrease;
+  private JButton insert;
+  private JButton delete;
+  private JTextField nameInsert;
+  private JLabel speed;
+  private JLabel errorMessage;
+  private JTextField timeInsert;
+  private JTextField insertX;
+  private JTextField insertY;
+  private JTextField insertR;
+  private JTextField insertG;
+  private JTextField insertB;
+  private JTextField insertW;
+  private JTextField insertH;
+  private JTextField timeDelete;
+  private EditorPanel panel;
 
   /**
    * constructs the editor view with given model and tickPerSec. Jbuttons for the editable view is
@@ -62,6 +62,7 @@ public class EditorView extends JFrame implements View, ActionListener {
    */
   public EditorView(KeyFrameAnimation model, int tickPerSec) {
     super();
+    //initialize the model and the plain canvas.
     this.animation = model;
     this.setTitle("Animation player");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,6 +71,8 @@ public class EditorView extends JFrame implements View, ActionListener {
     panel = new EditorPanel(animation, tickPerSec);
     this.add(panel);
 
+    //panel to hold all the buttons that allow feature of start, stop, resume, restart, and
+    //enable, disable loop.
     JPanel buttonPanel = new JPanel();
     buttonPanel.setLayout(new FlowLayout());
     this.add(buttonPanel, BorderLayout.SOUTH);
@@ -97,6 +100,8 @@ public class EditorView extends JFrame implements View, ActionListener {
     JPanel speedPanel = new JPanel();
     this.add(speedPanel, BorderLayout.NORTH);
 
+    //increase speed and decrease speed button so that the speed can be changed for 10 tick per
+    //second as the user clicked.
     speed = new JLabel("Speed: " + 0);
     speedPanel.add(speed);
 
@@ -108,7 +113,8 @@ public class EditorView extends JFrame implements View, ActionListener {
     decrease.addActionListener(this);
     speedPanel.add(decrease);
 
-    editorPanel = new JPanel();
+    //this panel allows user to insert keyframe and delete keyframe.
+    JPanel editorPanel = new JPanel();
     this.add(editorPanel, BorderLayout.EAST);
 
     editorPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -208,7 +214,8 @@ public class EditorView extends JFrame implements View, ActionListener {
 
   /**
    * check if the text is empty when using deletion. If it is, send an error message to stop
-   * deletion.
+   * deletion. Also check if the name is empty of the format of time is incorrect. Throw
+   * error message if anything is not correctly inputted.
    *
    * @param name name of the action
    * @param time time of the action
@@ -245,7 +252,7 @@ public class EditorView extends JFrame implements View, ActionListener {
   }
 
   /**
-   * set the text when text box is empty.
+   * set everything related to insert to empty to allow user to reenter.
    */
   public void setInsertToEmpty() {
     nameInsert.setText("");
@@ -260,7 +267,9 @@ public class EditorView extends JFrame implements View, ActionListener {
   }
 
   /**
-   * check if the insertion is empty, and if it is, send an error message.
+   * check if the inserting part is correctly inputed, throw error message is clean everything
+   * up if either some fields is empty or something that should be entered as integer but
+   * user entered a text.
    *
    * @param name name of the action
    * @param time time of the action
@@ -284,7 +293,7 @@ public class EditorView extends JFrame implements View, ActionListener {
         break;
       }
     }
-    if (errorMessage.getText().trim().length() != 0 && temp == true) {
+    if (errorMessage.getText().trim().length() != 0 && temp) {
       errorMessage.setText("");
       try {
         Integer.parseInt(time);
@@ -300,7 +309,7 @@ public class EditorView extends JFrame implements View, ActionListener {
         errorMessage.setText("Need Integer here");
       }
     }
-    if (errorMessage.getText().trim().length() == 0 && temp == true) {
+    if (errorMessage.getText().trim().length() == 0 && temp) {
       errorMessage.setText("");
       try {
         Integer.parseInt(time);
@@ -331,7 +340,7 @@ public class EditorView extends JFrame implements View, ActionListener {
       panel.restartTimer();
     } else if (e.getSource() == loop) {
       panel.loopEnableDisable();
-      if (loop.getText() == "Disable") {
+      if (loop.getText().equals("Disable")) {
         loop.setText("Enable");
       } else {
         loop.setText("Disable");

@@ -21,8 +21,8 @@ public class Frame {
    */
   public Frame(Shape state, int time) {
     if (state == null || time < 0) {
-      throw new IllegalArgumentException("the time cane't be less than zero and state can't be " +
-          "null");
+      throw new IllegalArgumentException("the time cane't be less than zero and state can't be "
+          + "null");
     }
     this.state = state;
     this.time = time;

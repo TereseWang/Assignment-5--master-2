@@ -25,8 +25,8 @@ public class Motion {
    * @throws IllegalArgumentException if the given shapes is null of the time is invalid
    */
   public Motion(int start, int end, Shape startS, Shape enshape) {
-    if (start < 0 || end < start || startS == null || enshape == null ||
-        !startS.isSameType(enshape)) {
+    if (start < 0 || end < start || startS == null || enshape == null
+        || !startS.isSameType(enshape)) {
       throw new IllegalArgumentException("can not construct a motion because 1condi: " + (start < 0)
           + " 2condi: " + (end <= start) + " 3condi: " + (startS == null) + " 4condi: "
           + (enshape == null) + " showStart tick: " + start + " endTick: " + end);
@@ -221,17 +221,27 @@ public class Motion {
   /**
    * check whether the motion has changed the color.
    *
-   * @return boolean as
+   * @return boolean as true if the color has been changed
    */
   public boolean isChangeColor() {
     return !getStartShape().getColor().equals(getFinalImages().getColor());
   }
 
+  /**
+   * check whether the motion has changed the size.
+   *
+   * @return true if the size has been changed
+   */
   public boolean isChangeSize() {
     return !(getStartShape().getWidth() == getFinalImages().getWidth()
         && getStartShape().getHeight() == getFinalImages().getHeight());
   }
 
+  /**
+   * check if this motion had changed the position.
+   *
+   * @return true if the position has been changed
+   */
   public boolean isChangePosn() {
     return !getStartShape().getPosition().equals(getFinalImages().getPosition());
   }

@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import javax.swing.*;
-
 import cs3500.animation.model.Animation;
 import cs3500.animation.model.KeyFrameAnimation;
 import cs3500.animation.model.SimpleAnimation;
@@ -17,6 +15,8 @@ import cs3500.animator.util.AnimationBuilder;
 import cs3500.animator.util.AnimationReader;
 import cs3500.animator.view.View;
 import cs3500.animator.view.ViewCreator;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * Entry point for this program.
@@ -41,6 +41,7 @@ public final class AnimationPlayer {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.pack();
 
+    //to spilt the arguments.
     Iterator<String> argsI = Arrays.asList(args).iterator();
     while (argsI.hasNext()) {
       switch (argsI.next()) {
@@ -68,7 +69,7 @@ public final class AnimationPlayer {
           "Inane warning",
           JOptionPane.WARNING_MESSAGE);
     }
-    //use input to model
+    //use input to model.
     AnimationReader reader = new AnimationReader();
     AnimationBuilder<Animation> builder;
     if (viewName.equalsIgnoreCase("edit")) {
@@ -77,8 +78,7 @@ public final class AnimationPlayer {
       builder = new SimpleAnimation.SimpleBuilder();
     }
     model = reader.parseFile(in, builder);
-    // out to create view
-    //out
+    // out to create view.
     out = null;
     if (!outFilename.equals("")) {
       try {
@@ -106,6 +106,7 @@ public final class AnimationPlayer {
 
     SimpleController controller = new SimpleController(view);
 
+    // go to the controller to display the animation.
     controller.execute();
     try {
       if (out != null) {

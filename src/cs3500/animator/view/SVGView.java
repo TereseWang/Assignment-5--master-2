@@ -1,16 +1,15 @@
 package cs3500.animator.view;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;
 import cs3500.animation.model.SimpleAnimation;
 import cs3500.animator.shape.Shape;
 import cs3500.animator.shape.ShapeType;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 
 /**
@@ -23,9 +22,9 @@ import cs3500.animator.shape.ShapeType;
  */
 public class SVGView implements View {
 
-  Animation model;
-  OutputStreamWriter out;
-  int tick;
+  private Animation model;
+  private OutputStreamWriter out;
+  private int tick;
 
   /**
    * construct a SVGVIew with given model.
@@ -52,6 +51,9 @@ public class SVGView implements View {
     throw new UnsupportedOperationException("SVGView does not support refresh");
   }
 
+  /**
+   * Translate the animation to string so that it can be used for svg view.
+   */
   private void translate() {
     StringBuilder translated = new StringBuilder();
     LinkedHashMap<String, List<Motion>> animation = model.getAnimate();
@@ -94,6 +96,13 @@ public class SVGView implements View {
     }
   }
 
+  /**
+   * Translate the motion to string format.
+   *
+   * @param motion the desired motion need to be translated
+   * @param type   the shape type of the motion
+   * @return string formate of the translated motion.
+   */
   private StringBuilder translateMotions(Motion motion, ShapeType type) {
     StringBuilder motionGroup = new StringBuilder();
     Shape startShape = motion.getStartShape();
@@ -187,6 +196,14 @@ public class SVGView implements View {
     return motionGroup;
   }
 
+  /**
+   * Turn shape into the string format of desired motion.
+   *
+   * @param motion the motion to be translated
+   * @param name   the name of the shape
+   * @param shape  the shape need to be painted
+   * @return
+   */
   private StringBuilder paintShape(Motion motion, String name, Shape shape) {
     StringBuilder image = new StringBuilder();
     String xPosi = "";
@@ -228,7 +245,12 @@ public class SVGView implements View {
     return image;
   }
 
-
+  /**
+   * Get the string format of the shape type.
+   *
+   * @param type the shape type
+   * @return the string format of the shape type
+   */
   private String getSVGShapeType(ShapeType type) {
     switch (type) {
       case RECTANGLE:

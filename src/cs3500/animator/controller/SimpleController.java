@@ -5,11 +5,11 @@ import java.io.IOException;
 import cs3500.animator.view.View;
 
 /**
- * controller for the project.
+ * controller for the project that run the display of the view that is inputted.
  */
 public class SimpleController implements AnimationController {
 
-  View view;
+  private View view;
 
   /**
    * construct a controller with given view.

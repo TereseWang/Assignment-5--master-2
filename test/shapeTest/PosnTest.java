@@ -1,4 +1,4 @@
-package ShapeTest;
+package shapeTest;
 
 import static org.junit.Assert.assertEquals;
 

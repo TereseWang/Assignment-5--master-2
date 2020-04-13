@@ -16,7 +16,9 @@ import cs3500.animator.util.AnimationBuilder;
 
 
 /**
- * a simple animation class, use list of motion as representation of sequence of motions.
+ * a simple animation class, use list of motion as representation of sequence of motions. This
+ * animation uses list of motions which each motion has a start time end time start shape and
+ * an end shape rather than using the frame to compile. It was kept to run the visual view.
  */
 public class SimpleAnimation extends AbstractAnimation<Motion> {
 
@@ -25,12 +27,20 @@ public class SimpleAnimation extends AbstractAnimation<Motion> {
    */
   public static final class SimpleBuilder implements AnimationBuilder<Animation> {
 
-    AbstractAnimation model;
+    private AbstractAnimation model;
 
+    /**
+     * The builder constructor that initialize the model to an empty simple animation with
+     * linked hash map being empty.
+     */
     public SimpleBuilder() {
       model = new SimpleAnimation();
     }
 
+    /**
+     * Constructor for testing.
+     * @param model the simple animation model
+     */
     public SimpleBuilder(KeyFrameAnimation model) {
       this.model = model;
     }

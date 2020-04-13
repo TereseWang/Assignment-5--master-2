@@ -24,7 +24,8 @@ public abstract class AbstractAnimation<K> implements Animation<List<K>> {
   private static int HEIGHT = 600;
 
   /**
-   * construct an empty animation.
+   * construct an empty animation with animation initialized to an empty linked hash map and set
+   * bounds for canvas.
    */
   public AbstractAnimation() {
     animation = new LinkedHashMap<>();

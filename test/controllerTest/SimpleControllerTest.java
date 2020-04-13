@@ -1,4 +1,4 @@
-package ControllerTest;
+package controllerTest;
 
 import cs3500.animation.model.Frame;
 import cs3500.animation.model.Motion;

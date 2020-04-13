@@ -1,4 +1,4 @@
-package ModelTest;
+package modelTest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,8 +16,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * test cases for builder class to test all public methods in the frame class to see if they works properly
- * as desired.
+ * test cases for builder class to test all public methods in the frame class to see if they works
+ * properly as desired.
  */
 public class BuilderTest {
 

@@ -1,4 +1,4 @@
-package ModelTest;
+package modelTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -15,7 +15,7 @@ import org.junit.Test;
 
 /**
  * This is a test class to test all public methods in the frame class to see if they works properly
- * as desired.
+ * as desired, which we tested all the public methods in the frame class.
  */
 public class FrameTest {
 

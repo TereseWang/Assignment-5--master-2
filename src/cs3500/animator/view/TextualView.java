@@ -58,6 +58,10 @@ public class TextualView implements View {
     }
   }
 
+  /**
+   * The methods that will turn the animation model to string format.
+   * @return string format of the model
+   */
   private String animateDescription() {
     LinkedHashMap<String, List<Motion>> animation = model.getAnimate();
     if (animation.isEmpty()) {
@@ -87,5 +91,4 @@ public class TextualView implements View {
       return result;
     }
   }
-
 }

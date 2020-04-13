@@ -1,4 +1,4 @@
-package ViewTest;
+package viewTest;
 
 import cs3500.animation.model.Animation;
 import cs3500.animation.model.Motion;

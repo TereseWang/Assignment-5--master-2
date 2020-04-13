@@ -1,7 +1,7 @@
 package cs3500.animator.shape;
 
 /**
- * an abstract calss for shape representation.
+ * an abstract class for shape representation.
  */
 public abstract class AbstractShape implements Shape {
 

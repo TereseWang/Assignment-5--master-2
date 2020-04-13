@@ -23,10 +23,18 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
 
     AbstractAnimation model;
 
+    /**
+     * Constructor of the builder that initialize the animation model to a new keyframe model.
+     */
     public Builder() {
       model = new KeyFrameAnimation();
     }
 
+    /**
+     * Constructor for testing.
+     *
+     * @param model the key frame model
+     */
     public Builder(KeyFrameAnimation model) {
       this.model = model;
     }
@@ -111,17 +119,14 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     else if (sequence.get(sequence.size() - 1).getTime() == start.getTime()) {
       sequence.add(start);
       sequence.add(end);
-    } else if (sequence.get(0).getTime() == end.getTime())  // add to first
-    {
+    } else if (sequence.get(0).getTime() == end.getTime()) {
       sequence.add(0, end);
       sequence.add(0, start);
     } else {
       throw new IllegalArgumentException(
-          "sorry can't add this motion because there is a motion in" +
-              "that timeline");
+          "sorry can't add this motion because there is a motion in" + "that timeline");
     }
   }
-
 
   @Override
   public void addKeyFrame(String name, Frame kf) {
@@ -138,6 +143,14 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     }
   }
 
+  /**
+   * Find the right spots of the list that can insert the keyframe with the given time.
+   *
+   * @param name the name of the shape that need to insert the key frame
+   * @param time the time of the keyframe that will be inserted
+   * @return int as the position of the listed linked with desired name that can insert the desired
+   *         keyframe with the given time
+   */
   private int findPosition(String name, int time) {
     validate(name);
     List<Frame> copy = new ArrayList<>(animation.get(name));
@@ -149,18 +162,22 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     return copy.size();
   }
 
-
-  /**
-   * deleting a keyframe.
-   */
   @Override
   public void deleteMotion(String name, int startTick) {
     Frame f = findKeyFrame(name, startTick);
     animation.get(name).remove(f);
   }
 
+  /**
+   * Find the key frame of desired shape name with the desired time.
+   *
+   * @param name the name of the shape that need to be be found
+   * @param tick the time of the frame that need to be found
+   * @return the frame that found with the desired tick
+   * @throws IllegalArgumentException if we cannot find the key frame
+   */
   private Frame findKeyFrame(String name, int tick) {
-    if (checkKeyFrame(name, tick) == false) {
+    if (!checkKeyFrame(name, tick)) {
       throw new IllegalArgumentException("Cannot find the keyframe at the given time");
     }
     List<Frame> copy = new ArrayList<>(animation.get(name));
@@ -174,6 +191,13 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     return result;
   }
 
+  /**
+   * Check whether the key frame exist.
+   *
+   * @param name the name of the shape
+   * @param tick the time of the frame that need to be found
+   * @return true if the key frame can be found in the model, false other wise
+   */
   private boolean checkKeyFrame(String name, int tick) {
     boolean result = false;
     if (animation.containsKey(name)) {
@@ -216,8 +240,8 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     Frame f = findKeyFrame(name, startTick);
     try {
       Frame frame = findKeyFrame(name, endTick);
-      throw new IllegalArgumentException("Can't change the keyframe to given time line because " +
-          "there is a keyframe.");
+      throw new IllegalArgumentException("Can't change the keyframe to given time line because "
+          + "there is a keyframe.");
     } catch (IllegalArgumentException ie) {
       f.changeTime(endTick);
     }
@@ -228,8 +252,8 @@ public class KeyFrameAnimation extends AbstractAnimation<Frame> {
     Frame f = findKeyFrame(name, endTick);
     try {
       Frame frame = findKeyFrame(name, startTick);
-      throw new IllegalArgumentException("Can't change the keyframe to given time line because " +
-          "there is a keyframe.");
+      throw new IllegalArgumentException("Can't change the keyframe to given time line because "
+          + "there is a keyframe.");
     } catch (IllegalArgumentException ie) {
       f.changeTime(startTick);
     }

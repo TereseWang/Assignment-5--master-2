@@ -1,6 +1,5 @@
-package ViewTest;
+package viewTest;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import cs3500.animation.model.KeyFrameAnimation;
@@ -18,13 +17,16 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class to see if the visual creator acturately create the type of view we desired.
+ */
 public class VisualCreatorTest {
 
-  ViewCreator creator;
-  OutputStreamWriter out;
-  SimpleAnimation model;
-  KeyFrameAnimation framemodel;
-  int tick;
+  private ViewCreator creator;
+  private OutputStreamWriter out;
+  private SimpleAnimation model;
+  private KeyFrameAnimation framemodel;
+  private int tick;
 
   @Before
   public void init() throws IOException {

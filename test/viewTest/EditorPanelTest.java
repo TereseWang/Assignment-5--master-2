@@ -1,4 +1,4 @@
-package ViewTest;
+package viewTest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,6 +13,10 @@ import cs3500.animator.view.EditorPanel;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class to test the editorpanel to see if all public methods in editorpanel class is correctly
+ * worked as defined.
+ */
 public class EditorPanelTest {
 
   EditorPanel panel;

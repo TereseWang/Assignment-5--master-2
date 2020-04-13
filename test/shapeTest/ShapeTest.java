@@ -1,4 +1,4 @@
-package ShapeTest;
+package shapeTest;
 
 import org.junit.Before;
 import org.junit.Test;
