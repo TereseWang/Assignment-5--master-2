@@ -1,5 +1,6 @@
 # SimpleAnimator
-Introduction:
+### Introduction:
+- A simple animation player 
 
 Model Design:
 We first had defined some basic shapes such as oval and rectangle that extends an abstract shape
