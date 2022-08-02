@@ -1,4 +1,6 @@
-HW5 Model Design:
+###Introduction:
+
+Model Design:
 We first had defined some basic shapes such as oval and rectangle that extends an abstract shape
 class that implements a shape interface. Each shape has fields for position, color and its size
 width and height. Beside the fields, each shape has the functionality of changeColor which changes
@@ -28,8 +30,7 @@ us to get the copied list of motion in a specific shape. For each class we fully
 methods.
 
 
-
-HW6 View Design and Model Revision:
+View Design and Model Revision:
 Model Revision:
     In order to better support the visual part we implement a nested class Build that helps us to
 build up the animation to be used in the main class for displaying the animation and such. This
@@ -86,7 +87,7 @@ the view creator class to create the desired view and also set up the desired sp
 
 
 
-HW7 Model, View, Controller revision, Support functionality of modify the animation.
+Model, View, Controller revision, Support functionality of modify the animation.
 To makes each class more seprate from each other, we want to add abstract class to the model,
 so that we can add more functionalities by writing less code.
 Besides, in order to add new models and allows the view to run the new model class, we also changed
