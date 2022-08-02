@@ -64,16 +64,16 @@ Besides, in order to add new models and allows the view to run the new model cla
 each view class, which makes them input a Animation model rather than specifically a SimpleAnimation
 model.
 
-Revision of textual view:
-Revision of visual view:
-Revision of SVG view:
-Revision of controller:
-Revision of Animation interface:
+- Revision of textual view:
+- Revision of visual view:
+- Revision of SVG view:
+- Revision of controller:
+- Revision of Animation interface:
     change the signature of changeColor(), changeSize(), and ChangePosn();
     delete method getAnimateDescription because similar process handled in textual.
-Revision of SimpleAnimation model:
+- Revision of SimpleAnimation model:
 
-Add EditorView:
+- Add EditorView:
   We implement an editor view class that did the similar thing with visual panel,except that
   it has editing features that stop, start, restart, resume, increase speed and decrease speed
   of the animation. We ensured that stop, and resume cannot be activated if the start
